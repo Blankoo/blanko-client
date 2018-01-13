@@ -28,7 +28,7 @@ class Start extends Component {
 			message: '',
 			current: 1,
 			kanban: false,
-			accountId: '5a59f02d6d6ccd3c9558e4b4',
+			accountId: '',
 			selectedProjectId: '',
 			tasks: [],
 			projects: [],
@@ -47,23 +47,26 @@ class Start extends Component {
 	}
 
 	componentDidMount() {
-		const isThereAToken = localStorage.getItem('USER_TOK') // eslint-disable-line no-undef
-		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID') // eslint-disable-line no-undef
+		const isThereAToken = localStorage.getItem('USER_TOK')
+		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID')
 
 		if (!isThereAToken) {
 			router.push('/login')
 		} else {
-			this.setState({ loading: false })
-
-			if (isThereAProjectSelected) {
-				this.setState({
-					selectedProjectId: isThereAProjectSelected
-				}, () => {
-					this.dataInit(false)
-				})
-			} else {
-				this.dataInit(true)
-			}
+			this.setState({
+				loading: false,
+				accountId: localStorage.getItem('USER_ID')
+			}, () => {
+				if (isThereAProjectSelected) {
+					this.setState({
+						selectedProjectId: isThereAProjectSelected
+					}, () => {
+						this.dataInit(false)
+					})
+				} else {
+					this.dataInit(true)
+				}
+			})
 		}
 	}
 
