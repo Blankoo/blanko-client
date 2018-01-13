@@ -1,0 +1,39 @@
+{
+	"name": "Blanko-API",
+	"version": "0.0.2",
+	"description": "Boilerplate api",
+	"license": "ISC",
+	"author": "Noud Adrichem",
+	"main": "dist",
+	"scripts": {
+		"dev": "NODE_ENV=development nodemon -w src --exec \"babel-node src -s --presets es2015,stage-0\" | bunyan -o short",
+		"build": "babel src -s -D -d dist --presets es2015,stage-0",
+		"start": "NODE_ENV=production pm2 start dist --name blanko",
+		"prestart": "npm run -s build",
+		"lint": "eslint src"
+	},
+	"dependencies": {
+		"bluebird": "^3.5.1",
+		"body-parser": "^1.17.2",
+		"express": "^4.15.4",
+		"express-jwt": "^5.3.0",
+		"gulp": "^3.9.1",
+		"gulp-babel": "^7.0.0",
+		"jsonwebtoken": "^7.4.3",
+		"mongoose": "^4.13.6",
+		"passport": "^0.4.0",
+		"passport-local": "^1.0.0",
+		"passport-local-mongoose": "^4.2.1"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.0",
+		"babel-eslint": "^7.2.3",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-stage-0": "^6.24.1",
+		"bunyan": "^1.8.12",
+		"bunyan-format": "^0.2.1",
+		"eslint": "^4.5.0",
+		"nodemon": "^1.10.0"
+	}
+}
