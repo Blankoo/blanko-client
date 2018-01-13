@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+renderer/.next
+renderer/out
+dist/
+.idea
+package-lock.json

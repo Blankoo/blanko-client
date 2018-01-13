@@ -1,0 +1,5 @@
+renderer/out/
+renderer/.next/
+renderer/vectors/
+dist
+node_modules

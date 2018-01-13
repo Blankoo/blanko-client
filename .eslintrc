@@ -1,0 +1,41 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": "2017",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+  },
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "node": 2
+  },
+  "globals": {
+    "suite": true,
+    "test": true  },
+  "rules": {
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "camelcase": 2,
+    "comma-style": [2, "last"],
+    "curly": 2,
+    "eqeqeq": 2,
+    "func-names": 2,
+    "space-before-function-paren": ["error", "never"],
+    "guard-for-in": 2,
+    "wrap-iife": 2,
+    "no-undef": 2,
+    "no-use-before-define": [2, "nofunc"],
+    "new-cap": 2,
+    "quotes": [2, "single"],
+    "no-trailing-spaces": 2,
+    "max-len": [2, 150],
+    "no-underscore-dangle": 0,
+    "strict": 0,
+    "no-shadow": 0,
+    "react/jsx-uses-vars": [2],
+    "react/jsx-uses-react": "error"
+  }
+}
