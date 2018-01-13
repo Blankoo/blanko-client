@@ -11,13 +11,13 @@
     "react"
   ],
   "env": {
-    "node": 2
+    "node": 2,
+    "browser": 2
   },
-  "globals": {
-    "suite": true,
-    "test": true  },
   "rules": {
-    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+    "brace-style": [2, "1tbs", {
+      "allowSingleLine": true
+    }],
     "camelcase": 2,
     "comma-style": [2, "last"],
     "curly": 2,
