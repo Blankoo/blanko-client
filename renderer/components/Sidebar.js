@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from '../styles/components/sidebar'
 import ProjectList from './ProjectList'
+import AddProject from './AddProject'
 
 class SideBar extends Component {
 	constructor(props) {
@@ -15,17 +16,25 @@ class SideBar extends Component {
 		return (
 			<div className="sidebar">
 				<div className="blanko">Blanko.</div>
-				<div className="favorites">
-					<span className="title">favorites</span>
-				</div>
-
 				<ProjectList
-					className="projectList"
+					className="favorites"
+					favorite={true}
 					projects={this.props.projects}
 					selectedProjectId={this.props.selectedProjectId}
 					activeProjectId={this.props.activeProjectId}
 					selectProject={this.props.selectProject}
 				/>
+
+				<ProjectList
+					className="projectList"
+					favorite={false}
+					projects={this.props.projects}
+					selectedProjectId={this.props.selectedProjectId}
+					activeProjectId={this.props.activeProjectId}
+					selectProject={this.props.selectProject}
+				/>
+
+			<AddProject addProjectToAccount={this.props.addProjectToAccount}/>
 
 				<style jsx global>{ styles }</style>
 			</div>

@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "main": "main/index.js",
   "author": "noudadrichem",
-  "description": "A personal task manager + time tracker app.",
+  "description": "A task manager + time tracker app.",
   "license": "MIT",
-  "repository": "https://github.com/noudadrichem/blanko",
+  "repository": "https://github.com/blankoo/blanko-client",
   "scripts": {
     "start": "electron .",
     "build": "next build renderer && next export renderer",

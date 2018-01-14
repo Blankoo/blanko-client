@@ -17,7 +17,7 @@ import Loader from '../components/atoms/Loader'
 import AddTask from '../components/AddTask'
 import Sidebar from '../components/Sidebar'
 import ProjectView from '../components/ProjectView'
-import AddProject from '../components/AddProject'
+import ActiveProject from '../components/ActiveProject'
 
 class Start extends Component {
 	constructor(props) {
@@ -28,8 +28,9 @@ class Start extends Component {
 			message: '',
 			current: 1,
 			kanban: false,
-			accountId: '5a59f02d6d6ccd3c9558e4b4',
+			accountId: '',
 			selectedProjectId: '',
+			activeProject: {},
 			tasks: [],
 			projects: [],
 			columns: ['todo', 'doing', 'done'],
@@ -47,35 +48,43 @@ class Start extends Component {
 	}
 
 	componentDidMount() {
-		const isThereAToken = localStorage.getItem('USER_TOK') // eslint-disable-line no-undef
-		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID') // eslint-disable-line no-undef
+		const isThereAToken = localStorage.getItem('USER_TOK')
+		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID')
 
 		if (!isThereAToken) {
 			router.push('/login')
 		} else {
-			this.setState({ loading: false })
-
-			if (isThereAProjectSelected) {
-				this.setState({
-					selectedProjectId: isThereAProjectSelected
-				}, () => {
-					this.dataInit(false)
-				})
-			} else {
-				this.dataInit(true)
-			}
+			this.setState({
+				loading: false,
+				accountId: localStorage.getItem('USER_ID')
+			}, () => {
+				if (isThereAProjectSelected) {
+					this.setState({
+						selectedProjectId: isThereAProjectSelected
+					}, () => {
+						this.dataInit(false)
+					})
+				} else {
+					this.dataInit(true)
+				}
+			})
 		}
 	}
 
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId } = this.state
 		const { data: projects } = await get('projects', accountId)
-
 		if(noSelectedProject) {
 			this.setState({ projects })
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
-			this.setState({ projects, tasks })
+			const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
+
+			this.setState({
+				projects,
+				tasks,
+				activeProject: selectedProjectObject
+			})
 		}
 	}
 
@@ -159,22 +168,23 @@ class Start extends Component {
 					activeProjectId={this.state.activeProjectId}
 					selectedProjectId={this.state.selectedProjectId}
 					selectProject={this.selectProject}
+					addProjectToAccount={this.addProjectToAccount}
 				/>
 
-				<h6><span className="title">Message:</span>{ this.state.message }</h6>
-
-				<AddTask
-					add={ this.addNewTask }
+				<ActiveProject
+					tasks={ this.state.tasks }
+					updateTaskStatus={this.updateTaskStatus}
+					deleteTask={ this.deleteTask }
+					addNewTask={this.addNewTask}
+					activeProject={this.state.activeProject}
 				/>
 
-				<ProjectView
+			{/*<ProjectView
 					tasks={this.state.tasks}
 					kanban={this.state.kanban}
 					updateTaskStatus={this.updateTaskStatus}
 					deleteTask={this.deleteTask}
-				/>
-
-				<AddProject addProjectToAccount={this.addProjectToAccount}/>
+				/>*/}
 
 				{ !this.state.loading ? <Loader/> : <Loader loading/> }
 

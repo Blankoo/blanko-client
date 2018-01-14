@@ -16,19 +16,15 @@ export default `
 	.favorites {
 		margin-top:64px;
 		margin-bottom:64px;
-		padding-left: 48px;
+		/* padding-left: 48px; */
 	}
 
 	.projectList {
 		margin-top:64px;
 	}
 
-	.title {
-		font-size: 10px;
-		user-select:none;
-		color: #7A848F;
-		letter-spacing: 0.5px;
-		text-transform: uppercase;
-		font-weight: bold;
+	.favorites .label,
+	.projectList .label {
+		padding-left:48px;
 	}
 `

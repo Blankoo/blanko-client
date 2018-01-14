@@ -1,4 +1,12 @@
 import React, {Component} from 'react'
+import styles from '../styles/components/addTask'
+import InputText from './atoms/form/InputText'
+import ButtonSubmit from './atoms/form/ButtonSubmit'
+
+const inputStyle = {
+	width: '100%',
+	border: 'none'
+}
 
 class AddTask extends Component {
 	constructor(props) {
@@ -13,7 +21,7 @@ class AddTask extends Component {
 		}
 
 		this.returnTypedValue = this.returnTypedValue.bind(this)
-		this.addTask = this.addTask.bind(this)
+		this.onEnter = this.onEnter.bind(this)
 	}
 
 	returnTypedValue(e) {
@@ -22,16 +30,32 @@ class AddTask extends Component {
 		})
 	}
 
-	addTask() {
-		this.props.add('projects/add', this.state)
+	onEnter(e) {
+		if(e.key === 'Enter' && this.state.title.length > 3) {
+			this.props.addNewTask('projects/add', this.state)
+			this.setState({
+				title: '',
+				subTitle: ''
+			}, () => {
+				this.form.reset()
+				this.form.blur()
+			})
+		}
 	}
 
 	render() {
 		return (
-			<div className="addTask">
-				<input type="text" name="title" onChange={this.returnTypedValue}/>
-				<input type="text" name="subTitle" onChange={this.returnTypedValue}/>
-				<button onClick={this.addTask}>Add taskerino</button>
+			<div className="addTask single">
+				<div className="plusIcon"></div>
+
+				<div className="input" onKeyUp={this.onEnter}>
+					<form ref={node => this.form = node}>
+						<InputText type="text" name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
+						<InputText type="text" name="subTitle" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 12, color: '#7D7D7D'}}/>
+					</form>
+				</div>
+				{ /* <ButtonSubmit onClick={ e => this.props.addNewTask('projects/add', this.state) }/> */ }
+				<style jsx>{ styles }</style>
 			</div>
 		)
 	}

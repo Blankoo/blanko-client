@@ -6,7 +6,6 @@ export default `
 		font-family: -apple-system, BlinkMacSystemFont, 'Verdana', sans-serif;
 	}
 
-
 	body {
 		margin:0;
 		padding:0;
@@ -27,5 +26,15 @@ export default `
 		left:0;
 		background: #FBFBFD;
 		box-shadow: inset 0 2px 40px 0 rgba(114,114,114,0.07);
+	}
+
+
+	.label {
+		font-size: 10px;
+		user-select:none;
+		color: #7A848F;
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+		font-weight: bold;
 	}
 `
