@@ -1,8 +1,8 @@
 import React from 'react'
-import Input from './atoms/form/InputText'
-import ButtonSubmit from './atoms/form/ButtonSubmit'
+import Input from '../../atoms/form/InputText/index'
+import ButtonSubmit from '../../atoms/form/ButtonSubmit/index'
 
-import add from '../utils/add'
+import add from '../../../utils/add'
 
 class AddProject extends React.Component {
 	constructor(props) {

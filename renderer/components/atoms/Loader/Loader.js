@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import styles from '../../../styles/components/atoms/loader'
+import styles from './loaderStyle'
 
 class Start extends Component {
 	constructor(props) {
