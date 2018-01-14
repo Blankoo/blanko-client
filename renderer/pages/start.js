@@ -30,6 +30,7 @@ class Start extends Component {
 			kanban: false,
 			accountId: '',
 			selectedProjectId: '',
+			activeProject: {},
 			tasks: [],
 			projects: [],
 			columns: ['todo', 'doing', 'done'],
@@ -73,12 +74,17 @@ class Start extends Component {
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId } = this.state
 		const { data: projects } = await get('projects', accountId)
-
 		if(noSelectedProject) {
 			this.setState({ projects })
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
-			this.setState({ projects, tasks })
+			const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
+
+			this.setState({
+				projects,
+				tasks,
+				activeProject: selectedProjectObject
+			})
 		}
 	}
 
@@ -170,6 +176,7 @@ class Start extends Component {
 					updateTaskStatus={this.updateTaskStatus}
 					deleteTask={ this.deleteTask }
 					addNewTask={this.addNewTask}
+					activeProject={this.state.activeProject}
 				/>
 
 			{/*<ProjectView

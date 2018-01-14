@@ -1,13 +1,13 @@
 export default `
 .activeProject {
-	padding-top:56px;
+	padding-top: 56px;
 }
 
 .mainTitle {
-	font-weight:normal;
+	font-weight: normal;
 	font-size: 22px;
 	color: #7A848F;
-	margin-bottom:16px;
+	margin-bottom: 16px;
 }
 
 .description {
@@ -16,6 +16,6 @@ export default `
 	color: #7D7D7D;
 	letter-spacing: 0;
 	line-height: 20px;
-	margin-bottom:86px;
+	margin-bottom: 86px;
 }
 `

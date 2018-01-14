@@ -16,7 +16,7 @@ class ProjectList extends React.Component {
 
 		return(
 			<div className={this.props.className}>
-				<div className="label">{this.props.className}</div>
+				<div className="label">{ this.props.className }</div>
 
 				{projects !== undefined && <div>
 

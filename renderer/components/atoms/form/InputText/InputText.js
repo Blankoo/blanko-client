@@ -16,7 +16,8 @@ class InputText extends Component {
 					name={this.props.name}
 					autoFocus={this.props.autofocus}
 					disabled={this.props.disabled}
-					onChange={this.props.onChange}/>
+					onChange={this.props.onChange}
+					style={this.props.style}/>
 				<style jsx>{ styles }</style>
 			</div>
 		)
