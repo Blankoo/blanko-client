@@ -2,7 +2,6 @@ export default `
 	.projects-list {
 		list-style: none;
 		overflow-y: scroll;
-		height:50vh;
 		display: block;
 	}
 

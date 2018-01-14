@@ -12,16 +12,16 @@ class ProjectList extends React.Component {
 	}
 
 	render() {
-		const { projects, activeProjectId, selectedProjectId } = this.props
+		const { projects, activeProjectId, selectedProjectId, favorite } = this.props
 
 		return(
 			<div className={this.props.className}>
-				<div className="title">Projects</div>
+				<div className="label">{this.props.className}</div>
 
 				{projects !== undefined && <div>
 
 					<ul className="projects-list">{
-						projects.filter(project => project !== null).map((project, i) => {
+						projects.filter(project => project !== null && project.favorite === favorite).map((project, i) => {
 
 							return(
 								<li key={i} className={selectedProjectId === project._id ? 'active' : ''}

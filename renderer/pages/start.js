@@ -17,7 +17,7 @@ import Loader from '../components/atoms/Loader'
 import AddTask from '../components/AddTask'
 import Sidebar from '../components/Sidebar'
 import ProjectView from '../components/ProjectView'
-import AddProject from '../components/AddProject'
+import ActiveProject from '../components/ActiveProject'
 
 class Start extends Component {
 	constructor(props) {
@@ -162,22 +162,22 @@ class Start extends Component {
 					activeProjectId={this.state.activeProjectId}
 					selectedProjectId={this.state.selectedProjectId}
 					selectProject={this.selectProject}
+					addProjectToAccount={this.addProjectToAccount}
 				/>
 
-				<h6><span className="title">Message:</span>{ this.state.message }</h6>
-
-				<AddTask
-					add={ this.addNewTask }
+				<ActiveProject
+					tasks={ this.state.tasks }
+					updateTaskStatus={this.updateTaskStatus}
+					deleteTask={ this.deleteTask }
+					addNewTask={this.addNewTask}
 				/>
 
-				<ProjectView
+			{/*<ProjectView
 					tasks={this.state.tasks}
 					kanban={this.state.kanban}
 					updateTaskStatus={this.updateTaskStatus}
 					deleteTask={this.deleteTask}
-				/>
-
-				<AddProject addProjectToAccount={this.addProjectToAccount}/>
+				/>*/}
 
 				{ !this.state.loading ? <Loader/> : <Loader loading/> }
 

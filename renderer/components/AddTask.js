@@ -22,16 +22,12 @@ class AddTask extends Component {
 		})
 	}
 
-	addTask() {
-		this.props.add('projects/add', this.state)
-	}
-
 	render() {
 		return (
 			<div className="addTask">
 				<input type="text" name="title" onChange={this.returnTypedValue}/>
 				<input type="text" name="subTitle" onChange={this.returnTypedValue}/>
-				<button onClick={this.addTask}>Add taskerino</button>
+				<button onClick={ e => this.props.addNewTask('projects/add', this.state) }>Add taskerino</button>
 			</div>
 		)
 	}
