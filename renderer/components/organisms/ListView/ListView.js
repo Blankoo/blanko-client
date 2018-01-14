@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import styles from '../styles/components/listview'
+import styles from './listViewStyle'
 
 class ListView extends Component {
 	constructor(props) {

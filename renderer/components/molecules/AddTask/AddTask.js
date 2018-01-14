@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import styles from '../styles/components/addTask'
-import InputText from './atoms/form/InputText'
-import ButtonSubmit from './atoms/form/ButtonSubmit'
+import styles from './addTaskStyle'
+import InputText from '../../atoms/form/InputText/index'
+import ButtonSubmit from '../../atoms/form/ButtonSubmit/index'
 
 const inputStyle = {
 	width: '100%',

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ListView from './ListView'
-import AddTask from './AddTask'
+import ListView from '../../organisms/ListView'
+import AddTask from '../../molecules/AddTask'
 
-import styles from '../styles/components/activeProject'
+import styles from './activeProjectStyle'
 
 class ActiveProject extends React.Component {
 	render() {

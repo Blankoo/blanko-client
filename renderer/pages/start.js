@@ -14,10 +14,10 @@ import styles from '../styles/pages/start'
 
 // components
 import Loader from '../components/atoms/Loader'
-import AddTask from '../components/AddTask'
-import Sidebar from '../components/Sidebar'
-import ProjectView from '../components/ProjectView'
-import ActiveProject from '../components/ActiveProject'
+import AddTask from '../components/molecules/AddTask'
+import Sidebar from '../components/templates/Sidebar'
+import ProjectView from '../components/templates/ProjectView'
+import ActiveProject from '../components/templates/ActiveProject'
 
 class Start extends Component {
 	constructor(props) {
