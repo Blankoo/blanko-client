@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from '../styles/components/projectList'
-import get from '../utils/get'
+import styles from './projectListStyle'
+import get from '../../../utils/get'
 
 const listStyle = {
 	lineHeight: 2.6

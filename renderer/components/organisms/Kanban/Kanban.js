@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import styles from '../styles/components/kanban'
+import styles from './kanbanStyle'
 
-import db from '../utils/db'
+import db from '../../../utils/db'
 
 class Kanban extends Component {
 	constructor(props) {

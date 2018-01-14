@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import styles from '../styles/components/project'
+import styles from './projectViewStyle'
 
 // Components
-import Kanban from '../components/Kanban'
-import ListView from '../components/ListView'
+import Kanban from '../../organisms/Kanban'
+import ListView from '../../organisms/ListView'
 
 class Project extends React.Component {
 	constructor(props) {
