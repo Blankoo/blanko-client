@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+//
+import Checkbox from '../../atoms/form/Checkbox';
+
+// Style import
 import styles from './listViewStyle'
 
 class ListView extends Component {
@@ -9,17 +13,18 @@ class ListView extends Component {
 
 	render() {
 		const { tasks } = this.props
-		const isChecked = task => (task.status === 'done' ? 'checked' : ' ')
+		const isCheckedToggle = task => (task.status === 'done' ? 'checked' : '')
 
 		return (
 			<div className="listView">
 				{tasks.map((task, i) =>
 
-					<div key={i} className={'single ' + isChecked(task)}>
-						<div
+					<div key={i} className={'single ' + isCheckedToggle(task)}>
+
+						<Checkbox
+							check={task.status === 'done'}
 							onClick={ e => this.props.updateTaskStatus(e, i, task._id, task) }
-							className={'checkbox ' + isChecked(task)}>
-						</div>
+						/>
 
 						<div className="taskTitle">
 							<h4>{ task.title }</h4>
