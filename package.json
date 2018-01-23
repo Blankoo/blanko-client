@@ -9,7 +9,7 @@
   "scripts": {
     "start": "electron .",
     "build": "next build renderer && next export renderer",
-    "dist": "npm run build && build --dir",
+    "dist": "npm run build && build",
     "lint": "./node_modules/.bin/eslint ."
   },
   "build": {
@@ -17,7 +17,13 @@
       "**/*",
       "!renderer",
       "renderer/out"
-    ]
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    }
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",

@@ -15,7 +15,7 @@ export default `
 	}
 
 	.container {
-		padding:16px 64px;
+		padding:0 64px 32px;
 	}
 
 	.sidebar {

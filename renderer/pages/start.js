@@ -16,7 +16,6 @@ import styles from '../styles/pages/start'
 import Loader from '../components/atoms/Loader'
 import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
-import ProjectView from '../components/templates/ProjectView'
 import ActiveProject from '../components/templates/ActiveProject'
 
 class Start extends Component {
@@ -34,10 +33,12 @@ class Start extends Component {
 			tasks: [],
 			projects: [],
 			columns: ['todo', 'doing', 'done'],
-			loading: true
+			loading: true,
+			filteredValue: 'all'
 		}
 
 		this.remote = electron.remote || false
+
 		this.addNewTask = this.addNewTask.bind(this)
 		this.toggleView = this.toggleView.bind(this)
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
@@ -45,6 +46,7 @@ class Start extends Component {
 		this.deleteTask = this.deleteTask.bind(this)
 		this.selectProject = this.selectProject.bind(this)
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
+		this.setFilteredValue = this.setFilteredValue.bind(this)
 	}
 
 	componentDidMount() {
@@ -159,11 +161,23 @@ class Start extends Component {
 		// del('tasks', id)
 	}
 
+	setFilteredValue(filteredValue) {
+		this.setState({ filteredValue })
+	}
+
 	render() {
+		const filteredTask = this.state.tasks.filter(task => {
+			if(this.state.filteredValue === 'all') {
+				return task
+			} else {
+				return task.status === this.state.filteredValue
+			}
+		})
+
 		return (
 			<div className="container">
 				<Sidebar
-					tasks={this.state.tasks}
+					tasks={filteredTask}
 					projects={this.state.projects}
 					activeProjectId={this.state.activeProjectId}
 					selectedProjectId={this.state.selectedProjectId}
@@ -172,19 +186,14 @@ class Start extends Component {
 				/>
 
 				<ActiveProject
-					tasks={ this.state.tasks }
+					tasks={filteredTask}
 					updateTaskStatus={this.updateTaskStatus}
 					deleteTask={ this.deleteTask }
 					addNewTask={this.addNewTask}
 					activeProject={this.state.activeProject}
+					filteredValue={this.state.filteredValue}
+					setFilteredValue={this.setFilteredValue}
 				/>
-
-			{/*<ProjectView
-					tasks={this.state.tasks}
-					kanban={this.state.kanban}
-					updateTaskStatus={this.updateTaskStatus}
-					deleteTask={this.deleteTask}
-				/>*/}
 
 				{ !this.state.loading ? <Loader/> : <Loader loading/> }
 

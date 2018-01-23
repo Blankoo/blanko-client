@@ -2,22 +2,29 @@ import React from 'react'
 
 import ListView from '../../organisms/ListView'
 import AddTask from '../../molecules/AddTask'
+import FilterTasks from '../..//molecules/FilterTasks'
 
 import styles from './activeProjectStyle'
 
 class ActiveProject extends React.Component {
 	render() {
-		const { projectTitle, projectDescription } = this.props.activeProject
+		const { activeProject, tasks, updateTaskStatus, deleteTask, addNewTask } = this.props
+		const { projectTitle, projectDescription } = activeProject
 
 		return(<div className="activeProject">
 			<h1 className="mainTitle">{ projectTitle }</h1>
-			<p className="description">{ projectDescription }</p>
+			{ projectDescription && <p className="description">{ projectDescription }</p> }
 
-			<div className="label">Today</div>
+			<FilterTasks
+				filteredValue={this.props.filteredValue}
+				setFilteredValue={this.props.setFilteredValue}
+			/>
 
-			<ListView tasks={ this.props.tasks } updateTaskStatus={this.props.updateTaskStatus} deleteTask={ this.props.deleteTask }/>
+			<div className="label">To Do:</div>
 
-			<AddTask addNewTask={this.props.addNewTask}/>
+			<ListView tasks={ tasks } updateTaskStatus={ updateTaskStatus } deleteTask={ deleteTask }/>
+
+			<AddTask addNewTask={ addNewTask }/>
 
 			<style jsx>{styles}</style>
 		</div>)
