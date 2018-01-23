@@ -1,28 +1,18 @@
 import React from 'react'
 import Button from '../../atoms/FilterButton'
+import styles from './filterTaskStyles'
 
 class FilterTasks extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {}
-	}
-
-	componentDidMount() {
-		console.log('_______________FilterTasks______________');
-		console.log(this.props);
-	}
-
 	render() {
 		const { filteredValue, setFilteredValue } = this.props
-		const todoValue = 'todo'
-		const doneValue = 'done'
 
 		return(
-			<div style={{ margin: '18px 0 10px 0' }}>
-				<Button onClick={e => setFilteredValue('') } text="All" active={filteredValue === ''}/>
-				<Button onClick={e => setFilteredValue(todoValue) } text="To Do" active={filteredValue === todoValue}/>
-				<Button onClick={e => setFilteredValue(doneValue) } text="Done" active={filteredValue === doneValue}/>
+			<div className="filter-tasks">
+				<Button onClick={e => setFilteredValue('all') } text="All" active={filteredValue === 'all'}/>
+				<Button onClick={e => setFilteredValue('todo') } text="To Do" active={filteredValue === 'todo'}/>
+				<Button onClick={e => setFilteredValue('done') } text="Done" active={filteredValue === 'done'}/>
+
+			<style jsx>{ styles }</style>
 			</div>
 		)
 	}

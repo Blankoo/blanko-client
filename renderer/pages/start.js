@@ -34,7 +34,7 @@ class Start extends Component {
 			projects: [],
 			columns: ['todo', 'doing', 'done'],
 			loading: true,
-			filteredValue: ''
+			filteredValue: 'all'
 		}
 
 		this.remote = electron.remote || false
@@ -167,7 +167,7 @@ class Start extends Component {
 
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
-			if(this.state.filteredValue === '') {
+			if(this.state.filteredValue === 'all') {
 				return task
 			} else {
 				return task.status === this.state.filteredValue

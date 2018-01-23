@@ -1,6 +1,6 @@
 export default `
 .activeProject {
-	padding-top: 56px;
+	padding-top: 64px;
 }
 
 .mainTitle {
@@ -16,6 +16,6 @@ export default `
 	color: #7D7D7D;
 	letter-spacing: 0;
 	line-height: 20px;
-	margin-bottom: 86px;
+	margin-bottom:40px;
 }
 `
