@@ -10,6 +10,11 @@ button {
   border-radius: 4px;
   outline: none;
 	margin-right: 8px;
+	transition: 100ms linear;
+}
+
+button:hover {
+	background-color: #F3F3F3;
 }
 
 button.active {

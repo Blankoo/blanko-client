@@ -31,7 +31,7 @@ class AddTask extends Component {
 	}
 
 	onEnter(e) {
-		if(e.key === 'Enter' && this.state.title.length > 3) {
+		if(e.key === 'Enter' && this.state.title.length > 2) {
 			this.props.addNewTask('projects/add', this.state)
 			this.setState({
 				title: '',
@@ -39,6 +39,7 @@ class AddTask extends Component {
 			}, () => {
 				this.form.reset()
 				this.form.blur()
+				this.props.onKeyUp(e)
 			})
 		}
 	}
@@ -50,7 +51,7 @@ class AddTask extends Component {
 
 				<div className="input" onKeyUp={this.onEnter}>
 					<form ref={node => this.form = node}>
-						<InputText type="text" name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
+						<InputText autofocus type="text" name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
 						<InputText type="text" name="subTitle" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 12, color: '#7D7D7D'}}/>
 					</form>
 				</div>

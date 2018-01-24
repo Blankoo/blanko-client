@@ -1,5 +1,7 @@
 export default `
-	.listView {}
+	.listView {
+		min-height:32px;
+	}
 
 	.single {
 		background: #FFFFFF;
@@ -7,6 +9,7 @@ export default `
 		border-radius: 4px;
 		padding: 24px;
 		margin:8px 0;
+		/* min-height:88px; */
 		max-width: 100%;
 		display: flex;
 	}
