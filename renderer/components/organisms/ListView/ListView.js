@@ -12,14 +12,18 @@ class ListView extends Component {
 	}
 
 	render() {
-		const { tasks } = this.props
-		const isCheckedToggle = task => (task.status === 'done' ? 'checked' : '')
+		const { tasks, selectedTaskId } = this.props
+		const isCheckedToggle = task => (task.status === 'done' ? ' checked ' : '')
+		const isSelected = task => (task._id === selectedTaskId ? ' active ' : '')
 
 		return (
 			<div className="listView">
 				{tasks.map((task, i) =>
 
-					<div key={i} className={'single ' + isCheckedToggle(task)}>
+					<div
+						key={i} className={'single ' + isCheckedToggle(task) + isSelected(task)}
+						onClick={e => this.props.setTaskActive(task._id)}
+					>
 
 						<Checkbox
 							check={task.status === 'done'}

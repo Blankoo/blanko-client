@@ -12,6 +12,7 @@ export default `
 		/* min-height:88px; */
 		max-width: 100%;
 		display: flex;
+		transition: 300ms	ease-in-out;
 	}
 
 	.taskTitle {
@@ -37,6 +38,10 @@ export default `
 	.single.checked .taskTitle p {
 		text-decoration: line-through;
 		color: #D0D1D6;
+	}
+
+	.single.active {
+		box-shadow: 0 5px 20px 0 rgba(187, 187, 187, 0.8);
 	}
 
 	.status {
