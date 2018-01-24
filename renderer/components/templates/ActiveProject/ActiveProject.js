@@ -18,7 +18,6 @@ class ActiveProject extends React.Component {
 	}
 
 	toggleAddProject() {
-		console.log('toggle add project');
 		this.setState(prevState => ({ isAddingProject: !prevState.isAddingProject}))
 	}
 
@@ -46,7 +45,13 @@ class ActiveProject extends React.Component {
 				{ filteredValue === 'done' ? 'DONE' : 'To Do:' }
 			</div>
 
-			<ListView tasks={ tasks } updateTaskStatus={ updateTaskStatus } deleteTask={ deleteTask }/>
+			<ListView
+				tasks={ tasks }
+				updateTaskStatus={ updateTaskStatus }
+				deleteTask={ deleteTask }
+				setTaskActive={this.props.setTaskActive}
+				selectedTaskId={this.props.selectedTaskId}
+			/>
 
 			{
 				this.state.isAddingProject ?

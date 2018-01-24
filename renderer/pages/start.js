@@ -34,7 +34,9 @@ class Start extends Component {
 			projects: [],
 			columns: ['todo', 'doing', 'done'],
 			loading: true,
-			filteredValue: 'all'
+			filteredValue: 'all',
+			selectedTaskId: '',
+			selectedTask: {}
 		}
 
 		this.remote = electron.remote || false
@@ -47,6 +49,7 @@ class Start extends Component {
 		this.selectProject = this.selectProject.bind(this)
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
+		this.setTaskActive = this.setTaskActive.bind(this)
 	}
 
 	componentDidMount() {
@@ -74,7 +77,7 @@ class Start extends Component {
 	}
 
 	async dataInit(noSelectedProject) {
-		const { accountId, selectedProjectId } = this.state
+		const { accountId, selectedProjectId, selectedTaskId } = this.state
 		const { data: projects } = await get('projects', accountId)
 		if(noSelectedProject) {
 			this.setState({ projects })
@@ -86,6 +89,8 @@ class Start extends Component {
 				projects,
 				tasks,
 				activeProject: selectedProjectObject
+			}, () => {
+				this.getActiveTaskData(selectedTaskId)
 			})
 		}
 	}
@@ -126,7 +131,6 @@ class Start extends Component {
 	}
 
 	toggleView() {
-		console.log('toggle view');
 		this.setState(oldState => ({
 			kanban: !oldState.kanban
 		}))
@@ -165,6 +169,22 @@ class Start extends Component {
 		this.setState({ filteredValue })
 	}
 
+	setTaskActive(id) {
+		this.setState({
+			selectedTaskId: id
+		}, () => {
+			this.getActiveTaskData(this.state.selectedTaskId)
+		})
+	}
+
+	async getActiveTaskData(id) {
+		const { accountId } = this.state
+		if(id.length > 0) {
+			const { data: selectedTask } = await get(`tasks/${accountId}/${id}`)
+			this.setState({ selectedTask })
+		}
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -193,6 +213,8 @@ class Start extends Component {
 					activeProject={this.state.activeProject}
 					filteredValue={this.state.filteredValue}
 					setFilteredValue={this.setFilteredValue}
+					setTaskActive={this.setTaskActive}
+					selectedTaskId={this.state.selectedTaskId}
 				/>
 
 				{ !this.state.loading ? <Loader/> : <Loader loading/> }
