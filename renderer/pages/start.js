@@ -14,6 +14,7 @@ import styles from '../styles/pages/start'
 
 // components
 import Loader from '../components/atoms/Loader'
+import TitleBar from '../components/atoms/TitleBar'
 import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
@@ -196,6 +197,7 @@ class Start extends Component {
 
 		return (
 			<div className="container">
+				<TitleBar/>
 				<Sidebar
 					tasks={filteredTask}
 					projects={this.state.projects}
