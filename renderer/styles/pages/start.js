@@ -37,4 +37,13 @@ export default `
 		text-transform: uppercase;
 		font-weight: bold;
 	}
+
+	h1 {
+		font-size: 32px;
+		color: #7A848F;
+		letter-spacing: 0;
+		font-weight:700;
+		user-select: none;
+		cursor: default;
+	}
 `

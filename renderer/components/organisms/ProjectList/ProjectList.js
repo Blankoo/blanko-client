@@ -16,7 +16,12 @@ class ProjectList extends React.Component {
 
 		return(
 			<div className={this.props.className}>
-				<div className="label">{ this.props.className }</div>
+				<div className="label">
+					{ this.props.className }
+					{!favorite && <span className="add-project">
+						<img src="/static/plus-large.svg"/>
+					</span>}
+				</div>
 
 				{projects !== undefined && <div>
 
@@ -24,9 +29,11 @@ class ProjectList extends React.Component {
 						projects.filter(project => project !== null && project.favorite === favorite).map((project, i) => {
 
 							return(
-								<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
-									onClick={e => this.props.selectProject(project._id)}>
-									{ project.projectTitle }
+								<li key={i} className={selectedProjectId === project._id ? 'active' : ''}>
+									<span onClick={e => this.props.selectProject(project._id)}>{ project.projectTitle }</span>
+									<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
+										⭐
+									</span>
 								</li>
 							)
 

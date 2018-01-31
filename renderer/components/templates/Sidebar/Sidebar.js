@@ -23,6 +23,7 @@ class SideBar extends Component {
 					selectedProjectId={this.props.selectedProjectId}
 					activeProjectId={this.props.activeProjectId}
 					selectProject={this.props.selectProject}
+					setProjectFavorite={this.props.setProjectFavorite}
 				/>
 
 				<ProjectList
@@ -32,9 +33,8 @@ class SideBar extends Component {
 					selectedProjectId={this.props.selectedProjectId}
 					activeProjectId={this.props.activeProjectId}
 					selectProject={this.props.selectProject}
+					setProjectFavorite={this.props.setProjectFavorite}
 				/>
-
-			<AddProject addProjectToAccount={this.props.addProjectToAccount}/>
 
 				<style jsx global>{ styles }</style>
 			</div>

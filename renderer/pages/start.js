@@ -18,6 +18,7 @@ import TitleBar from '../components/atoms/TitleBar'
 import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
+import ModalContainer from '../components/atoms/ModalContainer'
 
 class Start extends Component {
 	constructor(props) {
@@ -51,6 +52,7 @@ class Start extends Component {
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
 		this.setTaskActive = this.setTaskActive.bind(this)
+		this.setProjectFavorite = this.setProjectFavorite.bind(this)
 	}
 
 	componentDidMount() {
@@ -186,6 +188,14 @@ class Start extends Component {
 		}
 	}
 
+	async setProjectFavorite(e, projectId, boolean) {
+		const { accountId } = this.state
+		put(`projects/${accountId}`, projectId, { favorite: boolean })
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -198,6 +208,7 @@ class Start extends Component {
 		return (
 			<div className="container">
 				<TitleBar/>
+
 				<Sidebar
 					tasks={filteredTask}
 					projects={this.state.projects}
@@ -205,6 +216,7 @@ class Start extends Component {
 					selectedProjectId={this.state.selectedProjectId}
 					selectProject={this.selectProject}
 					addProjectToAccount={this.addProjectToAccount}
+					setProjectFavorite={this.setProjectFavorite}
 				/>
 
 				<ActiveProject
@@ -219,7 +231,9 @@ class Start extends Component {
 					selectedTaskId={this.state.selectedTaskId}
 				/>
 
-				{ !this.state.loading ? <Loader/> : <Loader loading/> }
+				{ this.state.loading && <Loader loading/> }
+
+				<ModalContainer/>
 
 				<style jsx global>{ styles }</style>
 			</div>

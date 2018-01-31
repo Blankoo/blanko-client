@@ -15,6 +15,7 @@ class Textarea extends Component {
 					maxLength={this.props.maxLength}
 					disabled={this.props.disabled}
 					autoFocus={this.props.autofocus}
+					style={this.props.style}
 					placeholder={this.props.placeholder}>
 					{this.props.textareaText}
 				</textarea>
