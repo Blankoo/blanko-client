@@ -62,7 +62,7 @@ export default () => {
     }).catch(err => res.json(err))
   })
 
-  // add task to project to account
+  // add task to project in account
   projects.post('/add/:accountId/:projectId', authenticate, (req, res) => {
     const { params, body } = req
     const { accountId, projectId } = params
@@ -79,6 +79,17 @@ export default () => {
         res.json({ message: `Task succesfully saved to acc with id: ${accountId} and project with id: ${projectId}`, body: newTask })
       })
     }).catch(err => res.json(err))
+  })
+
+  projects.put('/:accountId/:projectId', authenticate, (req, res) => {
+    const { params, body } = req
+    const { accountId, projectId } = params
+
+    Project.findByIdAndUpdate(projectId, body)
+      .then(project => {
+        log.info({ project })
+        res.json({ message: 'Project updated'})
+      })
   })
 
   return projects

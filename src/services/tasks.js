@@ -84,7 +84,7 @@ export default () => {
       } else {
         Task.findByIdAndUpdate(thisTask, body).then(task => {
           log.info({ task })
-          res.json({ message: 'updated task', body })
+          res.json({ message: 'updated task' })
         })
       }
     }).catch(err => {

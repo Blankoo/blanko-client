@@ -10,9 +10,7 @@ const generateAccessToken = (req, res, next) => {
   // req.token = req.token | {}
   req.token = jwt.sign({
     id: req.user.id
-  }, secret, {
-    expiresIn: conf.tokenTime
-  });
+  }, secret);
   next();
 }
 
