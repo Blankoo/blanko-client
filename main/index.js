@@ -27,11 +27,11 @@ app.on('ready', async e => {
     y: windowState.y,
 		minWidth: 800,
 		minHeight: 600,
-    title: 'Tide',
+    title: 'Blanko',
     titleBarStyle: 'hidden-inset',
 		center: true,
 		webPreferences: {
-    	webSecurity: false,
+    	webSecurity: true,
 			backgroundThrottling: false,
 			devtools: true
   	}
@@ -56,9 +56,6 @@ app.on('ready', async e => {
 
 	// Make the window instances accessible from everywhere
   global.windows = windows
-
-	// Add the native menu
-	buildMenu()
 })
 
 // Quit the app once all windows are closed
