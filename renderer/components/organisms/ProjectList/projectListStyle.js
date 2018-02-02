@@ -16,9 +16,13 @@ export default `
 		cursor: default;
 		position: relative;
 		padding-left: 48px;
+		transition: 100ms linear;
+		color: #9B9B9B;
 	}
+
 	.projects-list li.active {
-		font-weight: bold;
+		/* font-weight: bold; */
+		color: #7A848F;
 	}
 
 	.projects-list li.active:before {
@@ -31,5 +35,31 @@ export default `
 		height:16px;
 		border-radius: 100%;
 		background-color: #7A848F;
+	}
+
+	.set-favorite {
+		position: absolute;
+		right:16px;
+		opacity: 0;
+		font-size: 8px;
+		transition: 200ms ease;
+	}
+
+	.projects-list li:hover {
+		color: #7A848F;
+	}
+
+	.projects-list li:hover .set-favorite {
+		opacity: 1;
+	}
+
+	.label {
+		max-width: 200px;
+	}
+
+	.label .add-project img {
+		float:right;
+		width: 8px;
+		height: 8px;
 	}
 `

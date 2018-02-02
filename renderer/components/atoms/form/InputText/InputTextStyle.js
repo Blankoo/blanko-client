@@ -1,9 +1,19 @@
 export default `
 input {
-	background-color: transparent;
-	padding: 0 0 4px 0;
+	background: #F3F3F3;
+	border-radius: 4px;
+	width: 100%;
 	border: none;
-	border-bottom: 1px solid #e2e2e2;
+	line-height: 1;
+	min-height: 28px;
+	padding: 4px 0 4px 8px;
 	outline: none;
+	transition: 600ms ease;
+	font-size: 11px;
+	color: #7A848F;
+}
+
+input:focus {
+	/* box-shadow: 0 5px 10px 0 #EEEEF3; */
 }
 `

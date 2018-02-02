@@ -12,9 +12,11 @@ class ButtonSubmit extends Component {
 			<div>
 				<button
 					type="button"
+					className={this.props.invert ? 'inverted' : ''}
 					name={this.props.name}
 					disabled={this.props.disabled}
 					autoFocus={this.props.autofocus}
+					style={this.props.style}
 					onClick={this.props.onClick}>
 					{this.props.buttonText}
 				</button>

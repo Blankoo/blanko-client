@@ -18,6 +18,7 @@ import TitleBar from '../components/atoms/TitleBar'
 import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
+import AddProjectModal from '../components/organisms/AddProjectModal'
 
 class Start extends Component {
 	constructor(props) {
@@ -37,7 +38,8 @@ class Start extends Component {
 			loading: true,
 			filteredValue: 'all',
 			selectedTaskId: '',
-			selectedTask: {}
+			selectedTask: {},
+			addProjectModalVisible: false
 		}
 
 		this.remote = electron.remote || false
@@ -51,6 +53,8 @@ class Start extends Component {
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
 		this.setTaskActive = this.setTaskActive.bind(this)
+		this.toggleModal = this.toggleModal.bind(this)
+		this.setProjectFavorite = this.setProjectFavorite.bind(this)
 	}
 
 	componentDidMount() {
@@ -110,15 +114,16 @@ class Start extends Component {
 		}))
 	}
 
-	async addProjectToAccount(newProjectData) {
+	async addProjectToAccount(newProjectData, callback) {
 		const { accountId } = this.state
 		const { data: newProject } = await add('projects/add', accountId, newProjectData)
-		console.log('added new project: ', newProject);
+
 		this.setState(previousState => ({
 			projects: [...previousState.projects, newProject],
 			selectedProjectId: newProject._id
 		}), () => {
 			this.dataInit(false)
+			callback('addProjectModalVisible', false)
 		})
 	}
 
@@ -139,23 +144,20 @@ class Start extends Component {
 
 	async updateTaskStatus(e, i, id, task) {
 		const { selectedProjectId } = this.state
+		const copyTasks = [...this.state.tasks]
 
 		let newTask
 		switch (task.status) {
 			case 'todo':
-				newTask = await put(`tasks/${selectedProjectId}`, id, { status: 'done' })
+				copyTasks.find(task => task._id === id).status = 'done'
 				break;
 			case 'doing':
-				newTask = await put(`tasks/${selectedProjectId}`, id, { status: 'done' })
+				copyTasks.find(task => task._id === id).status = 'done'
 				break;
 			case 'done':
-				newTask = await put(`tasks/${selectedProjectId}`, id, { status: 'todo' })
+				copyTasks.find(task => task._id === id).status = 'todo'
 				break;
 		}
-
-		const copyTasks = [...this.state.tasks]
-		const thisTask = copyTasks.find(task => task._id === id)
-		thisTask.status = newTask.data.body.status
 
 		this.setState({
 			tasks: copyTasks
@@ -186,6 +188,19 @@ class Start extends Component {
 		}
 	}
 
+	async setProjectFavorite(e, projectId, boolean) {
+		const { accountId } = this.state
+		put(`projects/${accountId}`, projectId, { favorite: boolean })
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
+	toggleModal(key, value) {
+		console.log('moetje');
+		this.setState({ [key]: value})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -198,6 +213,7 @@ class Start extends Component {
 		return (
 			<div className="container">
 				<TitleBar/>
+
 				<Sidebar
 					tasks={filteredTask}
 					projects={this.state.projects}
@@ -205,6 +221,8 @@ class Start extends Component {
 					selectedProjectId={this.state.selectedProjectId}
 					selectProject={this.selectProject}
 					addProjectToAccount={this.addProjectToAccount}
+					setProjectFavorite={this.setProjectFavorite}
+					toggleModal={this.toggleModal}
 				/>
 
 				<ActiveProject
@@ -219,7 +237,12 @@ class Start extends Component {
 					selectedTaskId={this.state.selectedTaskId}
 				/>
 
-				{ !this.state.loading ? <Loader/> : <Loader loading/> }
+				{ this.state.loading && <Loader loading/> }
+
+				<AddProjectModal
+					visible={this.state.addProjectModalVisible}
+					toggleModal={this.toggleModal}
+					addProjectToAccount={this.addProjectToAccount}/>
 
 				<style jsx global>{ styles }</style>
 			</div>

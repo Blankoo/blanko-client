@@ -1,8 +1,20 @@
 export default `
 button {
-	background-color: transparent;
-	padding: 8px;
-	border: 1px solid #e2e2e2;
+	border-radius: 4px;
+	background: #F3F3F3;
+	font-size: 12px;
+	padding: 8px 16px;
+	border: none;
+	color: #7A848F;
+	letter-spacing: 0.5px;
 	outline: none;
+}
+
+button.inverted:hover {
+	background: #F3F3F3;
+}
+
+button.inverted {
+	background: transparent;
 }
 `
