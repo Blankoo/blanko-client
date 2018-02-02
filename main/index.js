@@ -6,13 +6,13 @@ const { BrowserWindow, app } = require('electron')
 const isDev = require('electron-is-dev')
 const prepareNext = require('electron-next')
 const { resolve } = require('app-root-path')
-const windowStateKeeper = require("electron-window-state")
+const windowStateKeeper = require('electron-window-state')
 
 app.setName('blanko')
 
 // Prepare the renderer once the app is ready
-app.on("ready", async () => {
-  await prepareNext("./renderer")
+app.on('ready', async e => {
+  await prepareNext('./renderer')
 
 	// Save the window state
 	const windowState = windowStateKeeper({
@@ -27,8 +27,8 @@ app.on("ready", async () => {
     y: windowState.y,
 		minWidth: 800,
 		minHeight: 600,
-    title: "Tide",
-    titleBarStyle: "hidden-inset",
+    title: 'Tide',
+    titleBarStyle: 'hidden-inset',
 		center: true,
 		webPreferences: {
     	webSecurity: false,
@@ -39,11 +39,11 @@ app.on("ready", async () => {
 
 	windowState.manage(mainWindow);
 
-  const devPath = "http://localhost:8000/start"
+  const devPath = 'http://localhost:8000/start'
 
   const prodPath = format({
-    pathname: resolve("renderer/out/start/index.html"),
-    protocol: "file:",
+    pathname: resolve('renderer/out/start/index.html'),
+    protocol: 'file:',
     slashes: true
   })
 
@@ -51,7 +51,7 @@ app.on("ready", async () => {
   mainWindow.loadURL(url)
 
 	const windows = {
-    "main": mainWindow
+    'main': mainWindow
   }
 
 	// Make the window instances accessible from everywhere
