@@ -38,7 +38,8 @@ export default `
 		font-weight: bold;
 	}
 
-	h1 {
+	h1,
+	h2 {
 		font-size: 32px;
 		color: #7A848F;
 		letter-spacing: 0;
@@ -46,4 +47,9 @@ export default `
 		user-select: none;
 		cursor: default;
 	}
+
+	h2 {
+		font-size: 24px;
+	}
+
 `

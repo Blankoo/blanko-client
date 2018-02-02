@@ -12,11 +12,14 @@ export default `
 	position: absolute;
 	top: 50%;
 	left:50%;
-	transform: translate(-50%, -50%);
+	border-radius: 4px;
+	transform: translate(-50%, -60%);
+	background: #FBFBFD;
+	box-shadow: 0 2px 40px 0 rgba(114,114,114,0.7);
 	width: 512px;
 	height: auto;
 	background: white;
-	padding: 24px;
+	padding: 32px 32px 24px 32px;
 }
 
 input,

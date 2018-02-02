@@ -34,6 +34,7 @@ class SideBar extends Component {
 					activeProjectId={this.props.activeProjectId}
 					selectProject={this.props.selectProject}
 					setProjectFavorite={this.props.setProjectFavorite}
+					toggleModal={this.props.toggleModal}
 				/>
 
 				<style jsx global>{ styles }</style>

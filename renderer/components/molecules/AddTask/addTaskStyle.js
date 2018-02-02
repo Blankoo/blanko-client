@@ -19,5 +19,10 @@ export default `
 
 	.input {
 		flex: 1;
+		background:transparent;
+	}
+
+	textarea {
+		background: transparent
 	}
 `

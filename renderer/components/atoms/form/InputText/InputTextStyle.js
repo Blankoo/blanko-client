@@ -9,11 +9,11 @@ input {
 	padding: 4px 0 4px 8px;
 	outline: none;
 	transition: 600ms ease;
-	font-size: 10px;
+	font-size: 11px;
 	color: #7A848F;
 }
 
 input:focus {
-	box-shadow: 0 5px 10px 0 #EEEEF3;
+	/* box-shadow: 0 5px 10px 0 #EEEEF3; */
 }
 `

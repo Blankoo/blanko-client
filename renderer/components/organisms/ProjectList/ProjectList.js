@@ -18,7 +18,7 @@ class ProjectList extends React.Component {
 			<div className={this.props.className}>
 				<div className="label">
 					{ this.props.className }
-					{!favorite && <span className="add-project">
+					{!favorite && <span className="add-project" onClick={e => this.props.toggleModal('addProjectModalVisible', true)}>
 						<img src="/static/plus-large.svg"/>
 					</span>}
 				</div>
