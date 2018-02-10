@@ -40,7 +40,8 @@ class Start extends Component {
 			filteredValue: 'all',
 			selectedTaskId: '',
 			selectedTask: {},
-			addProjectModalVisible: false
+			addProjectModalVisible: false,
+			toggleTaskDetail: false
 		}
 
 		this.remote = electron.remote || false
@@ -56,6 +57,7 @@ class Start extends Component {
 		this.setTaskActive = this.setTaskActive.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
 		this.setProjectFavorite = this.setProjectFavorite.bind(this)
+		this.closeTaskDetail = this.closeTaskDetail.bind(this)
 	}
 
 	componentDidMount() {
@@ -78,6 +80,14 @@ class Start extends Component {
 				} else {
 					this.dataInit(true)
 				}
+			})
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.selectedTask !== this.state.selectedTask) {
+			this.setState({
+				toggleTaskDetail: true
 			})
 		}
 	}
@@ -202,6 +212,12 @@ class Start extends Component {
 		this.setState({ [key]: value})
 	}
 
+	closeTaskDetail = () => {
+		this.setState({
+			toggleTaskDetail: false
+		})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -212,7 +228,7 @@ class Start extends Component {
 		})
 
 		return (
-			<div className="container">
+			<div className={`container ${this.state.toggleTaskDetail ? 'toggleTaskDetail' : ''}`}>
 				<TitleBar/>
 
 				<Sidebar
@@ -246,7 +262,11 @@ class Start extends Component {
 					addProjectToAccount={this.addProjectToAccount}
 				/>
 
-			<TaskDetail selectedTask={this.state.selectedTask}/>
+			<TaskDetail
+				selectedTask={this.state.selectedTask}
+				toggle={this.state.toggleTaskDetail}
+				close={this.closeTaskDetail}
+			/>
 
 				<style jsx global>{ styles }</style>
 			</div>

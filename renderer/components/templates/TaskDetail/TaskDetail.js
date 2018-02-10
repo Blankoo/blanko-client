@@ -5,37 +5,28 @@ import styles from './taskDetailStyle'
 class TaskDetail extends React.Component {
 	constructor(props) {
 		super(props)
-
-		this.state = {
-			toggleTaskDetail: false
-		}
-
-		this.closeTaskDetail = this.closeTaskDetail.bind(this)
-	}
-
-	componentDidUpdate(prevProps) {
-		if (prevProps.selectedTask !== this.props.selectedTask) {
-			this.setState({
-				toggleTaskDetail: true
-			})
-		}
-	}
-
-	closeTaskDetail = () => {
-		this.setState({
-			toggleTaskDetail: false
-		})
 	}
 
 	render() {
 
-		const { selectedTask } = this.props;
+		const { selectedTask, toggle } = this.props;
 
 		return(
-			<div className={`taskDetail ${this.state.toggleTaskDetail ? 'show' : ''}`}>
+			<div className={`taskDetail ${this.props.toggle ? 'show' : ''}`}>
 				<div className="taskDetailTile">
-					<h1 className="mainTitle">Title here!</h1>
-					<span onClick={e => this.closeTaskDetail(e)}><img src="../../static/plus-large.svg"/></span>
+					<span className="closeTaskDetail" onClick={this.props.close}><img src="../../static/plus-large.svg"/></span>
+					<h1 className="mainTitle">{ selectedTask.title }</h1>
+					{ selectedTask.subTitle && <p className="description">{ selectedTask.subTitle }</p> }
+					<div className="dates">
+						<div className="dateItem">
+							<span className="label">Task due date</span>
+							<span className="date">21-08-2012</span>
+						</div>
+						<div className="dateItem">
+							<span className="label">Task due date</span>
+							<span className="date">21-08-2012</span>
+						</div>
+					</div>
 				</div>
 				<style jsx global>{ styles }</style>
 			</div>

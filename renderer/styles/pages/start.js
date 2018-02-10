@@ -16,6 +16,10 @@ export default `
 
 	.container {
 		padding: 0 64px 32px;
+		margin-right: 30%;
+	}
+
+	.container.toggleTaskDetail {
 		margin-right: 420px;
 	}
 
