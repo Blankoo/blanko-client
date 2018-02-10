@@ -19,6 +19,7 @@ import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
+import TaskDetail from '../components/templates/TaskDetail'
 
 class Start extends Component {
 	constructor(props) {
@@ -242,7 +243,10 @@ class Start extends Component {
 				<AddProjectModal
 					visible={this.state.addProjectModalVisible}
 					toggleModal={this.toggleModal}
-					addProjectToAccount={this.addProjectToAccount}/>
+					addProjectToAccount={this.addProjectToAccount}
+				/>
+
+			<TaskDetail selectedTask={this.state.selectedTask}/>
 
 				<style jsx global>{ styles }</style>
 			</div>
