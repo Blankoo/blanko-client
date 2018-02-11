@@ -11,6 +11,8 @@ export default `
 		font-weight:700;
 		margin-top:64px;
 		padding-left: 48px;
+		user-select: none;
+		cursor: default;
 	}
 
 	.favorites {
