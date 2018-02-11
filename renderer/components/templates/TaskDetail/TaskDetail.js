@@ -9,6 +9,29 @@ import styles from './taskDetailStyle'
 class TaskDetail extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			toggle: this.props.toggle
+		}
+
+		this.closeTaskDetail = this.closeToggleDetail.bind(this)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.selectedTask === undefined) {
+			this.setState({
+				toggle: false,
+			})
+		}else {
+			this.setState({
+				toggle: true,
+			})
+		}
+	}
+
+	closeToggleDetail = () => {
+		this.setState({
+			toggle: false,
+		})
 	}
 
 	render() {
@@ -16,11 +39,11 @@ class TaskDetail extends React.Component {
 		const { selectedTask, toggle, updateTaskStatus, close} = this.props
 
 		return(
-			<div className={`task-detail ${toggle ? 'show' : ''}`}>
+			<div className={`task-detail ${this.state.toggle ? 'show' : ''}`}>
 					<div className="task-detail-tile">
 						{selectedTask !== undefined &&
 							<div className="task-detail-tile-container">
-								<span className="close-task-detail" onClick={close}><img src="../../static/plus-large.svg"/></span>
+								<span className="close-task-detail" onClick={this.closeToggleDetail}><img src="../../static/plus-large.svg"/></span>
 								<Checkbox
 									check={selectedTask.status === 'todo' ? false : true}
 									onClick={e => updateTaskStatus(e, 0, selectedTask._id, selectedTask)}

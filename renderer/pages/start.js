@@ -39,7 +39,6 @@ class Start extends Component {
 			loading: true,
 			filteredValue: 'all',
 			selectedTaskId: '',
-			selectedTask: {},
 			addProjectModalVisible: false,
 			toggleTaskDetail: false
 		}
@@ -85,7 +84,7 @@ class Start extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevState.selectedTask !== this.state.selectedTask) {
+		if (prevState.selectedTaskId !== this.state.selectedTaskId) {
 			this.setState({
 				toggleTaskDetail: true
 			})
@@ -216,7 +215,7 @@ class Start extends Component {
 
 	closeTaskDetail = () => {
 		this.setState({
-			toggleTaskDetail: false
+			toggleTaskDetail: false,
 		})
 	}
 
