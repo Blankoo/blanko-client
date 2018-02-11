@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="855" viewBox="0 0 1440 855">
+  <defs>
+    <rect id="skeleton-b" width="1440" height="856" y="1" rx="10"/>
+    <filter id="skeleton-a" width="102.4%" height="104.1%" x="-1.2%" y="-1.5%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-d" width="1152" height="856" x="297" y="1"/>
+    <filter id="skeleton-c" width="110.6%" height="114.3%" x="-5.3%" y="-6.9%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="20"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.447058824   0 0 0 0 0.447058824   0 0 0 0 0.447058824  0 0 0 0.075 0"/>
+    </filter>
+    <rect id="skeleton-f" width="763" height="88" rx="4"/>
+    <filter id="skeleton-e" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-h" width="763" height="88" rx="4"/>
+    <filter id="skeleton-g" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-j" width="763" height="88" rx="4"/>
+    <filter id="skeleton-i" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-l" width="763" height="88" rx="4"/>
+    <filter id="skeleton-k" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-n" width="763" height="88" rx="4"/>
+    <filter id="skeleton-m" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-p" width="763" height="88" rx="4"/>
+    <filter id="skeleton-o" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+    <rect id="skeleton-r" width="763" height="88" rx="4"/>
+    <filter id="skeleton-q" width="104.6%" height="139.8%" x="-2.3%" y="-14.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.933333333   0 0 0 0 0.933333333   0 0 0 0 0.952941176  0 0 0 1 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#000" filter="url(#skeleton-a)" xlink:href="#skeleton-b"/>
+    <use fill="#FBFBFD" xlink:href="#skeleton-b"/>
+    <use fill="#000" filter="url(#skeleton-c)" xlink:href="#skeleton-d"/>
+    <use fill="#FBFBFD" xlink:href="#skeleton-d"/>
+    <rect width="55" height="8" x="423" y="325" fill="#EDEDED" rx="4"/>
+    <g transform="translate(410 1)">
+      <g transform="translate(0 28)">
+        <use fill="#000" filter="url(#skeleton-e)" xlink:href="#skeleton-f"/>
+        <use fill="#FFF" xlink:href="#skeleton-f"/>
+        <g transform="translate(24 24)">
+          <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+            <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+          </text>
+          <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+            <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+          </text>
+          <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+        </g>
+        <g transform="translate(53 24)">
+          <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+          <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+        </g>
+      </g>
+      <g transform="translate(0 124)">
+        <use fill="#000" filter="url(#skeleton-g)" xlink:href="#skeleton-h"/>
+        <use fill="#FFF" xlink:href="#skeleton-h"/>
+        <g transform="translate(24 24)">
+          <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+            <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+          </text>
+          <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+            <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+          </text>
+          <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+        </g>
+        <g transform="translate(53 24)">
+          <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+          <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+        </g>
+      </g>
+      <g transform="translate(0 396)">
+        <g transform="translate(0 24)">
+          <use fill="#000" filter="url(#skeleton-i)" xlink:href="#skeleton-j"/>
+          <use fill="#FFF" xlink:href="#skeleton-j"/>
+          <g transform="translate(24 24)">
+            <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+              <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+            </text>
+            <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+              <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+            </text>
+            <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+          </g>
+        </g>
+        <rect width="67" height="8" x="15" fill="#007AFF" rx="4"/>
+        <g transform="translate(53 48)">
+          <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+          <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+        </g>
+        <g transform="translate(0 120)">
+          <use fill="#000" filter="url(#skeleton-k)" xlink:href="#skeleton-l"/>
+          <use fill="#FFF" xlink:href="#skeleton-l"/>
+          <g transform="translate(24 24)">
+            <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+              <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+            </text>
+            <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+              <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+            </text>
+            <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+          </g>
+          <g transform="translate(53 24)">
+            <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+            <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+          </g>
+        </g>
+      </g>
+      <g transform="translate(0 648)">
+        <g transform="translate(0 24)">
+          <use fill="#000" filter="url(#skeleton-m)" xlink:href="#skeleton-n"/>
+          <use fill="#FFF" xlink:href="#skeleton-n"/>
+          <g transform="translate(24 24)">
+            <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+              <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+            </text>
+            <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+              <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+            </text>
+            <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+          </g>
+        </g>
+        <rect width="67" height="8" x="15" fill="#007AFF" rx="4"/>
+        <g transform="translate(53 48)">
+          <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+          <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+        </g>
+        <g transform="translate(0 120)">
+          <use fill="#000" filter="url(#skeleton-o)" xlink:href="#skeleton-p"/>
+          <use fill="#FFF" xlink:href="#skeleton-p"/>
+          <g transform="translate(24 24)">
+            <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+              <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+            </text>
+            <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+              <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+            </text>
+            <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+          </g>
+          <g transform="translate(53 24)">
+            <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+            <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+          </g>
+        </g>
+      </g>
+      <g transform="translate(0 220)">
+        <use fill="#000" filter="url(#skeleton-q)" xlink:href="#skeleton-r"/>
+        <use fill="#FFF" xlink:href="#skeleton-r"/>
+        <g transform="translate(24 24)">
+          <text fill="#7D7D7D" font-family="SFProText-Regular, SF Pro Text" font-size="12">
+            <tspan x="32" y="37">Geleenstraat 8, Amsterdam</tspan>
+          </text>
+          <text fill="#424459" font-family="SFProText-Regular, SF Pro Text" font-size="14">
+            <tspan x="32" y="13">Naar Jesse om aan Blanko te werken</tspan>
+          </text>
+          <rect width="16" height="16" fill="#F3F3F3" rx="4"/>
+          <path fill="#007AFF" fill-rule="nonzero" d="M4.10384615,8.3 C4.03461538,8.24 4,8.15 4,8.09 C4,8.03 4.03461538,7.94 4.10384615,7.88 L4.58846154,7.46 C4.72692308,7.34 4.93461538,7.34 5.07307692,7.46 L5.10769231,7.49 L7.01153846,9.26 C7.08076923,9.32 7.18461538,9.32 7.25384615,9.26 L11.8923077,5.09 L11.9269231,5.09 C12.0653846,4.97 12.2730769,4.97 12.4115385,5.09 L12.8961538,5.51 C13.0346154,5.63 13.0346154,5.81 12.8961538,5.93 L7.35769231,10.91 C7.28846154,10.97 7.21923077,11 7.11538462,11 C7.01153846,11 6.94230769,10.97 6.87307692,10.91 L4.17307692,8.39 L4.10384615,8.3 Z"/>
+        </g>
+        <g transform="translate(53 24)">
+          <rect width="252" height="16" fill="#EDEDED" rx="4"/>
+          <path stroke="#007AFF" stroke-linecap="square" d="M8.5,7.5 L245.415729,7.5"/>
+          <rect width="252" height="16" y="24" fill="#F8F8F8" rx="4"/>
+          <path stroke="#007AFF" stroke-linecap="square" d="M8.5,31.5 L245.415729,31.5"/>
+        </g>
+      </g>
+      <text fill="#007AFF" font-family="SFProText-Bold, SF Pro Text" font-size="10" font-weight="bold" letter-spacing=".5">
+        <tspan x="8" y="10">TODAY</tspan>
+      </text>
+    </g>
+    <rect width="59" height="8" x="49" y="161" fill="#7A848F" rx="4"/>
+    <rect width="59" height="8" x="49" y="293" fill="#7A848F" rx="4"/>
+    <rect width="8" height="8" x="229" y="293" fill="#7A848F" rx="4"/>
+    <rect width="138" height="16" x="49" y="325" fill="#EDEDED" rx="4"/>
+    <rect width="138" height="16" x="49" y="365" fill="#EDEDED" rx="4"/>
+    <rect width="138" height="16" x="49" y="405" fill="#007AFF" rx="4"/>
+    <rect width="4" height="16" x="4" y="405" fill="#007AFF" rx="2"/>
+    <rect width="138" height="16" x="49" y="445" fill="#EDEDED" rx="4"/>
+    <rect width="138" height="16" x="49" y="485" fill="#EDEDED" rx="4"/>
+    <rect width="138" height="16" x="49" y="233" fill="#EDEDED" rx="4"/>
+    <rect width="138" height="16" x="49" y="193" fill="#EDEDED" rx="4"/>
+    <g transform="translate(308)">
+      <rect width="929" height="60" fill="#FBFBFD"/>
+      <g transform="translate(70 22)">
+        <rect width="16" height="16" fill="#EDEDED" rx="4"/>
+        <rect width="32" height="16" x="43" fill="#007AFF" rx="4"/>
+        <rect width="32" height="16" x="107" fill="#EDEDED" rx="4"/>
+        <rect width="32" height="16" x="171" fill="#EDEDED" rx="4"/>
+        <rect width="32" height="16" x="235" fill="#EDEDED" rx="4"/>
+      </g>
+    </g>
+    <rect width="110" height="27" x="49" y="60" fill="#EDEDED" rx="4"/>
+    <rect width="8" height="8" x="165" y="79" fill="#7A848F" rx="4"/>
+  </g>
+</svg>
