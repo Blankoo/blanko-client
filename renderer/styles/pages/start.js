@@ -17,10 +17,12 @@ export default `
 	.container {
 		padding: 0 64px 32px;
 		margin-right: 30%;
+		transition: all .2s ease-in-out;
 	}
 
 	.container.toggleTaskDetail {
 		margin-right: 420px;
+		padding: 0 64px 32px 32px;
 	}
 
 	.sidebar {

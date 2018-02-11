@@ -170,6 +170,8 @@ class Start extends Component {
 				break;
 		}
 
+		this.setTaskActive(id)
+
 		this.setState({
 			tasks: copyTasks
 		})
@@ -262,11 +264,12 @@ class Start extends Component {
 					addProjectToAccount={this.addProjectToAccount}
 				/>
 
-			<TaskDetail
-				selectedTask={this.state.selectedTask}
-				toggle={this.state.toggleTaskDetail}
-				close={this.closeTaskDetail}
-			/>
+				<TaskDetail
+					selectedTask={this.state.tasks.find(task => task._id === this.state.selectedTaskId)}
+					toggle={this.state.toggleTaskDetail}
+					close={this.closeTaskDetail}
+					updateTaskStatus={this.updateTaskStatus}
+				/>
 
 				<style jsx global>{ styles }</style>
 			</div>
