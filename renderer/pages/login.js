@@ -4,6 +4,11 @@ import router from 'next/router'
 import http from '../utils/http'
 import config from '../utils/config'
 
+import InputText from '../components/atoms/form/InputText'
+import InputPassword from '../components/atoms/form/InputPassword'
+
+import styles from '../styles/pages/login'
+
 class Login extends React.Component {
 	constructor(props) {
 		super()
@@ -30,11 +35,21 @@ class Login extends React.Component {
 	onType(e) { this.setState({ [e.target.name]: e.target.value }) }
 
 	render() {
-		return (<div style={{background:'#FBFBFD'}}>LOGIN
-			<input type="text" onChange={this.onType} name="username"/>
-			<input type="password" onChange={this.onType} name="password"/>
-			<button onClick={this.login}>LOGIN DAN</button>
-		</div>)
+		return (
+			<div className="login">
+				<div className="sidebar-left">
+					<div className="blanko">Blanko.</div>
+					<div className="input-fields">
+						<input type="text" onChange={this.onType} name="username" placeholder="Username" autoFocus={true}/>
+						<input type="password" onChange={this.onType} name="password" placeholder="Password"/>
+						<button onClick={this.login} className="login-button">Login</button>
+					</div>
+				</div>
+
+				<div className="skeleton"></div>
+				<style jsx global>{ styles }</style>
+			</div>
+		)
 	}
 }
 
