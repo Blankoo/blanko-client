@@ -19,6 +19,7 @@ import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
+import TaskDetail from '../components/templates/TaskDetail'
 
 class Start extends Component {
 	constructor(props) {
@@ -39,7 +40,8 @@ class Start extends Component {
 			filteredValue: 'all',
 			selectedTaskId: '',
 			selectedTask: {},
-			addProjectModalVisible: false
+			addProjectModalVisible: false,
+			toggleTaskDetail: false
 		}
 
 		this.remote = electron.remote || false
@@ -55,6 +57,7 @@ class Start extends Component {
 		this.setTaskActive = this.setTaskActive.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
 		this.setProjectFavorite = this.setProjectFavorite.bind(this)
+		this.closeTaskDetail = this.closeTaskDetail.bind(this)
 	}
 
 	componentDidMount() {
@@ -77,6 +80,14 @@ class Start extends Component {
 				} else {
 					this.dataInit(true)
 				}
+			})
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.selectedTask !== this.state.selectedTask) {
+			this.setState({
+				toggleTaskDetail: true
 			})
 		}
 	}
@@ -159,6 +170,8 @@ class Start extends Component {
 				break;
 		}
 
+		this.setTaskActive(id)
+
 		this.setState({
 			tasks: copyTasks
 		})
@@ -201,6 +214,12 @@ class Start extends Component {
 		this.setState({ [key]: value})
 	}
 
+	closeTaskDetail = () => {
+		this.setState({
+			toggleTaskDetail: false
+		})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -211,7 +230,7 @@ class Start extends Component {
 		})
 
 		return (
-			<div className="container">
+			<div className={`container ${this.state.toggleTaskDetail ? 'toggleTaskDetail' : ''}`}>
 				<TitleBar/>
 
 				<Sidebar
@@ -242,7 +261,15 @@ class Start extends Component {
 				<AddProjectModal
 					visible={this.state.addProjectModalVisible}
 					toggleModal={this.toggleModal}
-					addProjectToAccount={this.addProjectToAccount}/>
+					addProjectToAccount={this.addProjectToAccount}
+				/>
+
+				<TaskDetail
+					selectedTask={this.state.tasks.find(task => task._id === this.state.selectedTaskId)}
+					toggle={this.state.toggleTaskDetail}
+					close={this.closeTaskDetail}
+					updateTaskStatus={this.updateTaskStatus}
+				/>
 
 				<style jsx global>{ styles }</style>
 			</div>

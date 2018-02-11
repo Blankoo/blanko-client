@@ -15,15 +15,22 @@ export default `
 	}
 
 	.container {
-		padding:0 64px 32px;
+		padding: 0 64px 32px;
+		margin-right: 30%;
+		transition: all .2s ease-in-out;
+	}
+
+	.container.toggleTaskDetail {
+		margin-right: 420px;
+		padding: 0 64px 32px 32px;
 	}
 
 	.sidebar {
-		width:332px;
-		height:100vh;
+		width: 332px;
+		height: 100vh;
 		position: fixed;
-		top:0;
-		left:0;
+		top: 0;
+		left: 0;
 		background: #FBFBFD;
 		box-shadow: inset 0 2px 40px 0 rgba(114,114,114,0.07);
 	}
@@ -31,7 +38,7 @@ export default `
 
 	.label {
 		font-size: 10px;
-		user-select:none;
+		user-select: none;
 		color: #7A848F;
 		letter-spacing: 0.5px;
 		text-transform: uppercase;
