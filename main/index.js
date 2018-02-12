@@ -39,6 +39,8 @@ app.on('ready', async e => {
 
 	windowState.manage(mainWindow);
 
+	// mainWindow.webContents.openDevTools()
+
   const devPath = 'http://localhost:8000/start'
 
   const prodPath = format({
