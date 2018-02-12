@@ -13,6 +13,8 @@
     "lint": "./node_modules/.bin/eslint ."
   },
   "build": {
+    "appId": "com.blankoapp",
+    "productName": "Blanko",
     "files": [
       "**/*",
       "!renderer",
@@ -34,15 +36,15 @@
     "eslint-plugin-react": "^7.4.0",
     "next": "3.0.6",
     "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react-dom": "15.6.1",
+    "react-addons-css-transition-group": "^15.6.2",
+    "uglifyjs-webpack-plugin": "v1.0.0-beta.1"
   },
   "dependencies": {
     "app-root-path": "2.0.1",
     "axios": "^0.17.1",
-    "dexie": "^2.0.1",
     "electron-is-dev": "0.3.0",
     "electron-next": "3.1.1",
-    "electron-window-state": "^4.1.1",
-    "react-addons-css-transition-group": "^15.6.2"
+    "electron-window-state": "^4.1.1"
   }
 }
