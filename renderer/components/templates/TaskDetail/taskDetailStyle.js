@@ -89,7 +89,7 @@ export default `
 	flex-direction: column;
 }
 
-.dates .date-item .label {
+.dates .date-item label {
 	margin-bottom: 8px;
 }
 
