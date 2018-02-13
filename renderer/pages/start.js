@@ -38,9 +38,8 @@ class Start extends Component {
 			loading: true,
 			filteredValue: 'all',
 			selectedTaskId: '',
-			selectedTask: {},
 			addProjectModalVisible: false,
-			toggleTaskDetail: false
+			isDetailShown: false
 		}
 
 		this.remote = electron.remote || false
@@ -56,7 +55,8 @@ class Start extends Component {
 		this.setTaskActive = this.setTaskActive.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
 		this.setProjectFavorite = this.setProjectFavorite.bind(this)
-		this.closeTaskDetail = this.closeTaskDetail.bind(this)
+		this.hideTaskDetail = this.hideTaskDetail.bind(this)
+		this.showTaskDetail = this.showTaskDetail.bind(this)
 	}
 
 	componentDidMount() {
@@ -83,14 +83,6 @@ class Start extends Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevState.selectedTask !== this.state.selectedTask) {
-			this.setState({
-				toggleTaskDetail: true
-			})
-		}
-	}
-
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId, selectedTaskId } = this.state
 		const { data: projects } = await get('projects', accountId)
@@ -104,8 +96,6 @@ class Start extends Component {
 				projects,
 				tasks,
 				activeProject: selectedProjectObject
-			}, () => {
-				this.getActiveTaskData(selectedTaskId)
 			})
 		}
 	}
@@ -186,9 +176,8 @@ class Start extends Component {
 
 	setTaskActive(id) {
 		this.setState({
-			selectedTaskId: id
-		}, () => {
-			this.getActiveTaskData(this.state.selectedTaskId)
+			selectedTaskId: id,
+			isDetailShown: true
 		})
 	}
 
@@ -209,13 +198,22 @@ class Start extends Component {
 	}
 
 	toggleModal(key, value) {
-		console.log('moetje');
 		this.setState({ [key]: value})
 	}
 
-	closeTaskDetail = () => {
+	showTaskDetail() {
 		this.setState({
-			toggleTaskDetail: false
+			isDetailShown: true,
+		})
+	}
+
+	hideTaskDetail() {
+		this.setState({
+			isDetailShown: false,
+		}, () => {
+			setTimeout(() => {
+				this.setState({ selectedTaskId: '' })
+			}, 320) // remove data after transition time.
 		})
 	}
 
@@ -229,7 +227,7 @@ class Start extends Component {
 		})
 
 		return (
-			<div className={`container ${this.state.toggleTaskDetail ? 'toggleTaskDetail' : ''}`}>
+			<div className={`container ${this.state.isDetailShown ? 'toggleTaskDetail' : ''}`}>
 				<TitleBar/>
 
 				<Sidebar
@@ -253,6 +251,7 @@ class Start extends Component {
 					setFilteredValue={this.setFilteredValue}
 					setTaskActive={this.setTaskActive}
 					selectedTaskId={this.state.selectedTaskId}
+					keyUp={this.keyUp}
 				/>
 
 				{ this.state.loading && <Loader loading/> }
@@ -265,9 +264,11 @@ class Start extends Component {
 
 				<TaskDetail
 					selectedTask={this.state.tasks.find(task => task._id === this.state.selectedTaskId)}
-					toggle={this.state.toggleTaskDetail}
-					close={this.closeTaskDetail}
+					isDetailShown={this.state.isDetailShown}
 					updateTaskStatus={this.updateTaskStatus}
+					hideTaskDetail={this.hideTaskDetail}
+					showTaskdetail={this.showTaskDetail}
+					keyUp={this.keyUp}
 				/>
 
 				<style jsx global>{ styles }</style>

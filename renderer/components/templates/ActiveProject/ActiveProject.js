@@ -13,17 +13,17 @@ class ActiveProject extends React.Component {
 
 		this.state = { isAddingProject: false }
 
-		this.toggleAddProject = this.toggleAddProject.bind(this)
+		this.toggleAddTask = this.toggleAddTask.bind(this)
 		this.onKeyUp = this.onKeyUp.bind(this)
 	}
 
-	toggleAddProject() {
+	toggleAddTask() {
 		this.setState(prevState => ({ isAddingProject: !prevState.isAddingProject}))
 	}
 
 	onKeyUp(e) {
 		if(e.key === 'Escape' || e.key === 'Enter') {
-			this.toggleAddProject()
+			this.toggleAddTask()
 		}
 	}
 
@@ -38,7 +38,7 @@ class ActiveProject extends React.Component {
 			<FilterTasks
 				filteredValue={filteredValue}
 				setFilteredValue={setFilteredValue}
-				toggleAddProject={this.toggleAddProject}
+				toggleAddTask={this.toggleAddTask}
 			/>
 
 			<div className="label">
@@ -57,7 +57,7 @@ class ActiveProject extends React.Component {
 				this.state.isAddingProject ?
 				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp}/>
 				:
-				<Button onClick={this.toggleAddProject} text="Add Task" style={{ fontSize: 8}}/>
+				<Button onClick={this.toggleAddTask} text="Add Task" style={{ fontSize: 8}}/>
 			}
 
 			<style jsx>{styles}</style>
