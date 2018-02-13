@@ -55,7 +55,8 @@ class Start extends Component {
 		this.setTaskActive = this.setTaskActive.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
 		this.setProjectFavorite = this.setProjectFavorite.bind(this)
-		this.closeTaskDetail = this.closeTaskDetail.bind(this)
+		this.hideTaskDetail = this.hideTaskDetail.bind(this)
+		this.showTaskDetail = this.showTaskDetail.bind(this)
 	}
 
 	componentDidMount() {
@@ -82,11 +83,9 @@ class Start extends Component {
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevState.selectedTaskId !== this.state.selectedTaskId) {
-			this.setState({
-				toggleTaskDetail: true
-			})
+	componentWillUpdate(prevProps, prevState) {
+		if(prevState.selectedTaskId === this.selectedTaskId) {
+			console.log('TOGGLE!');
 		}
 	}
 
@@ -212,7 +211,13 @@ class Start extends Component {
 		this.setState({ [key]: value})
 	}
 
-	closeTaskDetail = () => {
+	showTaskDetail() {
+		this.setState({
+			toggleTaskDetail: true,
+		})
+	}
+
+	hideTaskDetail() {
 		this.setState({
 			toggleTaskDetail: false,
 		})
@@ -264,9 +269,10 @@ class Start extends Component {
 
 				<TaskDetail
 					selectedTask={this.state.tasks.find(task => task._id === this.state.selectedTaskId)}
-					toggle={this.state.toggleTaskDetail}
-					close={this.closeTaskDetail}
+					toggleTaskDetail={this.state.toggleTaskDetail}
 					updateTaskStatus={this.updateTaskStatus}
+					hideTaskDetail={this.hideTaskDetail}
+					showTaskdetail={this.showTaskDetail}
 				/>
 
 				<style jsx global>{ styles }</style>
