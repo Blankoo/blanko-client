@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import router from 'next/router'
 
 // utils
-import db from '../utils/db'
 import add from '../utils/add'
 import put from '../utils/put'
 import del from '../utils/delete'
