@@ -14,10 +14,12 @@ button {
 }
 
 button:hover {
-	background-color: #F3F3F3;
+	background-color: #1C87FB;
+	color:white;
 }
 
 button.active {
-  background-color: #F3F3F3;
+  background-color: #1C87FB;
+	color:white;
 }
 `

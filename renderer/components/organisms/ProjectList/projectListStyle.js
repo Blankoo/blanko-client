@@ -16,24 +16,25 @@ export default `
 		cursor: default;
 		position: relative;
 		padding-left: 48px;
+		font-size: 12px;
+		font-weight: 500;
 		transition: 100ms linear;
 		color: #9B9B9B;
 	}
 
 	.projects-list li.active {
 		/* font-weight: bold; */
-		color: #7A848F;
+		color: #1C87FB;
 	}
 
 	.projects-list li.active:before {
 		content: url('../../static/activeProjectLine.svg');
 		display: flex;
 		position: absolute;
-		left:0;
+		left:4px;
 		top:0;
 		width: 3px;
-		height:16px;
-		border-radius: 100%;
+		height:14px;
 		background-color: #7A848F;
 	}
 
@@ -46,7 +47,7 @@ export default `
 	}
 
 	.projects-list li:hover {
-		color: #7A848F;
+		color: #1C87FB;
 	}
 
 	.projects-list li:hover .set-favorite {
