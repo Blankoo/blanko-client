@@ -1,8 +1,8 @@
 module.exports = {
   webpack(config) {
-		const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+		// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
     config.target = 'electron-renderer'
-		config.plugins.push(new UglifyJSPlugin())
+		// config.plugins.push(new UglifyJSPlugin())
     return config
   },
   exportPathMap() {
