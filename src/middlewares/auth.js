@@ -7,11 +7,10 @@ const secret = conf.authSecret
 const authenticate = expressJwt({ secret })
 
 const generateAccessToken = (req, res, next) => {
-  // req.token = req.token | {}
   req.token = jwt.sign({
     id: req.user.id
   }, secret);
-  next();
+  next()
 }
 
 const respond = (req, res) => {
