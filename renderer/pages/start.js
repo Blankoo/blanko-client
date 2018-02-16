@@ -1,6 +1,7 @@
 import electron from 'electron'
 import React, {Component} from 'react'
 import router from 'next/router'
+import Mousetrap from 'mousetrap'
 
 // utils
 import add from '../utils/add'
@@ -81,6 +82,12 @@ class Start extends Component {
 				}
 			})
 		}
+
+		Mousetrap.bind('esc', e => {
+			if(this.state.selectedTas.length > 0) {
+				this.hideTaskDetail()
+			}
+		})
 	}
 
 	async dataInit(noSelectedProject) {
