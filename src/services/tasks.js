@@ -51,23 +51,11 @@ export default () => {
 
   tasks.put('/a/:accountId/:taskId', authenticate, (req, res) => {
     const { params, body } = req
-    const { taskId, accountId } = params
+    const { taskId } = params
 
-    Account.findById({_id: accountId}).then(acc => {
-      const thisTask = acc.tasks.find(accountTask => `${accountTask}` === taskId)
-
-      if(thisTask === undefined) {
-        log.info('This task ID is not part of this acc')
-        res.json({ message: 'This is not a valid task id'})
-      } else {
-        Task.findByIdAndUpdate(thisTask, body).then(task => {
-          log.info({ task })
-          res.json({ message: 'updated task', body })
-        })
-      }
-    }).catch(err => {
-      res.send(err)
-      log.info({ err })
+    Task.findByIdAndUpdate(taskId, body).then(task => {
+      log.info({ task })
+      res.json({ message: 'updated task' })
     })
   })
 
