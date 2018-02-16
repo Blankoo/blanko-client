@@ -6,6 +6,8 @@ const Schema = mongoose.Schema;
 const AccountSchema = new Schema({
   username: String,
   password: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   tasks: [{
     type: Schema.Types.ObjectId,
     ref: 'Task'

@@ -13,6 +13,7 @@
 		"lint": "eslint src"
 	},
 	"dependencies": {
+		"bcrypt-nodejs": "0.0.3",
 		"bluebird": "^3.5.1",
 		"body-parser": "^1.17.2",
 		"express": "^4.15.4",
@@ -21,6 +22,7 @@
 		"gulp-babel": "^7.0.0",
 		"jsonwebtoken": "^7.4.3",
 		"mongoose": "^4.13.6",
+		"nodemailer": "^4.4.2",
 		"passport": "^0.4.0",
 		"passport-local": "^1.0.0",
 		"passport-local-mongoose": "^4.2.1"
@@ -34,6 +36,6 @@
 		"bunyan": "^1.8.12",
 		"bunyan-format": "^0.2.1",
 		"eslint": "^4.5.0",
-		"nodemon": "^1.10.0"
+		"nodemon": "^1.14.12"
 	}
 }
