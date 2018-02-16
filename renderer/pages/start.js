@@ -143,19 +143,22 @@ class Start extends Component {
 	}
 
 	async updateTaskStatus(e, i, id, task) {
-		const { selectedProjectId } = this.state
+		const { selectedProjectId, accountId } = this.state
 		const copyTasks = [...this.state.tasks]
 
 		let newTask
 		switch (task.status) {
 			case 'todo':
 				copyTasks.find(task => task._id === id).status = 'done'
+				put(`tasks/a/${accountId}/${id}`, { status: 'done' })
 				break;
 			case 'doing':
 				copyTasks.find(task => task._id === id).status = 'done'
+				put(`tasks/a/${accountId}/${id}`, { status: 'done' })
 				break;
 			case 'done':
 				copyTasks.find(task => task._id === id).status = 'todo'
+				put(`tasks/a/${accountId}/${id}`, { status: 'todo' })
 				break;
 		}
 
