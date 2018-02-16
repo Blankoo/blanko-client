@@ -84,7 +84,7 @@ class Start extends Component {
 		}
 
 		Mousetrap.bind('esc', e => {
-			if(this.state.selectedTas.length > 0) {
+			if(this.state.selectedTaskId.length > 0) {
 				this.hideTaskDetail()
 			}
 		})
