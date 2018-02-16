@@ -22,7 +22,7 @@ class ActiveProject extends React.Component {
 	}
 
 	onKeyUp(e) {
-		if(e.key === 'Escape' || e.key === 'Enter') {
+		if((e.key === 'Escape' && this.state.isAddingProject) || (e.key === 'Enter')) {
 			this.toggleAddTask()
 		}
 	}
