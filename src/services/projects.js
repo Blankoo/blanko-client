@@ -15,18 +15,14 @@ export default () => {
   projects.get('/:accountId', authenticate, (req, res) => {
     const { accountId } = req.params
 
-    Account.findById(accountId).then(account => {
-      const { projects } = account
-      const finalProjectArray = []
-
-      projects.forEach(projectId => {
-        finalProjectArray.push(Project.findById(projectId))
-      })
-
-      return Promise.all(finalProjectArray)
-    }).then(projectList => {
-      log.info({projectList})
-      res.json(projectList)
+    Project.find({ createdBy: accountId}).then(projects => {
+      log.info('________________PROJECTS_____________')
+      log.info({projects})
+      res.json(projects)
+    })
+    .catch(err => {
+      res.json({err})
+      log.info({err})
     })
   })
 
@@ -91,6 +87,24 @@ export default () => {
         res.json({ message: 'Project updated'})
       })
   })
+
+  projects.delete('/:accountId/:projectId', authenticate, (req, res) => {
+    const { accountId, projectId } = req.params
+
+    // Account.findById(accountId).then(account => {
+    //   const { projects } = account
+    //   projects.remove(projectId)
+
+    //   Account.save()
+    //   res.json({ message: 'Removed project from account.' })
+    // }).catch(err => res.json(err))
+
+    Project.findByIdAndRemove(projectId).then(() => {
+      res.json({ accountId, projectId, message: 'delete ffies dan'})
+      Account.update({ projects }, { $pull: projects[projectId] }, { multi: true })
+    }).catch(err => err)
+  })
+
 
   return projects
 }

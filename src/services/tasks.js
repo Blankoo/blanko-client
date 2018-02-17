@@ -81,22 +81,14 @@ export default () => {
     })
   })
 
-  tasks.delete('/:accountId/:taskId', authenticate, (req, res) => {
-    const { taskId, accountId } = req.params
+  tasks.delete('/:accountId/:projectId/:taskId', authenticate, (req, res) => {
+    const { taskId, projectId, accountId } = req.params
 
-    Account.findById({ _id: accountId }).then(acc => {
-      const thisTaskId = acc.tasks.find(accountTask => `${accountTask}` === taskId)
-
-      if (thisTaskId !== undefined) {
-        Task.findByIdAndRemove(thisTaskId).then(() => {
-          res.json({ message: 'Task has been deleted'})
-        }).catch(err => {
-          res.json(err)
-          log.info({ err })
-        })
-      } else {
-        log.info({ message: 'Not a valid task' })
-      }
+    Task.findByIdAndRemove(taskId).then(() => {
+      res.json({ message: 'Task has been deleted'})
+    }).catch(err => {
+      res.json(err)
+      log.info({ err })
     })
   })
 
