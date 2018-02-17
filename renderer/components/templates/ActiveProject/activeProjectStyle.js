@@ -1,6 +1,7 @@
 export default `
 .activeProject {
 	padding-top: 64px;
+	max-width: 800px;
 }
 
 .mainTitle {
