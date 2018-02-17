@@ -6,6 +6,10 @@ export default `
 		font-family: -apple-system, BlinkMacSystemFont, 'Verdana', sans-serif;
 	}
 
+	::-webkit-scrollbar {
+        display: none;
+	}
+
 	body {
 		margin:0;
 		padding:0;
