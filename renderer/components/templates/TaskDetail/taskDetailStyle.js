@@ -16,8 +16,9 @@ export default `
 
 .task-detail-tile {
 	background: #FFFFFF;
-	box-shadow: 0 5px 20px 0 rgba(238,238,243, 0.8);
-	border-radius: 4px;
+	/* box-shadow: 0 5px 20px 0 rgba(238,238,243, 0.8); */
+	box-shadow: 0 6px 18px -6px rgba(4,19,36,0.27);
+	border-radius: 8px;
 	padding: 40px;
 	max-width: 100%;
 	height: 100%;

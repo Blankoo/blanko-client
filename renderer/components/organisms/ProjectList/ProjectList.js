@@ -30,7 +30,8 @@ class ProjectList extends React.Component {
 
 							return(
 								<li key={i} className={selectedProjectId === project._id ? 'active' : ''}>
-									<span onClick={e => this.props.selectProject(project._id)}>{ project.projectTitle }</span>
+									<span onClick={e => this.props.selectProject(project._id)}
+										title={project.projectTitle}>{ project.projectTitle }</span>
 									<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
 										⭐
 									</span>
