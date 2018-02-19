@@ -4,7 +4,8 @@ export default `
 		padding-right:16px;
 	}
 
-	.blanko {
+	.blanko,
+	.blanko-small {
 		font-size: 32px;
 		color: #7A848F;
 		letter-spacing: 0;
@@ -15,10 +16,15 @@ export default `
 		cursor: default;
 	}
 
+	.blanko-small {
+		display: none;
+		font-size: 42px;
+		padding-left: 22px;
+	}
+
 	.favorites {
 		margin-top:64px;
 		margin-bottom:64px;
-		/* padding-left: 48px; */
 	}
 
 	.projectList {

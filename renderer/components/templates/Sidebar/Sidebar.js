@@ -16,6 +16,7 @@ class SideBar extends Component {
 		return (
 			<div className="sidebar">
 				<div className="blanko">Blanko.</div>
+				<div className="blanko-small">B.</div>
 				<ProjectList
 					className="favorites"
 					favorite={true}

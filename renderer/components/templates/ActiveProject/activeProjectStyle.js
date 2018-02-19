@@ -1,7 +1,6 @@
 export default `
 .activeProject {
 	padding-top: 64px;
-	max-width: 800px;
 }
 
 .mainTitle {
@@ -12,6 +11,7 @@ export default `
 }
 
 .description {
+	max-width: 600px;
 	font-weight: light;
 	font-size: 12px;
 	color: #7D7D7D;

@@ -25,7 +25,7 @@ app.on('ready', async e => {
     height: windowState.height,
 		x: windowState.x,
     y: windowState.y,
-		minWidth: 800,
+		minWidth: 524,
 		minHeight: 600,
     title: 'Blanko',
     titleBarStyle: 'hidden-inset',
