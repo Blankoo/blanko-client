@@ -22,7 +22,7 @@ class ListView extends Component {
 
 					<div
 						key={i} className={'single ' + isCheckedToggle(task) + isSelected(task)}
-						onClick={e => this.props.setTaskActive(task._id)}
+						onClick={e => this.props.setTaskActive(e, task._id)}
 					>
 
 						<Checkbox
@@ -32,7 +32,7 @@ class ListView extends Component {
 
 						<div className="taskTitle">
 							<h4>{ task.title }</h4>
-							<p>{ task.subTitle }</p>
+							{ task.subTitle.length > 0 && <p>{ task.subTitle }</p>}
 						</div>
 						{/*<span onClick={ e => this.props.deleteTask(e, i, task._id) } className="delete">X</span>*/}
 					</div>

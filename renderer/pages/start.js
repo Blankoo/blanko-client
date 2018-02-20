@@ -150,9 +150,9 @@ class Start extends Component {
 	}
 
 	async updateTaskStatus(e, i, id, task) {
+		e.stopPropagation()
 		const { selectedProjectId, accountId } = this.state
 		const copyTasks = [...this.state.tasks]
-
 		let newTask
 		switch (task.status) {
 			case 'todo':
@@ -169,7 +169,7 @@ class Start extends Component {
 				break;
 		}
 
-		this.setTaskActive(id)
+		// this.setTaskActive(id)
 
 		this.setState({
 			tasks: copyTasks
@@ -184,11 +184,13 @@ class Start extends Component {
 		this.setState({ filteredValue })
 	}
 
-	setTaskActive(id) {
-		this.setState({
-			selectedTaskId: id,
-			isDetailShown: true
-		})
+	setTaskActive(e, id) {
+		if(!e.target.classList.contains('checkbox')) {
+			this.setState({
+				selectedTaskId: id,
+				isDetailShown: true
+			})
+		}
 	}
 
 	async getActiveTaskData(id) {
