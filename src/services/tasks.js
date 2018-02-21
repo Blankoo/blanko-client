@@ -127,5 +127,16 @@ export default () => {
       res.json({ message: 'Sub task deleted succesfully'})
     }).catch(err => log.info(err))
   })
+
+  tasks.put('/updatesub/:accountId/:projectId/:taskId/:subTaskId', (req, res) => {
+    const { taskId, subTaskId } = req.params
+    const { status } = req.body
+    Task.update({ 'subTasks.id': subTaskId }, {
+      'subTasks.$.status': status
+    }).then(() => {
+      res.json({ message: 'Task status updated succesfully' })
+    }).catch(err => log.info(err))
+  })
+
   return tasks
 }
