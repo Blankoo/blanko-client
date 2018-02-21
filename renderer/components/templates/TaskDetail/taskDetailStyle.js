@@ -52,7 +52,6 @@ export default `
 	opacity: 0;
 }
 
-
 .checkbox.taskdetail {
 	position: relative;
 	top: 6px;
@@ -92,6 +91,7 @@ export default `
 
 .labels .label-item label {
 	margin-bottom: 8px;
+	color: #1C87FB;
 }
 
 .labels .label-item .status {

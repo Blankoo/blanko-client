@@ -1,7 +1,10 @@
 export default `
-
 .active-project {
 	position: relative;
+}
+
+.label {
+	color: #1C87FB;
 }
 
 .mainTitle {

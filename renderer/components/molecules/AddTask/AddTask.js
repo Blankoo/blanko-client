@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import styles from './addTaskStyle'
 import InputText from '../../atoms/form/InputText/index'
-import ButtonSubmit from '../../atoms/form/ButtonSubmit/index'
 
 const inputStyle = {
 	width: '100%',
@@ -51,11 +50,21 @@ class AddTask extends Component {
 
 				<div className="input" onKeyUp={this.onEnter}>
 					<form ref={node => this.form = node}>
-						<InputText autofocus name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
-						<InputText name="subTitle" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 12, color: '#7D7D7D', marginTop: 8}}/>
+						<InputText
+							autofocus
+							type="text"
+							name="title"
+							onChange={this.returnTypedValue}
+							style={{...inputStyle, fontSize: 14, color: '#424459'}}
+						/>
+						<InputText
+							type="text"
+							name="subTitle"
+							onChange={this.returnTypedValue}
+							style={{...inputStyle, fontSize: 12, color: '#7D7D7D', marginTop: 8}}
+						/>
 					</form>
 				</div>
-				{ /* <ButtonSubmit onClick={ e => this.props.addNewTask('projects/add', this.state) }/> */ }
 				<style jsx>{ styles }</style>
 			</div>
 		)

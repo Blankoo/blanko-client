@@ -21,10 +21,24 @@ class ModalContainer extends React.Component {
 		}
 
 		this.onType = this.onType.bind(this)
+		this.validateCheck = this.validateCheck.bind(this)
 	}
 
 	onType(e) {
 		this.setState({ [e.target.name]: e.target.value })
+	}
+
+	validateCheck() {
+		if(this.state.projectTitle !== '') {
+			console.log('Title is filled in')
+
+			this.props.addProjectToAccount(this.state, this.props.toggleModal)
+
+			this.setState({
+				projectTitle: '',
+				projectDescription: ''
+			})
+		}
 	}
 
 	render() {
@@ -42,7 +56,7 @@ class ModalContainer extends React.Component {
 
 						<div style={{ ...offset, ...{ display: 'flex', justifyContent: 'flex-end' }}}>
 							<Button style={{marginRight: 8}} text="cancel" onClick={e => this.props.toggleModal('addProjectModalVisible', false)}/>
-							<Button text="save" type="submit" onClick={e => this.props.addProjectToAccount(this.state, this.props.toggleModal)}/>
+							<Button text="save" type={this.state.projectTitle !== '' ? 'submit' : 'disabled'} onClick={this.validateCheck}/>
 						</div>
 					</div>
 					<style jsx>{ styles }</style>

@@ -13,11 +13,15 @@ button {
 	transition: 100ms linear;
 }
 
-
 /*Button type: default*/
 button.default:hover {
 	background-color: #F3F3F3;
 	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
+}
+
+/*Button type: disabled*/
+button.disabled {
+	color: #D0D1D6;
 }
 
 /*Button type: filter*/
