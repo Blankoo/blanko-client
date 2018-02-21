@@ -3,7 +3,7 @@ import React from 'react'
 import ListView from '../../organisms/ListView'
 import AddTask from '../../molecules/AddTask'
 import FilterTasks from '../..//molecules/FilterTasks'
-import Button from '../../atoms/FilterButton'
+import Button from '../../atoms/Button'
 
 import styles from './activeProjectStyle'
 

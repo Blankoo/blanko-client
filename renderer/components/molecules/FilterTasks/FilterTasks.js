@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Button from '../../atoms/FilterButton'
+import Button from '../../atoms/Button'
 import styles from './filterTaskStyles'
 
 class FilterTasks extends React.Component {
