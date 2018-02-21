@@ -1,4 +1,4 @@
-const local = true
+const local = false
 export default {
 	apiUrl: local ? 'http://localhost:9098/v1' : 'https://api.blankoapp.com/v1/'
 }

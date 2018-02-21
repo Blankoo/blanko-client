@@ -31,9 +31,9 @@ class ActiveProject extends React.Component {
 		const { activeProject, tasks, updateTaskStatus, deleteTask, addNewTask, filteredValue, setFilteredValue } = this.props
 		const { projectTitle, projectDescription } = activeProject
 
-		return(<div className="activeProject" onKeyUp={this.onKeyUp}>
-			<h1 className="mainTitle">{ projectTitle }</h1>
-			{ projectDescription && <p className="description">{ projectDescription }</p> }
+		return(<div className="active-project" onKeyUp={this.onKeyUp}>
+			<h1 className="mainTitle" ref="activeProjectTitle">{ projectTitle }</h1>
+			{ projectDescription && <p className="description" ref="activeProjectDescription">{ projectDescription }</p> }
 
 			<FilterTasks
 				filteredValue={filteredValue}
