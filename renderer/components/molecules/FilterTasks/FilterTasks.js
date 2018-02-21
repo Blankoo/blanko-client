@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Button from '../../atoms/FilterButton'
 import styles from './filterTaskStyles'
 
@@ -16,20 +15,14 @@ class FilterTasks extends React.Component {
 	}
 
 	fixedFilterTasks() {
-		// const filterTasks = ReactDOM.findDOMNode(this.refs['filterTasks'])
 		const filterTasks = document.querySelector('.filter-tasks')
-		console.log('filterTasks', filterTasks)
 		const filterOffsetTop = filterTasks.getBoundingClientRect().top
 		const filterHeight = filterTasks.getBoundingClientRect().height
-		console.log('filterOffsetTop', filterOffsetTop)
-		console.log('filterHeight', filterHeight)
 		const activeProject = document.querySelector('.active-project')
 		const mainTitle = document.querySelector('.active-project .mainTitle')
 		const description = document.querySelector('.active-project .description')
 
 		const activeProjectContentHeight = description !== null ? mainTitle.offsetHeight + description.offsetHeight : mainTitle.offsetHeight
-		console.log('description', description);
-		console.log('window.scrollY', window.scrollY)
 		if (window.scrollY >= filterOffsetTop + activeProjectContentHeight + 56) {
 			this.setState({
 				fixed: true
