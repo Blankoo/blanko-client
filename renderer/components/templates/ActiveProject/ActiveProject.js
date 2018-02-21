@@ -19,6 +19,10 @@ class ActiveProject extends React.Component {
 
 	toggleAddTask() {
 		this.setState(prevState => ({ isAddingProject: !prevState.isAddingProject}))
+
+		if(this.state.isAddingProject) {
+			window.scrollTo(0, document.querySelector('.active-project').scrollHeight)
+		}
 	}
 
 	onKeyUp(e) {
@@ -42,7 +46,7 @@ class ActiveProject extends React.Component {
 			/>
 
 			<div className="label">
-				{ filteredValue === 'done' ? 'DONE' : 'To Do:' }
+				{ filteredValue === 'done' ? 'done' : 'to do' }
 			</div>
 
 			<ListView
@@ -57,7 +61,7 @@ class ActiveProject extends React.Component {
 				this.state.isAddingProject ?
 				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp}/>
 				:
-				<Button onClick={this.toggleAddTask} text="Add Task" style={{ fontSize: 8}}/>
+				<Button onClick={this.toggleAddTask} text="Add Task"/>
 			}
 
 			<style jsx>{styles}</style>

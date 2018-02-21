@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styles from './sidebarStyle'
 import ProjectList from '../../organisms/ProjectList'
-import AddProject from '../../molecules/AddProject'
 
 class SideBar extends Component {
 	constructor(props) {

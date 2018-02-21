@@ -53,7 +53,6 @@ export default `
 	opacity: 0;
 }
 
-
 .checkbox {
 	position: relative;
 	top: 6px;
@@ -78,24 +77,26 @@ export default `
 	width: 100%;
 }
 
-.dates {
+.date-and-status {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 
-.dates .date-item {
+.date-and-status .item {
 	width: 50%;
 	height: auto;
 	display: flex;
 	flex-direction: column;
 }
 
-.dates .date-item label {
+.date-and-status .item  .label {
 	margin-bottom: 8px;
+	color: #1C87FB;
 }
 
-.dates .date-item .date {
+.date-and-status .item .date,
+.date-and-status .item .status {
 	font-size: 14px;
 	color: #424459;
 	letter-spacing: 0.7px;

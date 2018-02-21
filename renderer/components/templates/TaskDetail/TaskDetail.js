@@ -31,14 +31,14 @@ class TaskDetail extends React.Component {
 									{ selectedTask.subTitle &&
 										<p className="description">{ selectedTask.subTitle }</p>
 									}
-									<div className="dates">
-										<div className="date-item">
-											<label>Task due date</label>
+									<div className="date-and-status">
+										<div className="item">
+											<span className="label">Task due date</span>
 											<span className="date">21-08-2012</span>
 										</div>
-										<div className="date-item">
-											<label>Task status</label>
-											<span className="date">21-08-2012</span>
+										<div className="item">
+											<span className="label">Task status</span>
+											<span className="status">Status here</span>
 										</div>
 									</div>
 							</div>

@@ -20,6 +20,7 @@ class Login extends React.Component {
 
 		this.onType = this.onType.bind(this)
 		this.login = this.login.bind(this)
+		this.onEnter = this.onEnter.bind(this)
 	}
 
 	async login() {
@@ -32,11 +33,17 @@ class Login extends React.Component {
 		} catch(err) { return err }
 	}
 
+	onEnter(e) {
+		if (e.key === 'Enter' && this.state.username !== '' && this.state.password !== '') {
+			this.login()
+		}
+	}
+
 	onType(e) { this.setState({ [e.target.name]: e.target.value }) }
 
 	render() {
 		return (
-			<div className="login">
+			<div className="login" onKeyUp={this.onEnter}>
 				<div className="sidebar-left">
 					<div className="blanko">Blanko.</div>
 					<div className="input-fields">
