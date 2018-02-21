@@ -3,7 +3,7 @@ import styles from './AddProjectModalStyle'
 
 import InputText from '../../atoms/form/InputText'
 import Textarea from '../../atoms/form/Textarea'
-import ButtonSubmit from '../../atoms/form/ButtonSubmit'
+import Button from '../../atoms/Button'
 
 const offset = {
 	marginTop: 8 * 3,
@@ -41,8 +41,8 @@ class ModalContainer extends React.Component {
 						<Textarea onChange={e => this.onType(e)} name="projectDescription"/>
 
 						<div style={{ ...offset, ...{ display: 'flex', justifyContent: 'flex-end' }}}>
-							<ButtonSubmit style={{marginRight: 8}} invert buttonText="cancel" onClick={e => this.props.toggleModal('addProjectModalVisible', false)}/>
-							<ButtonSubmit buttonText="Save" onClick={e => this.props.addProjectToAccount(this.state, this.props.toggleModal)}/>
+							<Button style={{marginRight: 8}} text="cancel" onClick={e => this.props.toggleModal('addProjectModalVisible', false)}/>
+							<Button text="save" type="submit" onClick={e => this.props.addProjectToAccount(this.state, this.props.toggleModal)}/>
 						</div>
 					</div>
 					<style jsx>{ styles }</style>
