@@ -3,20 +3,56 @@ import React from 'react'
 // Components
 import Checkbox from '../../atoms/form/Checkbox'
 import Button from '../../atoms/Button'
+import InputText from '../../atoms/form/InputText'
 
 // Style
 import styles from './taskDetailStyle'
 
+// utils
+import put from '../../../utils/put'
+
 class TaskDetail extends React.Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			subTaskTypedValue: '',
+			isAddingSubTask: false
+		}
+
+		this.onType = this.onType.bind(this)
+		this.onKeyUp = this.onKeyUp.bind(this)
+		this.toggleAddSubTask = this.toggleAddSubTask.bind(this)
+	}
+
+	onType(e) {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+	}
+
+	toggleAddSubTask() {
+		this.setState(prevState => ({ isAddingSubTask: !prevState.isAddingSubTask }))
+	}
+
+	onKeyUp(e) {
+		if(e.key === 'Escape') {
+			this.toggleAddSubTask()
+		} else if(e.key === 'Enter') {
+			this.props.addSubTaskToTask(this.state.subTaskTypedValue)
+			this.setState({
+				subTaskTypedValue: ''
+			}, () => {
+				this.toggleAddSubTask()
+			})
+		}
 	}
 
 	render() {
-		const { selectedTask, updateTaskStatus, isDetailShown, hideTaskDetail} = this.props
+		const { selectedTask, updateTaskStatus, isDetailShown, hideTaskDetail, updateSubTaskStatus} = this.props
 
 		return(
-			<div className={`task-detail ${isDetailShown && selectedTask !== undefined ? 'show' : ''}`} onKeyUp={e => this.props.keyup(e)}>
+			<div className={`task-detail ${isDetailShown && selectedTask !== undefined ? 'show' : ''}`}>
 					<div className="task-detail-tile">
 						{selectedTask !== undefined &&
 							<div className="task-detail-tile-container">
@@ -26,21 +62,51 @@ class TaskDetail extends React.Component {
 								<Checkbox
 									check={selectedTask.status === 'todo' ? false : true}
 									onClick={e => updateTaskStatus(e, 0, selectedTask._id, selectedTask)}
+									className="taskdetail"
 								/>
 									<h1 className="main-title">{ selectedTask.title }</h1>
 									{ selectedTask.subTitle &&
 										<p className="description">{ selectedTask.subTitle }</p>
 									}
-									<div className="date-and-status">
-										<div className="item">
-											<span className="label">Task due date</span>
-											<span className="date">21-08-2012</span>
+									<div className="labels">
+										<div className="label-item">
+											<label>Task due date</label>
+											<span className="status">21-08-2012</span>
 										</div>
-										<div className="item">
-											<span className="label">Task status</span>
-											<span className="status">Status here</span>
+										<div className="label-item">
+											<label>Task status</label>
+											<span className="status">{ selectedTask.status.toUpperCase() }</span>
 										</div>
 									</div>
+
+									<div className="subtask-list">
+										{selectedTask.subTasks.map((task, idx) =>
+
+											<div className="subtask" key={idx}>
+												<Checkbox
+													check={task.status === 'done'}
+													onClick={e => this.props.updateSubTaskStatus(task)}
+													className="subtask-checkbox"
+												/>
+												<span className={task.status === 'done' ? 'checked' : null}>
+													{ task.title }
+												</span>
+											</div>
+
+										)}
+
+										<div className="add-sub-task" onKeyUp={this.onKeyUp}>
+											{this.state.isAddingSubTask ?
+
+												<InputText autofocus name="subTaskTypedValue" value={this.state.subTaskTypedValue}
+													onChange={this.onType}/>
+												:
+												<Button type="filter" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
+
+											}
+										</div>
+									</div>
+
 							</div>
 						}
 					</div>

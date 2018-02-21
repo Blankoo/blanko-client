@@ -1,5 +1,4 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
 import styles from './InputTextStyle'
 
 class InputText extends Component {

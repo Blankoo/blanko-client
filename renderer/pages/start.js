@@ -58,6 +58,8 @@ class Start extends Component {
 		this.setProjectFavorite = this.setProjectFavorite.bind(this)
 		this.hideTaskDetail = this.hideTaskDetail.bind(this)
 		this.showTaskDetail = this.showTaskDetail.bind(this)
+		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
+		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
 	}
 
 	componentDidMount() {
@@ -169,8 +171,6 @@ class Start extends Component {
 				break;
 		}
 
-		// this.setTaskActive(id)
-
 		this.setState({
 			tasks: copyTasks
 		})
@@ -229,6 +229,26 @@ class Start extends Component {
 		})
 	}
 
+	async addSubTaskToTask(title) {
+		const { accountId, projectId, selectedTaskId } = this.state
+		const body = { title }
+		put(`tasks/sub/${accountId}/${projectId}/${selectedTaskId}`, body)
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
+	updateSubTaskStatus(task) {
+		const { accountId, projectId, selectedTaskId } = this.state
+		const { id: subTaskId, status } = task
+		const newStatus = status === 'done' ? 'todo' : 'done'
+		const body = { status: newStatus }
+		put(`tasks/updatesub/${accountId}/${projectId}/${selectedTaskId}/${subTaskId}`, body)
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -263,7 +283,6 @@ class Start extends Component {
 					setFilteredValue={this.setFilteredValue}
 					setTaskActive={this.setTaskActive}
 					selectedTaskId={this.state.selectedTaskId}
-					keyUp={this.keyUp}
 				/>
 
 				{ this.state.loading && <Loader loading/> }
@@ -280,7 +299,8 @@ class Start extends Component {
 					updateTaskStatus={this.updateTaskStatus}
 					hideTaskDetail={this.hideTaskDetail}
 					showTaskdetail={this.showTaskDetail}
-					keyUp={this.keyUp}
+					addSubTaskToTask={this.addSubTaskToTask}
+					updateSubTaskStatus={this.updateSubTaskStatus}
 				/>
 
 				<style jsx global>{ styles }</style>
