@@ -1,6 +1,7 @@
 export default `
-.activeProject {
-	padding-top: 64px;
+
+.active-project {
+	position: relative;
 }
 
 .mainTitle {
@@ -8,6 +9,7 @@ export default `
 	font-size: 22px;
 	color: #7A848F;
 	margin-bottom: 16px;
+	padding-top: 64px;
 }
 
 .description {
@@ -18,5 +20,6 @@ export default `
 	letter-spacing: 0;
 	line-height: 20px;
 	margin-bottom:40px;
+	display: block!important;
 }
 `
