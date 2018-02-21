@@ -30,14 +30,14 @@ class TaskDetail extends React.Component {
 									{ selectedTask.subTitle &&
 										<p className="description">{ selectedTask.subTitle }</p>
 									}
-									<div className="dates">
-										<div className="date-item">
+									<div className="labels">
+										<div className="label-item">
 											<label>Task due date</label>
-											<span className="date">21-08-2012</span>
+											<span className="status">21-08-2012</span>
 										</div>
-										<div className="date-item">
+										<div className="label-item">
 											<label>Task status</label>
-											<span className="date">21-08-2012</span>
+											<span className="status">{ selectedTask.status.toUpperCase() }</span>
 										</div>
 									</div>
 							</div>

@@ -78,24 +78,24 @@ export default `
 	width: 100%;
 }
 
-.dates {
+.labels {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 
-.dates .date-item {
+.labels .label-item {
 	width: 50%;
 	height: auto;
 	display: flex;
 	flex-direction: column;
 }
 
-.dates .date-item label {
+.labels .label-item label {
 	margin-bottom: 8px;
 }
 
-.dates .date-item .date {
+.labels .label-item .status {
 	font-size: 14px;
 	color: #424459;
 	letter-spacing: 0.7px;
