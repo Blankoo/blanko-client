@@ -92,5 +92,40 @@ export default () => {
     })
   })
 
+  // add sub tasks
+  tasks.put('/sub/:accountId/:projectId/:taskId', (req, res) => {
+    const { accountId, projectId, taskId } = req.params
+    const { title } = req.body
+    const timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+    const uniqueTimeStampId = () => timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, () => (Math.random() * 16 | 0).toString(16)).toLowerCase()
+
+    Task.findByIdAndUpdate(taskId, {
+      $push: {
+        subTasks: {
+          id: uniqueTimeStampId(),
+          title,
+          status: 'todo'
+        }
+      }
+    }).then(() => {
+      res.json({ message: 'Sub task added succesfully!'})
+    }).catch(err => log.info(err))
+  })
+
+  // delete subtask
+  tasks.put('/delsub/:accountId/:projectId/:taskId/:subTaskId', (req, res) => {
+    const { taskId, subTaskId } = req.params
+    log.info({ taskId })
+    log.info({ subTaskId })
+
+    Task.findByIdAndUpdate(taskId, {
+      $pull: {
+        subTasks: { id: subTaskId }
+      }
+    }).then(() => {
+      log.info('Task has been updated')
+      res.json({ message: 'Sub task deleted succesfully'})
+    }).catch(err => log.info(err))
+  })
   return tasks
 }
