@@ -49,9 +49,9 @@ class FilterTasks extends React.Component {
 		return(
 			<div className={`filter-tasks ${fixed ? 'fixed' : ''}`} ref="filterTasks">
 				<span onClick={e => toggleAddTask(e)}><img src="../../static/plus-large.svg"/></span>
-				<Button onClick={e => setFilteredValue('all') } text="All" active={filteredValue === 'all'}/>
-				<Button onClick={e => setFilteredValue('todo') } text="To Do" active={filteredValue === 'todo'}/>
-				<Button onClick={e => setFilteredValue('done') } text="Done" active={filteredValue === 'done'}/>
+				<Button type="filter" onClick={e => setFilteredValue('all') } text="All" active={filteredValue === 'all'}/>
+				<Button type="filter" onClick={e => setFilteredValue('todo') } text="To Do" active={filteredValue === 'todo'}/>
+				<Button type="filter" onClick={e => setFilteredValue('done') } text="Done" active={filteredValue === 'done'}/>
 
 				<style jsx>{ styles }</style>
 			</div>
