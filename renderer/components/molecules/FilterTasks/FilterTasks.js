@@ -16,16 +16,20 @@ class FilterTasks extends React.Component {
 	}
 
 	fixedFilterTasks() {
-		const filterTasks = ReactDOM.findDOMNode(this.refs['filterTasks'])
+		// const filterTasks = ReactDOM.findDOMNode(this.refs['filterTasks'])
+		const filterTasks = document.querySelector('.filter-tasks')
+		console.log('filterTasks', filterTasks)
 		const filterOffsetTop = filterTasks.getBoundingClientRect().top
 		const filterHeight = filterTasks.getBoundingClientRect().height
-
+		console.log('filterOffsetTop', filterOffsetTop)
+		console.log('filterHeight', filterHeight)
 		const activeProject = document.querySelector('.active-project')
 		const mainTitle = document.querySelector('.active-project .mainTitle')
 		const description = document.querySelector('.active-project .description')
 
-		const activeProjectContentHeight = mainTitle.offsetHeight + description.offsetHeight
-
+		const activeProjectContentHeight = description !== null ? mainTitle.offsetHeight + description.offsetHeight : mainTitle.offsetHeight
+		console.log('description', description);
+		console.log('window.scrollY', window.scrollY)
 		if (window.scrollY >= filterOffsetTop + activeProjectContentHeight + 56) {
 			this.setState({
 				fixed: true
@@ -47,7 +51,6 @@ class FilterTasks extends React.Component {
 
 	render() {
 		const { filteredValue, setFilteredValue, toggleAddTask } = this.props
-
 		const { fixed } = this.state
 
 		return(
