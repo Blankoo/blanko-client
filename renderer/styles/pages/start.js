@@ -14,6 +14,10 @@ export default `
 		--sizebar-width: 256px;
 	}
 
+	html {
+  	scroll-behavior: smooth;
+	}
+
 	body {
 		margin: 0;
 		padding: 0;
