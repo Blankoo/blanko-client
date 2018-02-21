@@ -13,13 +13,22 @@ button {
 	transition: 100ms linear;
 }
 
-button:hover {
+button.default:hover {
 	background-color: #1C87FB;
 	color:white;
 }
 
-button.active {
+button.default.active {
   background-color: #1C87FB;
 	color:white;
+}
+
+button.edit:hover {
+	background-color: #F3F3F3;
+}
+
+button.delete:hover {
+	background-color: #B32B2B;
+	color: #FCFCFC;
 }
 `
