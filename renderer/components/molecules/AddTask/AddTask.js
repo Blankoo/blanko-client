@@ -51,8 +51,8 @@ class AddTask extends Component {
 
 				<div className="input" onKeyUp={this.onEnter}>
 					<form ref={node => this.form = node}>
-						<InputText autofocus type="text" name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
-						<InputText type="text" name="subTitle" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 12, color: '#7D7D7D', marginTop: 8}}/>
+						<InputText autofocus name="title" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 14, color: '#424459'}}/>
+						<InputText name="subTitle" onChange={this.returnTypedValue} style={{...inputStyle, fontSize: 12, color: '#7D7D7D', marginTop: 8}}/>
 					</form>
 				</div>
 				{ /* <ButtonSubmit onClick={ e => this.props.addNewTask('projects/add', this.state) }/> */ }

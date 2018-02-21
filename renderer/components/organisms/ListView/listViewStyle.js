@@ -12,7 +12,7 @@ export default `
 		/* min-height:88px; */
 		max-width: 100%;
 		display: flex;
-		align-items: baseline;
+		align-items: flex-start;
 		transition: 300ms	ease-in-out;
 	}
 

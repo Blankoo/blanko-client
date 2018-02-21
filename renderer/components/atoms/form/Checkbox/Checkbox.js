@@ -10,7 +10,7 @@ class Checkbox extends Component {
 	render() {
 		return (
 				<div
-					className={`checkbox ${this.props.check ? 'checked' : ''}`}
+					className={`checkbox ${this.props.check ? 'checked' : ''} ${this.props.className}`}
 					check={this.props.check}
 					onClick={this.props.onClick}>
 					<style jsx>{ styles }</style>
