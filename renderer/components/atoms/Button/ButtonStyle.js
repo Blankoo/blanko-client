@@ -6,30 +6,43 @@ button {
   font-size: 10px;
   background: transparent;
   border:none;
-  font-weight: bold;
+  font-weight: 500;
   border-radius: 4px;
   outline: none;
 	margin-right: 8px;
 	transition: 100ms linear;
 }
 
+
 /*Button type: default*/
 button.default:hover {
-	background-color: #1C87FB;
-	box-shadow: 0 2px 8px 0 rgba(28, 135, 251, 0.33);
-	color: white;
-}
-
-button.default.active {
-  background-color: #1C87FB;
-	box-shadow: 0 2px 8px 0 rgba(28, 135, 251, 0.33);
-	color: white;
-}
-
-/*Button type: edit*/
-button.edit:hover {
 	background-color: #F3F3F3;
 	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
+}
+
+/*Button type: filter*/
+button.filter:hover {
+	background-color: #1C87FB;
+	box-shadow: 0 2px 8px 0 rgba(28,135,251,0.33);
+	color: #ffffff;
+}
+
+button.filter.active {
+	background-color: #1C87FB;
+	box-shadow: 0 2px 8px 0 rgba(28,135,251,0.33);
+	color: #ffffff;
+}
+
+/*Button type: submit*/
+button.submit {
+	background-color: #1C87FB;
+	box-shadow: 0 2px 8px 0 rgba(28,135,251,0.33);
+	color: #ffffff;
+}
+
+button.submit:hover {
+	background: #0063cc;
+	box-shadow: 0 2px 8px 0 rgba(0,122,255,0.33);
 }
 
 /*Button type: delete*/
