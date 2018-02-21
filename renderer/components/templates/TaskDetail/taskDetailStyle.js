@@ -17,7 +17,6 @@ export default `
 
 .task-detail-tile {
 	background: #FFFFFF;
-	/* box-shadow: 0 5px 20px 0 rgba(238,238,243, 0.8); */
 	box-shadow: 0 6px 18px -6px rgba(4,19,36,0.27);
 	border-radius: 8px;
 	padding: 40px;
@@ -54,7 +53,7 @@ export default `
 }
 
 
-.checkbox {
+.checkbox.taskdetail {
 	position: relative;
 	top: 6px;
 }
@@ -78,26 +77,45 @@ export default `
 	width: 100%;
 }
 
-.dates {
+.labels {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
 
-.dates .date-item {
+.labels .label-item {
 	width: 50%;
 	height: auto;
 	display: flex;
 	flex-direction: column;
 }
 
-.dates .date-item label {
+.labels .label-item label {
 	margin-bottom: 8px;
 }
 
-.dates .date-item .date {
+.labels .label-item .status {
 	font-size: 14px;
 	color: #424459;
 	letter-spacing: 0.7px;
+}
+
+.subtask-list {
+	margin-top: 64px;
+	width: 100%;
+}
+
+.subtask-list .subtask {
+	display: flex;
+	font-size: 14px;
+	align-items: center;
+	margin: 12px 0;
+	color: #424459;
+}
+
+.subtask-list .subtask span.checked {
+	text-decoration: line-through;
+	color: #D0D1D6;
+	text-decoration-color: #1C87FB;
 }
 `
