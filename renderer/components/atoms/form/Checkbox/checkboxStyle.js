@@ -6,7 +6,7 @@ export default `
 		background: #F3F3F3;
 		border-radius: 4px;
 		margin-right: 16px;
-		cursor: pointer;
+		cursor: default;
 	}
 
 	.checkbox.checked {
