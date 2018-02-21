@@ -7,6 +7,7 @@ export default `
 	bottom: 0;
 	padding: 32px 32px 32px 0;
 	transition: all .2s ease-in-out;
+	z-index: 10;
 }
 
 .task-detail.show {
