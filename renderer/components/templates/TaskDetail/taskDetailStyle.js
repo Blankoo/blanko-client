@@ -91,7 +91,9 @@ export default `
 
 .labels .label-item label {
 	margin-bottom: 8px;
-	color: #1C87FB;
+	font-weight: 500;
+	text-transform: uppercase;
+	font-size: 10px;
 }
 
 .labels .label-item .status {
