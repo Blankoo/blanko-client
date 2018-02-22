@@ -49,7 +49,7 @@ class TaskDetail extends React.Component {
 	}
 
 	render() {
-		const { selectedTask, updateTaskStatus, isDetailShown, hideTaskDetail, updateSubTaskStatus} = this.props
+		const { selectedTask, updateTaskStatus, isDetailShown, hideTaskDetail, updateSubTaskStatus, deleteTask} = this.props
 
 		return(
 			<div className={`task-detail ${isDetailShown && selectedTask !== undefined ? 'show' : ''}`}>
@@ -106,7 +106,9 @@ class TaskDetail extends React.Component {
 											}
 										</div>
 									</div>
-
+									<div className="controllers">
+										<Button text="delete" type="delete" onClick={e => this.props.deleteTask(e, selectedTask._id)} />
+									</div>
 							</div>
 						}
 					</div>

@@ -120,4 +120,11 @@ export default `
 	color: #D0D1D6;
 	text-decoration-color: #1C87FB;
 }
+
+.controllers {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 16px;
+}
 `

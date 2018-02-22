@@ -176,8 +176,11 @@ class Start extends Component {
 		})
 	}
 
-	deleteTask(e, i, id) {
-		// del('tasks', id)
+	deleteTask(e, id) {
+		const { accountId, selectedProjectId } = this.state
+		del(`tasks/${accountId}/${selectedProjectId}/${id}`).then(res => {
+			this.dataInit(false)
+		})
 	}
 
 	setFilteredValue(filteredValue) {
@@ -301,6 +304,7 @@ class Start extends Component {
 					showTaskdetail={this.showTaskDetail}
 					addSubTaskToTask={this.addSubTaskToTask}
 					updateSubTaskStatus={this.updateSubTaskStatus}
+					deleteTask={this.deleteTask}
 				/>
 
 				<style jsx global>{ styles }</style>
