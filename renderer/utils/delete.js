@@ -1,5 +1,11 @@
+import http from './http'
+import conf from './config'
 
-
-export default (table, id) => {
-	console.log('hoi');
+async function del(endpoint) {
+	const finalEndpoint = `${conf.apiUrl}/${endpoint}`
+	const retrievedData = await http.delete(finalEndpoint)
+	const { data } = retrievedData
+	return { data, retrievedData }
 }
+
+export default del
