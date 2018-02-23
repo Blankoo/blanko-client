@@ -93,7 +93,7 @@ export default () => {
   })
 
   // add sub tasks
-  tasks.put('/sub/:accountId/:projectId/:taskId', (req, res) => {
+  tasks.put('/sub/:accountId/:projectId/:taskId', authenticate, (req, res) => {
     const { accountId, projectId, taskId } = req.params
     const { title } = req.body
     const timestamp = (new Date().getTime() / 1000 | 0).toString(16);
@@ -108,12 +108,13 @@ export default () => {
         }
       }
     }).then(() => {
+      log.info({ message: 'Sub task added succesfully!'})
       res.json({ message: 'Sub task added succesfully!'})
-    }).catch(err => log.info(err))
+    }).catch(err => res.json(err))
   })
 
   // delete subtask
-  tasks.put('/delsub/:accountId/:projectId/:taskId/:subTaskId', (req, res) => {
+  tasks.put('/delsub/:accountId/:projectId/:taskId/:subTaskId', authenticate, (req, res) => {
     const { taskId, subTaskId } = req.params
     log.info({ taskId })
     log.info({ subTaskId })
@@ -123,19 +124,20 @@ export default () => {
         subTasks: { id: subTaskId }
       }
     }).then(() => {
-      log.info('Task has been updated')
+      log.info({ message: 'Sub task deleted succesfully'})
       res.json({ message: 'Sub task deleted succesfully'})
-    }).catch(err => log.info(err))
+    }).catch(err => res.json(err))
   })
 
-  tasks.put('/updatesub/:accountId/:projectId/:taskId/:subTaskId', (req, res) => {
+  tasks.put('/updatesub/:accountId/:projectId/:taskId/:subTaskId', authenticate, (req, res) => {
     const { taskId, subTaskId } = req.params
     const { status } = req.body
     Task.update({ 'subTasks.id': subTaskId }, {
       'subTasks.$.status': status
     }).then(() => {
+      log.info({ message: 'Task status updated succesfully' })
       res.json({ message: 'Task status updated succesfully' })
-    }).catch(err => log.info(err))
+    }).catch(err => res.json(err))
   })
 
   return tasks
