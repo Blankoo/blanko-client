@@ -49,7 +49,15 @@ class TaskDetail extends React.Component {
 	}
 
 	render() {
-		const { selectedTask, updateTaskStatus, isDetailShown, hideTaskDetail, updateSubTaskStatus, deleteTask} = this.props
+		const {
+			selectedTask,
+			updateTaskStatus,
+			isDetailShown,
+			hideTaskDetail,
+			updateSubTaskStatus,
+			deleteTask,
+			deleteSubTask
+		} = this.props
 
 		return(
 			<div className={`task-detail ${isDetailShown && selectedTask !== undefined ? 'show' : ''}`}>
@@ -91,6 +99,11 @@ class TaskDetail extends React.Component {
 												<span className={task.status === 'done' ? 'checked' : null}>
 													{ task.title }
 												</span>
+												<span
+													onClick={e => deleteSubTask(e, selectedTask._id, task.id)}
+													className="delete-subtask">
+													X
+												</span>
 											</div>
 
 										)}
@@ -102,11 +115,11 @@ class TaskDetail extends React.Component {
 													onChange={this.onType}/>
 												:
 												<Button type="filter" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
-
 											}
 										</div>
 									</div>
 									<div className="controllers">
+										<Button text="edit" type="default" onClick={e => console.log('edit') }/>
 										<Button text="delete" type="delete" onClick={e => this.props.deleteTask(e, selectedTask._id)} />
 									</div>
 							</div>
