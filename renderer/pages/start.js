@@ -186,7 +186,7 @@ class Start extends Component {
 
 	deleteSubTask(e, taskId, subTaskId) {
 		const { accountId, selectedProjectId } = this.state
-		del(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`).then(res => {
+		put(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`).then(res => {
 			this.dataInit(false)
 		})
 	}
