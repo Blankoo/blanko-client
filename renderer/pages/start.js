@@ -50,6 +50,7 @@ class Start extends Component {
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
 		this.reloadTasks = this.reloadTasks.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
+		this.deleteSubTask = this.deleteSubTask.bind(this)
 		this.selectProject = this.selectProject.bind(this)
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
@@ -176,8 +177,18 @@ class Start extends Component {
 		})
 	}
 
-	deleteTask(e, i, id) {
-		// del('tasks', id)
+	deleteTask(e, id) {
+		const { accountId, selectedProjectId } = this.state
+		del(`tasks/${accountId}/${selectedProjectId}/${id}`).then(res => {
+			this.dataInit(false)
+		})
+	}
+
+	deleteSubTask(e, taskId, subTaskId) {
+		const { accountId, selectedProjectId } = this.state
+		put(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`).then(res => {
+			this.dataInit(false)
+		})
 	}
 
 	setFilteredValue(filteredValue) {
@@ -301,6 +312,8 @@ class Start extends Component {
 					showTaskdetail={this.showTaskDetail}
 					addSubTaskToTask={this.addSubTaskToTask}
 					updateSubTaskStatus={this.updateSubTaskStatus}
+					deleteTask={this.deleteTask}
+					deleteSubTask={this.deleteSubTask}
 				/>
 
 				<style jsx global>{ styles }</style>

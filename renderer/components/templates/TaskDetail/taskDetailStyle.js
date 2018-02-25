@@ -113,11 +113,34 @@ export default `
 	align-items: center;
 	margin: 12px 0;
 	color: #424459;
+	position: relative;
+}
+
+.subtask-list .subtask:hover .delete-subtask {
+	visibility: visible;
+	opacity: 1;
 }
 
 .subtask-list .subtask span.checked {
 	text-decoration: line-through;
 	color: #D0D1D6;
 	text-decoration-color: #1C87FB;
+}
+
+.subtask-list .subtask .delete-subtask {
+	font-size: 10px;
+	margin-left: 10px;
+	position: absolute;
+	right: 0;
+	visibility: hidden;
+	cursor: default;
+	opacity: 0;
+}
+
+.controllers {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 16px;
 }
 `
