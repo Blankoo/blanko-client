@@ -4,6 +4,7 @@ import React from 'react'
 import Checkbox from '../../atoms/form/Checkbox'
 import Button from '../../atoms/Button'
 import InputText from '../../atoms/form/InputText'
+import TimeMeasurement from '../../molecules/TimeMeasurement'
 
 // Style
 import styles from './taskDetailStyle'
@@ -101,8 +102,7 @@ class TaskDetail extends React.Component {
 												</span>
 												<span
 													onClick={e => deleteSubTask(e, selectedTask._id, task.id)}
-													className="delete-subtask">
-													X
+													className="delete-subtask">X
 												</span>
 											</div>
 
@@ -118,6 +118,9 @@ class TaskDetail extends React.Component {
 											}
 										</div>
 									</div>
+
+									<TimeMeasurement/>
+
 									<div className="controllers">
 										<Button text="edit" type="default" onClick={e => console.log('edit') }/>
 										<Button text="delete" type="delete" onClick={e => this.props.deleteTask(e, selectedTask._id)} />
