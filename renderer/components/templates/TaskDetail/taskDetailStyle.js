@@ -19,9 +19,10 @@ export default `
 	background: #FFFFFF;
 	box-shadow: 0 6px 18px -6px rgba(4,19,36,0.27);
 	border-radius: 8px;
-	padding: 40px;
+	padding: 24px;
 	max-width: 100%;
 	height: 100%;
+	overflow-y: scroll;
 	position: relative;
 	transition: 300ms	ease-in-out;
 }
@@ -138,9 +139,9 @@ export default `
 }
 
 .controllers {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	padding: 16px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 64px;
 }
 `
