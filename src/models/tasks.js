@@ -13,7 +13,12 @@ const taskSchema = new Schema({
   billable: Boolean,
   subTasks: Array,
   priorityLevel: Number,
-  timeSpend: Number,
+  totalTime: Number,
+  measurements: [{
+    startTime: Number,
+    endTime: Number,
+    total: Number
+  }],
   misc: {},
   projectId: {
     type: Schema.Types.ObjectId,
