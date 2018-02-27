@@ -3,7 +3,7 @@ import styles from './projectViewStyle'
 
 // Components
 import Kanban from '../../organisms/Kanban'
-import ListView from '../../organisms/ListView'
+import ListView from '../../templates/ListView'
 
 class Project extends React.Component {
 	constructor(props) {

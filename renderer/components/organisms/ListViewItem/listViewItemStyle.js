@@ -1,8 +1,4 @@
 export default `
-	.listView {
-		min-height:32px;
-	}
-
 	.single {
 		background: #FFFFFF;
 		box-shadow: 0 5px 20px 0 rgba(238,238,243, 0.8);
@@ -67,5 +63,4 @@ export default `
 	.status {
 		color: lightgrey;
 	}
-
 `
