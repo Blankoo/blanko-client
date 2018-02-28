@@ -140,5 +140,38 @@ export default () => {
     }).catch(err => res.json(err))
   })
 
+  tasks.put('/newtimemeasurement/:accountId/:projectId/:taskId', (req, res) => {
+    const { taskId } = req.params
+    const { startTime, endTime } = req.body
+    const total = (endTime - startTime)
+    const bodyToSave = {
+      startTime,
+      endTime,
+      total
+    }
+
+    Task.findByIdAndUpdate(taskId, {
+      $push: {
+        measurements: bodyToSave
+      }
+    })
+    .then(() => res.json({ message: 'succesfully added new time measurement!'}))
+    .catch(() => res.json({ message: 'There has been an error adding the time measurement!'}))
+  })
+
+  tasks.get('/alltimemeasurements/:accountId/:projectId/:taskId', (req, res) => {
+    const { taskId } = req.params
+    Task.findById(taskId).then(task => {
+      const totalTime = task.measurements.reduce((accum, measurement) => accum + measurement.total, 0)
+
+      log.info({ totalTime })
+
+      res.json({
+        message: 'succesfully calculated total time from measurements.',
+        total: totalTime
+      })
+    })
+  })
+
   return tasks
 }
