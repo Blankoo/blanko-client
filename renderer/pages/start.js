@@ -61,6 +61,7 @@ class Start extends Component {
 		this.showTaskDetail = this.showTaskDetail.bind(this)
 		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
 		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
+		this.putNewTimeMeasurement = this.putNewTimeMeasurement.bind(this)
 	}
 
 	componentDidMount() {
@@ -260,6 +261,30 @@ class Start extends Component {
 			})
 	}
 
+	putNewTimeMeasurement(taskId, startTime, endTime, measureId) {
+		console.log('start ff nieuwe dan', { taskId, startTime, endTime })
+		const { accountId, selectedProjectId, tasks } = this.state
+		const copyTasks = [...tasks]
+		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
+		const body = {
+			startTime,
+			endTime,
+			isPosted: true
+		}
+
+		measurements.push(body)
+
+		put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
+		.then(res => {
+			// this.dataInit(false)
+			console.log(res.data);
+		})
+
+		this.setState({
+			task: copyTasks
+		})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -314,6 +339,7 @@ class Start extends Component {
 					updateSubTaskStatus={this.updateSubTaskStatus}
 					deleteTask={this.deleteTask}
 					deleteSubTask={this.deleteSubTask}
+					putNewTimeMeasurement={this.putNewTimeMeasurement}
 				/>
 
 				<style jsx global>{ styles }</style>
