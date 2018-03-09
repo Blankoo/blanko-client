@@ -22,12 +22,12 @@ class TimeMeasurement extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		console.log('time measurement new props', newProps);
 		this.setState({
 			selectedTask: newProps.selectedTask,
 			measurements: newProps.selectedTask.measurements
 		})
 	}
+
 	componentDidMount() {
 		this.setState({
 			selectedTask: this.props.selectedTask,
@@ -56,19 +56,18 @@ class TimeMeasurement extends React.Component {
 
 	setSpendedTimeValue(isTiming) {
 		this.interval = setInterval(() => {
-			this.setState(previousState => ({
+			this.setState({
 				currenTime: this.currenTime()
-			}))
+			})
 		}, 980)
 	}
 
 	stopMeasurement() {
-		const measurementId = '5a9ab6d68a11df1856f1da25'
 		this.setState({
 			isMeasuring: false,
 			endTime: this.state.currenTime
 		}, () => {
-			this.props.putNewTimeMeasurement(this.props.selectedTask._id, this.state.startTime, this.state.endTime, measurementId)
+			this.props.putNewTimeMeasurement(this.props.selectedTask._id, this.state.startTime, this.state.endTime)
 			clearInterval(this.interval)
 		})
 	}
@@ -76,6 +75,8 @@ class TimeMeasurement extends React.Component {
 	render() {
 		const { selectedTask } = this.props
 		const { measurements } = selectedTask
+		const totalInMiliSeconds = (endTime, startTime) => Math.floor(endTime - startTime)
+		const totalInSeconds = (endTime, startTime) => Math.floor(totalInMiliSeconds(endTime, startTime) / 1000)
 
 		return (
 			<div className="time-measurement-container">
@@ -89,9 +90,9 @@ class TimeMeasurement extends React.Component {
 							<span>
 								{
 									timeObject.isPosted ?
-									<span>{ timeObject.endTime - timeObject.startTime}</span>
+									<span>{ totalInSeconds(timeObject.endTime, timeObject.startTime) }</span>
 									:
-									<span>{ this.state.currenTime - timeObject.startTime}</span>
+									<span>{ totalInSeconds(this.state.currenTime, timeObject.startTime) }</span>
 								}
 							</span>
 						</li>

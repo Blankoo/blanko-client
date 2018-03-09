@@ -261,8 +261,7 @@ class Start extends Component {
 			})
 	}
 
-	putNewTimeMeasurement(taskId, startTime, endTime, measureId) {
-		console.log('start ff nieuwe dan', { taskId, startTime, endTime })
+	async putNewTimeMeasurement(taskId, startTime, endTime) {
 		const { accountId, selectedProjectId, tasks } = this.state
 		const copyTasks = [...tasks]
 		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
@@ -274,15 +273,9 @@ class Start extends Component {
 
 		measurements.push(body)
 
-		put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
-		.then(res => {
-			// this.dataInit(false)
-			console.log(res.data);
-		})
+		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
 
-		this.setState({
-			task: copyTasks
-		})
+		this.setState({ task: copyTasks })
 	}
 
 	render() {
