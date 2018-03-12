@@ -100,9 +100,9 @@ class TimeMeasurement extends React.Component {
 							<span>
 								{
 									timeObject.isPosted ?
-									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(timeObject.endTime, timeObject.startTime)) }</span>
+									<span className="numbers">{ this.secondsToHourMinuteSecond(totalInSeconds(timeObject.endTime, timeObject.startTime)) }</span>
 									:
-									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(this.state.currenTime, timeObject.startTime)) }</span>
+									<span className="numbers">{ this.secondsToHourMinuteSecond(totalInSeconds(this.state.currenTime, timeObject.startTime)) }</span>
 								}
 							</span>
 						</li>

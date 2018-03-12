@@ -19,6 +19,11 @@ button.default:hover {
 	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
 }
 
+button.secondary {
+	background-color: #F3F3F3;
+	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
+}
+
 /*Button type: disabled*/
 button.disabled {
 	color: #D0D1D6;

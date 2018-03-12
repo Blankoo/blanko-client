@@ -215,7 +215,7 @@ class Start extends Component {
 
 	async setProjectFavorite(e, projectId, boolean) {
 		const { accountId } = this.state
-		put(`projects/${accountId}`, projectId, { favorite: boolean })
+		put(`projects/${accountId}/${projectId}`, { favorite: boolean })
 			.then(({ message }) => {
 				this.dataInit(false)
 			})

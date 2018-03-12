@@ -110,11 +110,10 @@ class TaskDetail extends React.Component {
 
 										<div className="add-sub-task" onKeyUp={this.onKeyUp}>
 											{this.state.isAddingSubTask ?
-
 												<InputText autofocus name="subTaskTypedValue" value={this.state.subTaskTypedValue}
 													onChange={this.onType}/>
 												:
-												<Button type="filter" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
+												<Button type="secondary" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
 											}
 										</div>
 									</div>
