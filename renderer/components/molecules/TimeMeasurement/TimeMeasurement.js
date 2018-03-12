@@ -58,8 +58,10 @@ class TimeMeasurement extends React.Component {
 		this.interval = setInterval(() => {
 			this.setState({
 				currenTime: this.currenTime()
+			}, () => {
+				console.log('currenTime: ', this.state.currenTime)
 			})
-		}, 980)
+		}, 500)
 	}
 
 	stopMeasurement() {
@@ -70,6 +72,14 @@ class TimeMeasurement extends React.Component {
 			this.props.putNewTimeMeasurement(this.props.selectedTask._id, this.state.startTime, this.state.endTime)
 			clearInterval(this.interval)
 		})
+	}
+
+	secondsToHourMinuteSecond(totalSeconds) {
+		let hour = Math.floor(totalSeconds / 3600);
+		let minute = Math.floor(totalSeconds % 3600 / 60);
+		let seconds = Math.floor(totalSeconds % 3600 % 60);
+
+		return `${('0' + hour).slice(-2)}:${('0' + minute).slice(-2)}:${('0' + seconds).slice(-2)}`
 	}
 
 	render() {
@@ -90,9 +100,9 @@ class TimeMeasurement extends React.Component {
 							<span>
 								{
 									timeObject.isPosted ?
-									<span>{ totalInSeconds(timeObject.endTime, timeObject.startTime) }</span>
+									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(timeObject.endTime, timeObject.startTime)) }</span>
 									:
-									<span>{ totalInSeconds(this.state.currenTime, timeObject.startTime) }</span>
+									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(this.state.currenTime, timeObject.startTime)) }</span>
 								}
 							</span>
 						</li>
