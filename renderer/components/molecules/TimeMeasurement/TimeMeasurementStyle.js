@@ -1,7 +1,11 @@
 export default `
+.time-measurement-container {
+	width: 100%;
+}
+
 .time-measurements {
-		width: 100%;
-		margin-top: 64px;
+	width: 100%;
+	margin-top: 64px;
 }
 
 .time-measurements li {

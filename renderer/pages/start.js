@@ -61,6 +61,7 @@ class Start extends Component {
 		this.showTaskDetail = this.showTaskDetail.bind(this)
 		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
 		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
+		this.putNewTimeMeasurement = this.putNewTimeMeasurement.bind(this)
 	}
 
 	componentDidMount() {
@@ -260,6 +261,23 @@ class Start extends Component {
 			})
 	}
 
+	async putNewTimeMeasurement(taskId, startTime, endTime) {
+		const { accountId, selectedProjectId, tasks } = this.state
+		const copyTasks = [...tasks]
+		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
+		const body = {
+			startTime,
+			endTime,
+			isPosted: true
+		}
+
+		measurements.push(body)
+
+		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
+
+		this.setState({ task: copyTasks })
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -314,6 +332,7 @@ class Start extends Component {
 					updateSubTaskStatus={this.updateSubTaskStatus}
 					deleteTask={this.deleteTask}
 					deleteSubTask={this.deleteSubTask}
+					putNewTimeMeasurement={this.putNewTimeMeasurement}
 				/>
 
 				<style jsx global>{ styles }</style>

@@ -119,7 +119,10 @@ class TaskDetail extends React.Component {
 										</div>
 									</div>
 
-									<TimeMeasurement/>
+									<TimeMeasurement
+										selectedTask={selectedTask}
+										putNewTimeMeasurement={this.props.putNewTimeMeasurement}
+									/>
 
 									<div className="controllers">
 										<Button text="edit" type="default" onClick={e => console.log('edit') }/>
