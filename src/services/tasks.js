@@ -137,17 +137,18 @@ export default () => {
     }).then(() => {
       log.info({ message: 'Task status updated succesfully' })
       res.json({ message: 'Task status updated succesfully' })
-    }).catch(err => res.json(err))
+    }).catch(err => res.json({ message: 'There has been an error!', err }))
   })
 
   tasks.put('/newtimemeasurement/:accountId/:projectId/:taskId', (req, res) => {
     const { taskId } = req.params
-    const { startTime, endTime } = req.body
+    const { startTime, endTime, isPosted } = req.body
     const total = (endTime - startTime)
     const bodyToSave = {
       startTime,
       endTime,
-      total
+      total,
+      isPosted
     }
 
     Task.findByIdAndUpdate(taskId, {
@@ -155,8 +156,31 @@ export default () => {
         measurements: bodyToSave
       }
     })
-    .then(() => res.json({ message: 'succesfully added new time measurement!'}))
-    .catch(() => res.json({ message: 'There has been an error adding the time measurement!'}))
+    .then((task) => {
+      const x = task.measurements.slice().pop()
+      log.info({ message: 'succesfully added new time measurement!'})
+      res.json({ message: 'succesfully added new time measurement!', measurement: x})
+    })
+    .catch(err => res.json({ message: 'There has been an error adding the time measurement!', err }))
+  })
+
+  tasks.put('/updatetimemeasurement/:accountId/:projectId/:taskId/:measurementId', (req, res) => {
+    const { taskId, measurementId } = req.params
+    const { body } = req
+    log.info({ body })
+    Task.updateOne({
+      measurements: {
+        _id: measurementId
+      }
+    }, {
+      $set: {
+        'measurements.$': { endTime: body.endTime, isPosted: body.isPosted}
+      }
+    }).then(() => {
+      res.json({
+        message: 'Succesfully updated time measurement!'
+      })
+    }).catch(err => res.json({ message: 'There has been an error!', err }))
   })
 
   tasks.get('/alltimemeasurements/:accountId/:projectId/:taskId', (req, res) => {

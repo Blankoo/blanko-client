@@ -17,7 +17,8 @@ const taskSchema = new Schema({
   measurements: [{
     startTime: Number,
     endTime: Number,
-    total: Number
+    total: Number,
+    isPosted: Boolean
   }],
   misc: {},
   projectId: {
