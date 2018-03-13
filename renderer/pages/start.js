@@ -275,7 +275,7 @@ class Start extends Component {
 
 		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
 
-		this.setState({ task: copyTasks })
+		this.setState({ task: copyTasks }, () => this.dataInit(false))
 	}
 
 	render() {

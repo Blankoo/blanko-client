@@ -73,7 +73,7 @@ export default `
 	color: #7D7D7D;
 	letter-spacing: 0;
 	line-height: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 32px;
 	width: 100%;
 }
 
@@ -81,6 +81,7 @@ export default `
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 32px;
 }
 
 .labels .label-item {
@@ -104,8 +105,8 @@ export default `
 }
 
 .subtask-list {
-	margin-top: 64px;
 	width: 100%;
+	margin-bottom: 32px;
 }
 
 .subtask-list .subtask {
@@ -142,6 +143,5 @@ export default `
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 64px;
 }
 `
