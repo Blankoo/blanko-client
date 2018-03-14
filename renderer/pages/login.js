@@ -15,7 +15,8 @@ class Login extends React.Component {
 
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			message: null
 		}
 
 		this.onType = this.onType.bind(this)
@@ -25,17 +26,28 @@ class Login extends React.Component {
 
 	async login() {
 		try {
-			const loginResolve = await http.post(`${config.apiUrl}/account/login`, this.state)
-			localStorage.setItem('USER', loginResolve.data.user) // eslint-disable-line no-undef
-			localStorage.setItem('USER_TOK', loginResolve.data.token) // eslint-disable-line no-undef
-			localStorage.setItem('USER_ID', loginResolve.data.id) // eslint-disable-line no-undef
-			router.push('/start')
-		} catch(err) { return err }
+			const { data: { message, success, user, token, id }} = await http.post(`${config.apiUrl}/account/login`, this.state)
+
+			if(success) {
+					localStorage.setItem('USER', user)
+					localStorage.setItem('USER_TOK', token)
+					localStorage.setItem('USER_ID', id)
+					router.push('/start')
+			} else {
+				this.setState({ message })
+			}
+		} catch(err) {
+			console.error(err)
+		}
 	}
 
 	onEnter(e) {
 		if (e.key === 'Enter' && this.state.username !== '' && this.state.password !== '') {
 			this.login()
+		} else {
+			this.setState({
+				message: 'Please provide your email & password'
+			})
 		}
 	}
 
@@ -46,6 +58,7 @@ class Login extends React.Component {
 			<div className="login" onKeyUp={this.onEnter}>
 				<div className="sidebar-left">
 					<div className="blanko">Blanko.</div>
+					<div className="error-message">{this.state.message}</div>
 					<div className="input-fields">
 						<input type="text" onChange={this.onType} name="username" placeholder="Username" autoFocus={true}/>
 						<input type="password" onChange={this.onType} name="password" placeholder="Password"/>
