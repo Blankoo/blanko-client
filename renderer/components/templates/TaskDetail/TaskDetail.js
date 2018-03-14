@@ -40,12 +40,16 @@ class TaskDetail extends React.Component {
 		if(e.key === 'Escape') {
 			this.toggleAddSubTask()
 		} else if(e.key === 'Enter') {
-			this.props.addSubTaskToTask(this.state.subTaskTypedValue)
-			this.setState({
-				subTaskTypedValue: ''
-			}, () => {
-				this.toggleAddSubTask()
-			})
+			if(e.target.value.length > 1) {
+				this.props.addSubTaskToTask(this.state.subTaskTypedValue)
+				this.setState({
+					subTaskTypedValue: ''
+				}, () => {
+					this.toggleAddSubTask()
+				})
+			} else {
+				console.error('Not longer then 1 char.')
+			}
 		}
 	}
 
@@ -110,11 +114,10 @@ class TaskDetail extends React.Component {
 
 										<div className="add-sub-task" onKeyUp={this.onKeyUp}>
 											{this.state.isAddingSubTask ?
-
 												<InputText autofocus name="subTaskTypedValue" value={this.state.subTaskTypedValue}
 													onChange={this.onType}/>
 												:
-												<Button type="filter" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
+												<Button type="submit" onClick={this.toggleAddSubTask} text="Add Sub Task" style={{ fontSize: 10 }}/>
 											}
 										</div>
 									</div>

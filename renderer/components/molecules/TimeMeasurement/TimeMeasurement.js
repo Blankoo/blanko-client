@@ -46,7 +46,8 @@ class TimeMeasurement extends React.Component {
 				measurements: [...previousState.measurements, {
 					startTime: this.currenTime(),
 					endTime: 0,
-					isPosted: false
+					isPosted: false,
+					total: 0
 				}]
 			}
 		}, () => {
@@ -58,8 +59,6 @@ class TimeMeasurement extends React.Component {
 		this.interval = setInterval(() => {
 			this.setState({
 				currenTime: this.currenTime()
-			}, () => {
-				console.log('currenTime: ', this.state.currenTime)
 			})
 		}, 500)
 	}
@@ -87,6 +86,7 @@ class TimeMeasurement extends React.Component {
 		const { measurements } = selectedTask
 		const totalInMiliSeconds = (endTime, startTime) => Math.floor(endTime - startTime)
 		const totalInSeconds = (endTime, startTime) => Math.floor(totalInMiliSeconds(endTime, startTime) / 1000)
+		const totalMeasuredTime = this.state.measurements.reduce((zero, { total }) => zero + total, 0)
 
 		return (
 			<div className="time-measurement-container">
@@ -100,9 +100,17 @@ class TimeMeasurement extends React.Component {
 							<span>
 								{
 									timeObject.isPosted ?
-									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(timeObject.endTime, timeObject.startTime)) }</span>
+									<span className="numbers">{
+										this.secondsToHourMinuteSecond(
+											totalInSeconds(timeObject.endTime, timeObject.startTime)
+										)}
+									</span>
 									:
-									<span>{ this.secondsToHourMinuteSecond(totalInSeconds(this.state.currenTime, timeObject.startTime)) }</span>
+									<span className="numbers">{
+										this.secondsToHourMinuteSecond(
+											totalInSeconds(this.state.currenTime, timeObject.startTime)
+										)}
+									</span>
 								}
 							</span>
 						</li>
@@ -110,23 +118,22 @@ class TimeMeasurement extends React.Component {
 					)}
 
 					<div className="measurement-controls">
-
-						{<span className="total-measurement">
-							{ selectedTask.totalTime !== undefined &&
-							<span>
-								<label>Total measured time:</label>
-								<span>{}</span>
-							</span>
-							}
-						</span>}
-
-						<span>
+						<span className="add-measurement">
 							{this.state.isMeasuring ?
-								<Button text="Cancel" type="cancel" onClick={e => this.stopMeasurement()}/>
+								<Button text="Stop time measurement" type="cancel" onClick={e => this.stopMeasurement()}/>
 								:
 								<Button text="Start time measurement" type="submit" onClick={e => this.startMeasurement()}/>
 							}
-
+						</span>
+						<span className="total-measurement">
+							<span>
+								<label>Total measured time:</label>
+								<span className="numbers">
+									{
+										this.secondsToHourMinuteSecond(totalMeasuredTime / 1000)
+									}
+								</span>
+							</span>
 						</span>
 					</div>
 

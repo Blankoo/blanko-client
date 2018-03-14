@@ -34,7 +34,6 @@ class ListView extends Component {
 							<h4>{ task.title }</h4>
 							{ task.subTitle.length > 0 && <p>{ task.subTitle }</p>}
 						</div>
-						{/*<span onClick={ e => this.props.deleteTask(e, i, task._id) } className="delete">X</span>*/}
 					</div>
 
 				)}
