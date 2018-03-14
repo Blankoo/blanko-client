@@ -102,6 +102,7 @@ export default `
 	font-size: 14px;
 	color: #424459;
 	letter-spacing: 0.7px;
+	text-transform: capitalize;
 }
 
 .subtask-list {

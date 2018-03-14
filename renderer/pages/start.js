@@ -48,7 +48,6 @@ class Start extends Component {
 		this.addNewTask = this.addNewTask.bind(this)
 		this.toggleView = this.toggleView.bind(this)
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
-		this.reloadTasks = this.reloadTasks.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
 		this.selectProject = this.selectProject.bind(this)
@@ -65,6 +64,7 @@ class Start extends Component {
 	}
 
 	componentDidMount() {
+		this.disableWindowZoom()
 		const isThereAToken = localStorage.getItem('USER_TOK')
 		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID')
 
@@ -111,7 +111,11 @@ class Start extends Component {
 		}
 	}
 
-	reloadTasks() {}
+	async disableWindowZoom() {
+		const window = await electron.webFrame
+		window.setVisualZoomLevelLimits(1, 1)
+		window.setLayoutZoomLevelLimits(0, 0)
+	}
 
 	async addNewTask(endpoint, objectToAdd, id) {
 		const { selectedProjectId, accountId } = this.state

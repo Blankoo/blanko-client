@@ -88,7 +88,7 @@ class TaskDetail extends React.Component {
 										</div>
 										<div className="label-item">
 											<label>Task status</label>
-											<span className="status">{ selectedTask.status.toUpperCase() }</span>
+											<span className="status">{ selectedTask.status }</span>
 										</div>
 									</div>
 
