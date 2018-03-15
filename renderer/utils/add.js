@@ -8,8 +8,6 @@ async function add(endpoint, id, obj) {
 		const finalEndpoint = `${conf.apiUrl}/${hasEndpoint}${hasId}`
 		const retrievedData = await http.post(finalEndpoint, obj)
 		const { data } = retrievedData
-		console.log('finalEndpoint', finalEndpoint);
-		console.log('retrievedData', retrievedData);
 		return { data, retrievedData }
 	} catch(err) {
 		throw err

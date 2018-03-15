@@ -8,6 +8,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import InputText from '../components/atoms/form/InputText'
 import InputPassword from '../components/atoms/form/InputPassword'
 
+import add from '../utils/add'
 
 import styles from '../styles/pages/login'
 
@@ -20,13 +21,15 @@ class Login extends React.Component {
 			password: '',
 			message: null,
 			success: true,
-			forgotPassword: false
+			forgotPassword: false,
+			skeletonLeft: 40
 		}
 
 		this.onType = this.onType.bind(this)
 		this.login = this.login.bind(this)
 		this.onEnter = this.onEnter.bind(this)
 		this.toggleForgotPassword = this.toggleForgotPassword.bind(this)
+		this.sendForgotUsernameMail = this.sendForgotUsernameMail.bind(this)
 	}
 
 	async login() {
@@ -38,7 +41,13 @@ class Login extends React.Component {
 					localStorage.setItem('USER', user)
 					localStorage.setItem('USER_TOK', token)
 					localStorage.setItem('USER_ID', id)
-					router.push('/start')
+					this.setState({
+						skeletonLeft: 0
+					}, () => {
+						setTimeout(() => {
+							router.push('/start')
+						}, 420)
+					})
 			} else {
 				this.setState({ message })
 			}
@@ -61,9 +70,19 @@ class Login extends React.Component {
 		}))
 	}
 
+	sendForgotUsernameMail() {
+		const { username } = this.state
+		console.log(username);
+		add('account/forgot', undefined, { username })
+			.then(res => {
+				console.log('forgot email: ', res)
+			})
+	}
+
 	render() {
 		const transitionOptions = {
       transitionName: 'fade',
+			transitionEnterTimeout: 0,
       transitionEnter: true,
       transitionLeave: false
 		}
@@ -94,13 +113,13 @@ class Login extends React.Component {
 
 							<input type="text" onChange={this.onType} name="username" placeholder="Email address" autoFocus={true}
 								className={this.state.success ? '' : 'error'}/>
-							<button onClick={this.submitForgotPassword} className="login-button">Send reset email</button>
+							<button onClick={this.sendForgotUsernameMail} className="login-button">Send reset email</button>
 						</div>
 					}
 					</ReactCSSTransitionGroup>
 				</div>
 
-				<div className="skeleton"></div>
+				<div className="skeleton" style={{ left: `${this.state.skeletonLeft}vw` }}></div>
 				<style jsx global>{ styles }</style>
 			</div>
 		)

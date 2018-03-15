@@ -30,7 +30,6 @@ body {
 
 .sidebar-left {
 	padding-top: 56px;
-	width: 1081px;
 	height: 100vh;
 	padding-left: 48px;
 	box-sizing: content-box;
@@ -109,6 +108,10 @@ input.error {
 	background-position: top left;
 	background-repeat: no-repeat;
 	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 40vw;
+	transition: 420ms ease-in-out;
 }
 
 .links {
