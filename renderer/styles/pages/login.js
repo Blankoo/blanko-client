@@ -36,11 +36,14 @@ body {
 	box-sizing: content-box;
 }
 
-.input-fields {
+.input-fields,
+.forgot-password {
 	margin-top: 170px;
+	width: 282px;
+	position: relative;
 }
 
-.input-fields input {
+input {
 	font-size: 14px;
 	width: 282px;
 	display: block;
@@ -54,12 +57,16 @@ body {
 	padding: 0 0 8px;
 }
 
-.input-fields input:nth-child(2) {
-	margin: 32px 0 64px;
+input:nth-child(2) {
+	margin: 32px 0 40px;
 }
 
-.input-fields input:focus {
-	border-color: #007aff;
+input:focus {
+	border-color: #007aff !important;
+}
+
+input.error {
+	border-color: #ff0000;
 }
 
 .login-button {
@@ -102,5 +109,63 @@ body {
 	background-position: top left;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+.links {
+	text-align: center;
+	margin-top: 16px;
+	display: block;
+	width: 100%;
+}
+
+.link {
+	color: #007AFF;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	opacity: 0.5;
+	transition: 300ms ease-in-out;
+	font-size: 14px;
+	outline: none;
+}
+
+.link:hover {
+	opacity: 1;
+}
+
+.link.small:first-child {
+	margin-right: 24px;
+}
+
+.link.small {
+	font-size: 10px;
+}
+
+.move-to-left {
+	transform: translateX(-16px);
+	margin-bottom: 16px;
+}
+
+.forgot-password input{
+	margin: 32px 0 40px;;
+}
+
+.forgot-password p {
+	line-height: 24px;
+}
+
+.forgot-password {
+	margin-top: 90px;
+}
+
+.fade-enter {
+  opacity: 0;
+	top: 8px;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+	top: 0px;
+  transition: 220ms ease-in;
 }
 `
