@@ -17,8 +17,8 @@ const respond = (req, res) => {
   res.status(200).json({
     user: req.user.username,
     token: req.token,
-    scope: req.user.scope,
-    id: req.user.id
+    id: req.user.id,
+    success: true
   })
 }
 

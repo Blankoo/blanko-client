@@ -85,6 +85,9 @@ export default () => {
       .then(project => {
         log.info({ project })
         res.json({ message: 'Project updated'})
+      }).catch(err => {
+        res.json({ message: 'Something went wrong while updating your project', err})
+        log.info({ err })
       })
   })
 
