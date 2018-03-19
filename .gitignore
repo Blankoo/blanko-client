@@ -1,5 +1,5 @@
 .DS_Store
 dist
-/src/config/
+/src/config/index.js
 node_modules
 package-lock.json

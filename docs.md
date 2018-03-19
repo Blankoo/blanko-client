@@ -1,13 +1,30 @@
 # API endpoints
 
-> Base API url: https://api.blankoapp.com/v1/
+> online API url: https://api.blankoapp.com/v1/
 
 ## Account
-POST — register url: `https://api.blankoapp.com/v1/account/register/`
+POST — register:
+`https://api.blankoapp.com/v1/account/register/`
 
-POST — login url: `https://api.blankoapp.com/v1/account/login/`
+POST — login:
+`https://api.blankoapp.com/v1/account/login/`
 
-GET — me url: `https://api.blankoapp.com/v1/account/me/`
+GET – logout user:
+`https://api.blankoapp.com/v1/account/logout/`
+
+GET — user info:
+`https://api.blankoapp.com/v1/account/me/`
+
+POST — change password:
+`https://api.blankoapp.com/v1/account/changepassword/`
+
+POST — forgot password:
+`https://api.blankoapp.com/v1/account/forgot/`
+
+POST – reset password:
+`https://api.blankoapp.com/v1/account/reset/[TOKEN]`
+
+
 
 ### Account schema
 ```json
@@ -17,17 +34,45 @@ GET — me url: `https://api.blankoapp.com/v1/account/me/`
 }
 ```
 
+## Project
+
+GET — all projects from account:
+`https://api.blankoapp.com/v1/projects/[ACCOUNTID]`
+
+GET — one project from account with project id:
+`https://api.blankoapp.com/v1/projects/[ACCOUNTID]/[PROJECTID]`
+
+GET — all tasks in a project:
+`https://api.blankoapp.com/v1/projects/[ACCOUNTID]/[PROJECTID]/tasks`
+
+POST — add project to account
+`https://api.blankoapp.com/v1/projects/add/[ACCOUNTID]`
+
+POST — add task to project to account:
+`https://api.blankoapp.com/v1/projects/add/[ACCOUNTID]/[PROJECTID]`
+
+PUT — update project:
+`https://api.blankoapp.com/v1/projects/[ACCOUNTID]/[PROJECTID]`
+
+DELETE — delete project from account:
+`https://api.blankoapp.com/v1/projects/[ACCOUNTID]/[PROJECTID]`
+
 ## Tasks
 
-GET — get all tasks dedicated to account url: `https://api.blankoapp.com/v1/tasks/[ACCOUNTID]`
+GET — get all tasks dedicated to account:
+`https://api.blankoapp.com/v1/tasks/[ACCOUNTID]`
 
-GET — get one task dedicated to account url: `https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
+GET — get one task dedicated to account:
+`https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
 
-POST — add task to account url: `https://api.blankoapp.com/v1/tasks/add/[ACCOUNTID]`
+POST — add task to account:
+`https://api.blankoapp.com/v1/tasks/add/[ACCOUNTID]`
 
-PUT — update task from acc url: `https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
+PUT — update task from acc:
+`https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
 
-DELETE — delete task from acc url: `https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
+DELETE — delete task from acc:
+`https://api.blankoapp.com/v1/tasks/[ACCOUNTID]/[TASKID]`
 
 ### Task schema
 
@@ -44,7 +89,13 @@ DELETE — delete task from acc url: `https://api.blankoapp.com/v1/tasks/[ACCOUN
   }],
   "priorityLevel": 1,
   "timeSpend": 0,
-	"misc": {}
+  "misc": {},
+  "measurements:" [{
+    "isPosted" : true,
+    "total" : 9508,
+    "endTime" : 152105921304,
+    "startTime" : 1521059203532,
+  }]
 }
 ```
 
