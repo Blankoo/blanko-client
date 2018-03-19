@@ -48,6 +48,7 @@ class Start extends Component {
 		this.addNewTask = this.addNewTask.bind(this)
 		this.toggleView = this.toggleView.bind(this)
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
+		this.updateTaskTitles = this.updateTaskTitles.bind(this)
 		this.reloadTasks = this.reloadTasks.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
@@ -260,6 +261,21 @@ class Start extends Component {
 			})
 	}
 
+	updateTaskTitles(taskId, title, subTitle) {
+		const { accountId } = this.state
+		let body = {}
+		if(title === undefined) {
+			body = { subtitle: subTitle }
+ 		} else if(subTitle === undefined) {
+			body = { title: title }
+		}
+		console.log(`tasks/${accountId}/${taskId}`, body)
+		put(`tasks/${accountId}/${taskId}`, body)
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task => {
 			if(this.state.filteredValue === 'all') {
@@ -287,6 +303,7 @@ class Start extends Component {
 				<ActiveProject
 					tasks={filteredTask}
 					updateTaskStatus={this.updateTaskStatus}
+					updateTaskTitles={this.updateTaskTitles}
 					deleteTask={ this.deleteTask }
 					addNewTask={this.addNewTask}
 					activeProject={this.state.activeProject}

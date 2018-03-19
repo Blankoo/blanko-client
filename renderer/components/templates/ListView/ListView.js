@@ -26,6 +26,7 @@ class ListView extends Component {
 						isSelected={isSelected(task)}
 						setTaskActive={e => this.props.setTaskActive(e, task._id)}
 						updateTaskStatus={e => this.props.updateTaskStatus(e, i, task._id, task)}
+						updateTaskTitles={this.props.updateTaskTitles}
 					/>
 				)}
 				<style jsx>{ styles }</style>
