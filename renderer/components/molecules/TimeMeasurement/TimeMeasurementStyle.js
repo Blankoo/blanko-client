@@ -1,7 +1,11 @@
 export default `
+.time-measurement-container {
+	width: 100%;
+}
+
 .time-measurements {
-		width: 100%;
-		margin-top: 64px;
+	width: 100%;
+	margin-bottom: 64px;
 }
 
 .time-measurements li {
@@ -21,14 +25,21 @@ export default `
 	font-weight: 500;
 }
 
-.measurement-controls {
-	display: flex;
-	align-items: flex-start;
+.add-measurement,
+.total-measurement {
+	display: inline-flex;
 }
 
 .total-measurement {
-	flex: 1;
+	text-align: right;
 }
+
+.measurement-controls {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
 .total-measurement span {
 	font-size: 14px;
 	color: #424459;

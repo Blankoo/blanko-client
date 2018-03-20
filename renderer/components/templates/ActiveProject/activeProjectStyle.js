@@ -3,10 +3,6 @@ export default `
 	position: relative;
 }
 
-.label {
-	color: #1C87FB;
-}
-
 .mainTitle {
 	font-weight: normal;
 	font-size: 22px;

@@ -70,7 +70,7 @@ export default `
 	}
 
 	.single.active {
-		box-shadow: 0 5px 20px 0 rgba(187, 187, 187, 0.8);
+		box-shadow: 0 5px 20px 0 rgba(187, 187, 187, 0.3);
 	}
 
 	.status {

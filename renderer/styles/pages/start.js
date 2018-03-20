@@ -62,6 +62,10 @@ export default `
 		box-shadow: inset 0 2px 40px 0 rgba(114,114,114,0.07);
 	}
 
+	.numbers {
+		font-family: 'SF Mono', 'Droid Sans Mono', monospace !important;
+	}
+
 	@media screen and (max-width: 850px) {
 		:root {
 			--sizebar-width: 78px;

@@ -49,7 +49,6 @@ class Start extends Component {
 		this.toggleView = this.toggleView.bind(this)
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
 		this.updateTaskTitles = this.updateTaskTitles.bind(this)
-		this.reloadTasks = this.reloadTasks.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
 		this.selectProject = this.selectProject.bind(this)
@@ -62,9 +61,11 @@ class Start extends Component {
 		this.showTaskDetail = this.showTaskDetail.bind(this)
 		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
 		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
+		this.putNewTimeMeasurement = this.putNewTimeMeasurement.bind(this)
 	}
 
 	componentDidMount() {
+		this.disableWindowZoom()
 		const isThereAToken = localStorage.getItem('USER_TOK')
 		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID')
 
@@ -112,7 +113,11 @@ class Start extends Component {
 		}
 	}
 
-	reloadTasks() {}
+	async disableWindowZoom() {
+		const window = await electron.webFrame
+		window.setVisualZoomLevelLimits(1, 1)
+		window.setLayoutZoomLevelLimits(0, 0)
+	}
 
 	async addNewTask(endpoint, objectToAdd, id) {
 		const { selectedProjectId, accountId } = this.state
@@ -216,7 +221,7 @@ class Start extends Component {
 
 	async setProjectFavorite(e, projectId, boolean) {
 		const { accountId } = this.state
-		put(`projects/${accountId}`, projectId, { favorite: boolean })
+		put(`projects/${accountId}/${projectId}`, { favorite: boolean })
 			.then(({ message }) => {
 				this.dataInit(false)
 			})
@@ -262,6 +267,7 @@ class Start extends Component {
 			})
 	}
 
+
 	updateTaskTitles(taskId, title, subTitle) {
 		const { accountId } = this.state
 		let body = {}
@@ -274,6 +280,23 @@ class Start extends Component {
 			.then(({ message }) => {
 				this.dataInit(false)
 			})
+	}
+
+	async putNewTimeMeasurement(taskId, startTime, endTime) {
+		const { accountId, selectedProjectId, tasks } = this.state
+		const copyTasks = [...tasks]
+		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
+		const body = {
+			startTime,
+			endTime,
+			isPosted: true
+		}
+
+		measurements.push(body)
+
+		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
+
+		this.setState({ task: copyTasks }, () => this.dataInit(false))
 	}
 
 	render() {
@@ -331,6 +354,7 @@ class Start extends Component {
 					updateSubTaskStatus={this.updateSubTaskStatus}
 					deleteTask={this.deleteTask}
 					deleteSubTask={this.deleteSubTask}
+					putNewTimeMeasurement={this.putNewTimeMeasurement}
 				/>
 
 				<style jsx global>{ styles }</style>

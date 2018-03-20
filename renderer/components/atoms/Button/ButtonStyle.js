@@ -19,6 +19,11 @@ button.default:hover {
 	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
 }
 
+button.secondary {
+	background-color: #F3F3F3;
+	box-shadow: 0 2px 8px 0 rgba(243, 243, 243, 0.33);
+}
+
 /*Button type: disabled*/
 button.disabled {
 	color: #D0D1D6;
@@ -51,8 +56,23 @@ button.submit:hover {
 
 /*Button type: delete*/
 button.delete:hover {
-	background-color: #B32B2B;
+	/* background-color: #B32B2B; */
+	background-color: #FB1C1C;
 	box-shadow: 0 2px 8px 0 rgba(179, 43, 43, 0.33);
 	color: #FCFCFC;
+}
+
+/*Button type: cancel*/
+button.cancel {
+	/* background-color: #B32B2B; */
+	background-color: #FB1C1C;
+	box-shadow: 0 2px 8px 0 rgba(179, 43, 43, 0.33);
+	color: #FCFCFC;
+}
+
+button.cancel:hover {
+	/* background-color: #912323; */
+	background-color: #B32B2B;
+	box-shadow: 0 2px 8px 0 rgba(145, 35, 35, 0.33);
 }
 `
