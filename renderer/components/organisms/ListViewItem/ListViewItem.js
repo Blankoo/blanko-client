@@ -16,7 +16,7 @@ class ListViewItem extends Component {
 			subTitle: this.props.task.subTitle,
 		}
 		this.setActiveTaskCheck = this.setActiveTaskCheck.bind(this)
-		this.toggleEditTask = this.toggleEditTask.bind(this)
+		this.toggleEditTaskView = this.toggleEditTaskView.bind(this)
 		this.deselectInputAndSetTitle = this.deselectInputAndSetTitle.bind(this)
 	}
 
@@ -29,15 +29,15 @@ class ListViewItem extends Component {
 		}
 	}
 
-	toggleEditTask(e) {
+	toggleEditTaskView(e) {
 		if(e.target.tagName === 'H4') {
-			this.setState({
-				editingTitle: !this.state.editingTitle,
-			})
-		} else if(e.target.tagName === 'P'){
-			this.setState({
-				editingSubTitle: !this.state.editingSubTitle,
-			})
+			this.setState(({editingTitle}) => (
+				{ editingTitle: !editingTitle }
+			))
+		} else if(e.target.tagName === 'P') {
+			this.setState(({editingSubTitle}) => (
+				{ editingSubTitle: !editingSubTitle }
+			))
 		}
 	}
 
@@ -57,7 +57,7 @@ class ListViewItem extends Component {
 				subTitle: this.props.task.subTitle
 			})
 		}
-		//todo: set editing false when data is updated
+
 		this.setState({
 			editingTitle: false,
 			editingSubTitle: false,
@@ -81,7 +81,7 @@ class ListViewItem extends Component {
 				<div className="task-titles">
 					{ !editingTitle ?
 						<h4 className="list-view-title"
-								onDoubleClick={e => this.toggleEditTask(e) }>
+								onDoubleClick={e => this.toggleEditTaskView(e) }>
 								{ task.title }
 						</h4>
 						:
@@ -97,7 +97,7 @@ class ListViewItem extends Component {
 					}
 					{ !editingSubTitle ?
 						<p	className="list-view-sub-title"
-								onDoubleClick={e => this.toggleEditTask(e) }>
+								onDoubleClick={e => this.toggleEditTaskView(e) }>
 								{ task.subTitle }
 						</p>
 						:
