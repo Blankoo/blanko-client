@@ -1,8 +1,4 @@
 export default `
-	.listView {
-		min-height:32px;
-	}
-
 	.single {
 		background: #FFFFFF;
 		box-shadow: 0 5px 20px 0 rgba(238,238,243, 0.8);
@@ -16,7 +12,7 @@ export default `
 		transition: 300ms	ease-in-out;
 	}
 
-	.taskTitle {
+	.task-titles {
 		flex: 1;
 		display: inline-block;
 	}
@@ -25,40 +21,53 @@ export default `
 		opacity: 0.5;
 	}
 
-	.taskTitle h4 {
+	.task-titles .list-view-title {
 		position: relative;
 		font-weight: normal;
 		font-size: 14px;
 		color: #424459;
 		letter-spacing: 0;
 		margin-bottom: 8px;
+		height: 17px;
+		overflow: hidden;
 	}
 
-	.taskTitle p {
+	.task-titles .list-view-title.edit {
+		border: none;
+		outline: none;
+		resize: none;
+		overflow: auto;
+		width: 100%;
+		height: 17px;
+		display: block;
+	}
+
+	.task-titles p {
 		position: relative;
+		font-weight: normal;
 		font-size: 12px;
 		color: #7D7D7D;
 		letter-spacing: 0;
+		overflow: hidden;
 	}
 
-	.single.checked .taskTitle h4,
-	.single.checked .taskTitle p {
+	.task-titles .list-view-sub-title.edit {
+		border: none;
+		outline: none;
+		resize: none;
+		width: 100%;
+		display: block;
+		font-size: 12px;
+		letter-spacing: 0;
+		color: #7D7D7D;
+	}
+
+	.single.checked .task-titles h4,
+	.single.checked .task-titles p {
 		text-decoration: line-through;
     text-decoration-color: #1C87FB;
 		color: #D0D1D6;
 	}
-
-	/* .single.checked .taskTitle h4:before,
-	.single.checked .taskTitle p:before {
-		content: '';
-		height: 1px;
-		position: absolute;
-		left: 0;
-		top: calc(50% - 1px);
-		width: 100%;
-		background: #1C87FB;
-		display: block;
-	} */
 
 	.single.active {
 		box-shadow: 0 5px 20px 0 rgba(187, 187, 187, 0.3);
@@ -67,5 +76,4 @@ export default `
 	.status {
 		color: lightgrey;
 	}
-
 `

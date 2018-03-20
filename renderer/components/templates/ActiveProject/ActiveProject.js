@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ListView from '../../organisms/ListView'
+import ListView from '../../templates/ListView'
 import AddTask from '../../molecules/AddTask'
 import FilterTasks from '../..//molecules/FilterTasks'
 import Button from '../../atoms/Button'
@@ -32,7 +32,7 @@ class ActiveProject extends React.Component {
 	}
 
 	render() {
-		const { activeProject, tasks, updateTaskStatus, deleteTask, addNewTask, filteredValue, setFilteredValue } = this.props
+		const { activeProject, tasks, updateTaskStatus, updateTaskTitles, deleteTask, addNewTask, filteredValue, setFilteredValue } = this.props
 		const { projectTitle, projectDescription } = activeProject
 
 		return(<div className="active-project" onKeyUp={this.onKeyUp}>
@@ -52,6 +52,7 @@ class ActiveProject extends React.Component {
 			<ListView
 				tasks={ tasks }
 				updateTaskStatus={ updateTaskStatus }
+				updateTaskTitles={ updateTaskTitles }
 				deleteTask={ deleteTask }
 				setTaskActive={this.props.setTaskActive}
 				selectedTaskId={this.props.selectedTaskId}

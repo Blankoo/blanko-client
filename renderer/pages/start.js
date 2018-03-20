@@ -48,6 +48,7 @@ class Start extends Component {
 		this.addNewTask = this.addNewTask.bind(this)
 		this.toggleView = this.toggleView.bind(this)
 		this.updateTaskStatus = this.updateTaskStatus.bind(this)
+		this.updateTaskTitles = this.updateTaskTitles.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
 		this.selectProject = this.selectProject.bind(this)
@@ -97,6 +98,7 @@ class Start extends Component {
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId, selectedTaskId } = this.state
 		const { data: projects } = await get('projects', accountId)
+
 		if(noSelectedProject) {
 			this.setState({ projects })
 		} else {
@@ -265,6 +267,21 @@ class Start extends Component {
 			})
 	}
 
+
+	updateTaskTitles(taskId, title, subTitle) {
+		const { accountId } = this.state
+		let body = {}
+		if(title === undefined) {
+			body = { subTitle }
+ 		} else if(subTitle === undefined) {
+			body = { title }
+		}
+		put(`tasks/a/${accountId}/${taskId}`, body)
+			.then(({ message }) => {
+				this.dataInit(false)
+			})
+	}
+
 	async putNewTimeMeasurement(taskId, startTime, endTime) {
 		const { accountId, selectedProjectId, tasks } = this.state
 		const copyTasks = [...tasks]
@@ -309,6 +326,7 @@ class Start extends Component {
 				<ActiveProject
 					tasks={filteredTask}
 					updateTaskStatus={this.updateTaskStatus}
+					updateTaskTitles={this.updateTaskTitles}
 					deleteTask={ this.deleteTask }
 					addNewTask={this.addNewTask}
 					activeProject={this.state.activeProject}
