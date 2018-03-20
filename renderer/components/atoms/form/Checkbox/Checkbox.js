@@ -10,18 +10,12 @@ class Checkbox extends Component {
 	render() {
 		return (
 				<div
-					className={`checkbox ${this.props.check ? 'checked' : ''} ${this.props.className}`}
-					check={this.props.check}
+					className={`checkbox ${this.props.check ? 'checked' : ''}`}
 					onClick={this.props.onClick}>
 					<style jsx>{ styles }</style>
 				</div>
 		)
 	}
 }
-
-Checkbox.propTypes = {
-	check: React.PropTypes.bool,
-}
-
 
 export default Checkbox
