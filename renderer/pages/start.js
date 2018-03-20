@@ -97,6 +97,7 @@ class Start extends Component {
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId, selectedTaskId } = this.state
 		const { data: projects } = await get('projects', accountId)
+
 		if(noSelectedProject) {
 			this.setState({ projects })
 		} else {
@@ -265,12 +266,11 @@ class Start extends Component {
 		const { accountId } = this.state
 		let body = {}
 		if(title === undefined) {
-			body = { subtitle: subTitle }
+			body = { subTitle }
  		} else if(subTitle === undefined) {
-			body = { title: title }
+			body = { title }
 		}
-		console.log(`tasks/${accountId}/${taskId}`, body)
-		put(`tasks/${accountId}/${taskId}`, body)
+		put(`tasks/a/${accountId}/${taskId}`, body)
 			.then(({ message }) => {
 				this.dataInit(false)
 			})

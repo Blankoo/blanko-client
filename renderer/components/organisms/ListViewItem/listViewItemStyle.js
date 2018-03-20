@@ -12,7 +12,7 @@ export default `
 		transition: 300ms	ease-in-out;
 	}
 
-	.task-title {
+	.task-titles {
 		flex: 1;
 		display: inline-block;
 	}
@@ -21,33 +21,49 @@ export default `
 		opacity: 0.5;
 	}
 
-	.task-title .list-view-title {
+	.task-titles .list-view-title {
 		position: relative;
 		font-weight: normal;
 		font-size: 14px;
 		color: #424459;
 		letter-spacing: 0;
 		margin-bottom: 8px;
+		height: 17px;
+		overflow: hidden;
 	}
 
-	.task-title .list-view-title.edit {
+	.task-titles .list-view-title.edit {
 		border: none;
 		outline: none;
 		resize: none;
 		overflow: auto;
 		width: 100%;
 		height: 17px;
+		display: block;
 	}
 
-	.task-title p {
+	.task-titles p {
 		position: relative;
+		font-weight: normal;
 		font-size: 12px;
 		color: #7D7D7D;
 		letter-spacing: 0;
+		overflow: hidden;
 	}
 
-	.single.checked .task-title h4,
-	.single.checked .task-title p {
+	.task-titles .list-view-sub-title.edit {
+		border: none;
+		outline: none;
+		resize: none;
+		width: 100%;
+		display: block;
+		font-size: 12px;
+		letter-spacing: 0;
+		color: #7D7D7D;
+	}
+
+	.single.checked .task-titles h4,
+	.single.checked .task-titles p {
 		text-decoration: line-through;
     text-decoration-color: #1C87FB;
 		color: #D0D1D6;
