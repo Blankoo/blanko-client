@@ -1,5 +1,4 @@
 import { Router as router } from 'express'
-import Promise from 'bluebird'
 
 import log from '../log'
 import { authenticate } from '../middlewares/auth'
@@ -15,15 +14,12 @@ export default () => {
   projects.get('/:accountId', authenticate, (req, res) => {
     const { accountId } = req.params
 
-    Project.find({ createdBy: accountId}).then(projects => {
-      log.info('________________PROJECTS_____________')
-      log.info({projects})
-      res.json(projects)
-    })
-    .catch(err => {
-      res.json({err})
-      log.info({err})
-    })
+    Project.find({ createdBy: accountId})
+      .then(projects => {
+        log.info({projects})
+        res.json(projects)
+      })
+      .catch(err => log.info({ err }))
   })
 
   projects.get('/:accountId/:projectId', authenticate, (req, res) => {
@@ -93,14 +89,6 @@ export default () => {
 
   projects.delete('/:accountId/:projectId', authenticate, (req, res) => {
     const { accountId, projectId } = req.params
-
-    // Account.findById(accountId).then(account => {
-    //   const { projects } = account
-    //   projects.remove(projectId)
-
-    //   Account.save()
-    //   res.json({ message: 'Removed project from account.' })
-    // }).catch(err => res.json(err))
 
     Project.findByIdAndRemove(projectId).then(() => {
       res.json({ accountId, projectId, message: 'delete ffies dan'})
