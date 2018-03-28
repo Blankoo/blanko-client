@@ -4,6 +4,7 @@ import initializeDb from '../config/db';
 import tasks from '../services/tasks';
 import accounts from '../services/accounts';
 import projects from '../services/projects';
+import betaReleaseEmails from '../services/beta';
 
 const router = express()
 
@@ -12,6 +13,7 @@ initializeDb(db => {
   router.use('/tasks', tasks({ config, db }));
   router.use('/account', accounts({ config, db }));
   router.use('/projects', projects({ config, db }));
+  router.use('/beta', betaReleaseEmails({ config, db }));
 
   router.get('/', (req, res) => {
     res.json({
