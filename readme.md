@@ -35,12 +35,12 @@
 ```javascript
 export default {
   port: 3002, // port to run on
-  mongoUrl: 'mongodb://localhost:27017/blanko-v1', // db name on localhost unauthed
+  mongoUrl: 'mongodb://localhost:27017/blanko-v1', // db name on localhost unauthenticated
   bodyLimit: '', // bodyLimit like so: '10kb'
   authSecret: '', // secret used for auth tokens.
   tokenTime: null, // token time in mili seconds
   email: '', // email address to send mails from
-  emailPassword: '' // email adress password to send mails with
+  emailPassword: '' // email address password to send mails from
 }
 
 ```
