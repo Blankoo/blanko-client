@@ -57,6 +57,16 @@ PUT — update project:
 DELETE — delete project from account:
 `https://api.blankoapp.com/v1/projects/[ACCOUNTID]/[PROJECTID]`
 
+## Time measurements
+POST — post new time measurement to task:
+`http://api.blankoapp.com/v1/timemeasurements/new/[accountId]/[taskId]`
+
+PUT — update time measurement:
+`http://api.blankoapp.com/v1/timemeasurements/update/[accountId]/[taskId]/[measurementId]`
+
+GET — get all task related measurements
+`http://api.blankoapp.com/v1/timemeasurements/all/[taskId]/`
+
 ## Tasks
 
 GET — get all tasks dedicated to account:
@@ -90,12 +100,6 @@ DELETE — delete task from acc:
   "priorityLevel": 1,
   "timeSpend": 0,
   "misc": {},
-  "measurements:" [{
-    "isPosted" : true,
-    "total" : 9508,
-    "endTime" : 152105921304,
-    "startTime" : 1521059203532,
-  }]
 }
 ```
 
