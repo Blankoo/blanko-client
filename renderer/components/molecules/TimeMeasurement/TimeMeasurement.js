@@ -39,7 +39,6 @@ class TimeMeasurement extends React.Component {
 
 	startMeasurement() {
 		event.stopPropagation()
-		console.log('START');
 		this.setState({
 			isMeasuring: true
 		}, () => {
@@ -63,7 +62,6 @@ class TimeMeasurement extends React.Component {
 
 	stopMeasurement() {
 		event.stopPropagation()
-		console.log('STOP');
 		this.setState({
 			isMeasuring: false,
 		}, () => {
@@ -72,7 +70,6 @@ class TimeMeasurement extends React.Component {
 				isFinished: true
 			}
 			const measurementId = [...this.props.measurements].pop()._id
-			console.log('measurementId', measurementId)
 
 			this.props.putNewTimeMeasurement(false, inititalMeasurement, measurementId)
 			clearInterval(this.interval)

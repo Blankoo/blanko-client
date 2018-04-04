@@ -300,17 +300,14 @@ class Start extends Component {
 		const copyTasks = [...tasks]
 
 		if(isNew && measurementId === undefined) {
-			console.log('is new measurement')
 			add(`timemeasurements/new/${accountId}/${selectedTaskId}`, undefined, bodyToUpload)
 				.then(response => {
 					this.inititalizeMeasurements()
 				})
 
 		} else {
-			console.log('is an update of the new measurement');
 			put(`timemeasurements/update/${accountId}/${selectedTaskId}/${measurementId}`, bodyToUpload)
 				.then(response => {
-					console.log('updated:', response)
 					this.inititalizeMeasurements()
 				})
 		}
