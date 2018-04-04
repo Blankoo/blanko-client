@@ -31,13 +31,15 @@ class ListViewItem extends Component {
 
 	toggleEditTaskView(e) {
 		if(e.target.tagName === 'H4') {
-			this.setState(({editingTitle}) => (
-				{ editingTitle: !editingTitle }
-			))
+			this.setState(({editingTitle, editing}) => ({
+				editingTitle: !editingTitle,
+				editing: !editing
+			}))
 		} else if(e.target.tagName === 'P') {
-			this.setState(({editingSubTitle}) => (
-				{ editingSubTitle: !editingSubTitle }
-			))
+			this.setState(({editingSubTitle, editing}) => ({
+				editingSubTitle: !editingSubTitle,
+				editing: !editing
+			}))
 		}
 	}
 
@@ -78,9 +80,10 @@ class ListViewItem extends Component {
 		return (
 			<div className={'list-view-item single ' + isCheckedToggle + isSelected} onClick={(e) => { this.setActiveTaskCheck(e) }}>
 				<Checkbox check={task.status === 'done'} onClick={ updateTaskStatus } />
-				<div className="task-titles">
+				<div className={"task-titles " + (this.state.editing ? 'isEditing' :  '')}>
 					{ !editingTitle ?
 						<h4 className="list-view-title"
+								onClick={(e) => { this.setActiveTaskCheck(e) }}
 								onDoubleClick={e => this.toggleEditTaskView(e) }>
 								{ task.title }
 						</h4>
@@ -91,7 +94,7 @@ class ListViewItem extends Component {
 							className="list-view-title edit"
 							onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
 							value={ this.state.title }
-							onChange={e => this.updateInputValue(e.target.value, task.subTitle) }
+							onChange={e => this.updateInputValue(e.target.value, task.subTitle)}
 							onBlur={e => this.deselectInputAndSetTitle() }
 						/>
 					}

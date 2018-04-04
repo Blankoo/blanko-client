@@ -12,9 +12,16 @@ export default `
 		transition: 300ms	ease-in-out;
 	}
 
+	.single * {
+		cursor: default;
+	}
+
 	.task-titles {
-		flex: 1;
 		display: inline-block;
+	}
+
+	.task-titles.isEditing {
+		flex: 1 !important;
 	}
 
 	.single.checked {

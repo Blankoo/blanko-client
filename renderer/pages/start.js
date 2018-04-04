@@ -319,13 +319,8 @@ class Start extends Component {
 	}
 
 	render() {
-		const filteredTask = this.state.tasks.filter(task => {
-			if(this.state.filteredValue === 'all') {
-				return task
-			} else {
-				return task.status === this.state.filteredValue
-			}
-		})
+		const filteredTask = this.state.tasks.filter(task =>
+			(this.state.filteredValue === 'all') ? task : task.status === this.state.filteredValue)
 
 		return (
 			<div className={`container ${this.state.isDetailShown ? 'toggleTaskDetail' : ''}`}>
