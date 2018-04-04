@@ -41,7 +41,8 @@ class Start extends Component {
 			selectedTaskId: '',
 			addProjectModalVisible: false,
 			isDetailShown: false,
-			measurements: []
+			measurements: [],
+			isMeasuring: false
 		}
 
 		this.remote = electron.remote || false
@@ -204,7 +205,7 @@ class Start extends Component {
 	}
 
 	setTaskActive(e, id) {
-		if(!e.target.classList.contains('checkbox')) {
+		if(!e.target.classList.contains('checkbox') && !this.state.isMeasuring) {
 			this.setState({
 				selectedTaskId: id,
 				isDetailShown: true
@@ -249,13 +250,15 @@ class Start extends Component {
 	}
 
 	hideTaskDetail() {
-		this.setState({
-			isDetailShown: false,
-		}, () => {
-			setTimeout(() => {
-				this.setState({ selectedTaskId: '' })
-			}, 320) // remove data after transition time.
-		})
+		if(!this.state.isMeasuring) {
+			this.setState({
+				isDetailShown: false,
+			}, () => {
+				setTimeout(() => {
+					this.setState({ selectedTaskId: '' })
+				}, 320) // remove data after transition time.
+			})
+		}
 	}
 
 	async addSubTaskToTask(title) {
@@ -302,17 +305,17 @@ class Start extends Component {
 		if(isNew && measurementId === undefined) {
 			add(`timemeasurements/new/${accountId}/${selectedTaskId}`, undefined, bodyToUpload)
 				.then(response => {
+					this.setState({ isMeasuring: true })
 					this.inititalizeMeasurements()
 				})
 
 		} else {
 			put(`timemeasurements/update/${accountId}/${selectedTaskId}/${measurementId}`, bodyToUpload)
 				.then(response => {
+					this.setState({ isMeasuring: false })
 					this.inititalizeMeasurements()
 				})
 		}
-
-		// this.setState({ task: copyTasks }, () => this.dataInit(false))
 	}
 
 	render() {
