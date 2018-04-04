@@ -38,24 +38,21 @@ class TimeMeasurement extends React.Component {
 	currenTime = () => new Date().getTime()
 
 	startMeasurement() {
-		this.setState(previousState => {
-			return {
-				isMeasuring: true,
-				startTime: this.currenTime(),
-				currenTime: this.currenTime(),
-				measurements: [...previousState.measurements, {
-					startTime: this.currenTime(),
-					endTime: 0,
-					isPosted: false,
-					total: 0
-				}]
-			}
+		event.stopPropagation()
+		this.setState({
+			isMeasuring: true
 		}, () => {
 			this.setSpendedTimeValue()
+			const inititalMeasurement = {
+				startTime: this.currenTime(),
+				isFinished: false
+			}
+
+			this.props.putNewTimeMeasurement(true, inititalMeasurement)
 		})
 	}
 
-	setSpendedTimeValue(isTiming) {
+	setSpendedTimeValue() {
 		this.interval = setInterval(() => {
 			this.setState({
 				currenTime: this.currenTime()
@@ -64,19 +61,25 @@ class TimeMeasurement extends React.Component {
 	}
 
 	stopMeasurement() {
+		event.stopPropagation()
 		this.setState({
 			isMeasuring: false,
-			endTime: this.state.currenTime
 		}, () => {
-			this.props.putNewTimeMeasurement(this.props.selectedTask._id, this.state.startTime, this.state.endTime)
+			const inititalMeasurement = {
+				endTime: this.currenTime(),
+				isFinished: true
+			}
+			const measurementId = [...this.props.measurements].pop()._id
+
+			this.props.putNewTimeMeasurement(false, inititalMeasurement, measurementId)
 			clearInterval(this.interval)
 		})
 	}
 
 	secondsToHourMinuteSecond(totalSeconds) {
-		let hour = Math.floor(totalSeconds / 3600);
-		let minute = Math.floor(totalSeconds % 3600 / 60);
-		let seconds = Math.floor(totalSeconds % 3600 % 60);
+		let hour = Math.floor(totalSeconds / 3600)
+		let minute = Math.floor(totalSeconds % 3600 / 60)
+		let seconds = Math.floor(totalSeconds % 3600 % 60)
 
 		return `${('0' + hour).slice(-2)}:${('0' + minute).slice(-2)}:${('0' + seconds).slice(-2)}`
 	}
@@ -93,36 +96,37 @@ class TimeMeasurement extends React.Component {
 				{ selectedTask !== null ?
 				<ul className="time-measurements">
 
-					{this.state.measurements.map((timeObject, idx) =>
+					{this.props.measurements.map((measurement, idx) =>
 
 						<li key={idx}>
-							<label>Measurement:</label>
+							<label>Measurement</label>
 							<span>
+
 								{
-									timeObject.isPosted ?
-									<span className="numbers">{
-										this.secondsToHourMinuteSecond(
-											totalInSeconds(timeObject.endTime, timeObject.startTime)
-										)}
-									</span>
+									measurement.isFinished ?
+										<span className="numbers isFinished">{
+											this.secondsToHourMinuteSecond(
+												totalInSeconds(measurement.endTime, measurement.startTime)
+											)}
+										</span>
 									:
-									<span className="numbers">{
-										this.secondsToHourMinuteSecond(
-											totalInSeconds(this.state.currenTime, timeObject.startTime)
-										)}
-									</span>
+										<span className="numbers isNotFinished">{
+											this.secondsToHourMinuteSecond(
+												totalInSeconds(this.state.currenTime, measurement.startTime)
+											)}
+										</span>
 								}
 							</span>
 						</li>
 
 					)}
 
-					<div className="measurement-controls">
+					{ <div className="measurement-controls">
 						<span className="add-measurement">
 							{this.state.isMeasuring ?
-								<Button text="Stop time measurement" type="cancel" onClick={e => this.stopMeasurement()}/>
+								<Button text="Stop time measurement" type="cancel" onClick={this.stopMeasurement}/>
 								:
-								<Button text="Start time measurement" type="submit" onClick={e => this.startMeasurement()}/>
+								<Button text="Start time measurement" type="submit" onClick={this.startMeasurement}/>
 							}
 						</span>
 						<span className="total-measurement">
@@ -135,7 +139,7 @@ class TimeMeasurement extends React.Component {
 								</span>
 							</span>
 						</span>
-					</div>
+					</div>}
 
 				</ul>
 				: null}

@@ -11,6 +11,7 @@ import styles from './taskDetailStyle'
 
 // utils
 import put from '../../../utils/put'
+import get from '../../../utils/get'
 
 class TaskDetail extends React.Component {
 	constructor(props) {
@@ -61,7 +62,8 @@ class TaskDetail extends React.Component {
 			hideTaskDetail,
 			updateSubTaskStatus,
 			deleteTask,
-			deleteSubTask
+			deleteSubTask,
+			measurements
 		} = this.props
 
 		return(
@@ -125,6 +127,7 @@ class TaskDetail extends React.Component {
 									<TimeMeasurement
 										selectedTask={selectedTask}
 										putNewTimeMeasurement={this.props.putNewTimeMeasurement}
+										measurements={measurements}
 									/>
 
 									<div className="controllers">

@@ -40,7 +40,9 @@ class Start extends Component {
 			filteredValue: 'all',
 			selectedTaskId: '',
 			addProjectModalVisible: false,
-			isDetailShown: false
+			isDetailShown: false,
+			measurements: [],
+			isMeasuring: false
 		}
 
 		this.remote = electron.remote || false
@@ -203,12 +205,22 @@ class Start extends Component {
 	}
 
 	setTaskActive(e, id) {
-		if(!e.target.classList.contains('checkbox')) {
+		if(!e.target.classList.contains('checkbox') && !this.state.isMeasuring) {
 			this.setState({
 				selectedTaskId: id,
 				isDetailShown: true
+			}, () => {
+				this.inititalizeMeasurements()
 			})
 		}
+	}
+
+	inititalizeMeasurements() {
+		get(`timemeasurements/all/${this.state.selectedTaskId}`)
+			.then(response => {
+				const { data: { measurements }} = response
+				this.setState({ measurements })
+			})
 	}
 
 	async getActiveTaskData(id) {
@@ -238,13 +250,15 @@ class Start extends Component {
 	}
 
 	hideTaskDetail() {
-		this.setState({
-			isDetailShown: false,
-		}, () => {
-			setTimeout(() => {
-				this.setState({ selectedTaskId: '' })
-			}, 320) // remove data after transition time.
-		})
+		if(!this.state.isMeasuring) {
+			this.setState({
+				isDetailShown: false,
+			}, () => {
+				setTimeout(() => {
+					this.setState({ selectedTaskId: '' })
+				}, 320) // remove data after transition time.
+			})
+		}
 	}
 
 	async addSubTaskToTask(title) {
@@ -271,6 +285,7 @@ class Start extends Component {
 	updateTaskTitles(taskId, title, subTitle) {
 		const { accountId } = this.state
 		let body = {}
+
 		if(title === undefined) {
 			body = { subTitle }
  		} else if(subTitle === undefined) {
@@ -282,21 +297,25 @@ class Start extends Component {
 			})
 	}
 
-	async putNewTimeMeasurement(taskId, startTime, endTime) {
+	async putNewTimeMeasurement(isNew, bodyToUpload, measurementId) {
+		const { selectedTaskId } = this.state
 		const { accountId, selectedProjectId, tasks } = this.state
 		const copyTasks = [...tasks]
-		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
-		const body = {
-			startTime,
-			endTime,
-			isPosted: true
+
+		if(isNew && measurementId === undefined) {
+			add(`timemeasurements/new/${accountId}/${selectedTaskId}`, undefined, bodyToUpload)
+				.then(response => {
+					this.setState({ isMeasuring: true })
+					this.inititalizeMeasurements()
+				})
+
+		} else {
+			put(`timemeasurements/update/${accountId}/${selectedTaskId}/${measurementId}`, bodyToUpload)
+				.then(response => {
+					this.setState({ isMeasuring: false })
+					this.inititalizeMeasurements()
+				})
 		}
-
-		measurements.push(body)
-
-		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
-
-		this.setState({ task: copyTasks }, () => this.dataInit(false))
 	}
 
 	render() {
@@ -355,6 +374,7 @@ class Start extends Component {
 					deleteTask={this.deleteTask}
 					deleteSubTask={this.deleteSubTask}
 					putNewTimeMeasurement={this.putNewTimeMeasurement}
+					measurements={this.state.measurements}
 				/>
 
 				<style jsx global>{ styles }</style>
