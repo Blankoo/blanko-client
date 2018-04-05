@@ -1,6 +1,6 @@
 // Native
 const { format } = require('url')
-
+const path = require('path')
 // Packages
 const { BrowserWindow, app } = require('electron')
 const isDev = require('electron-is-dev')
@@ -34,7 +34,8 @@ app.on('ready', async e => {
     	webSecurity: true,
 			backgroundThrottling: false,
 			devtools: true
-  	}
+  	},
+    icon: path.join(__dirname, 'assets/icon_1024x1024.icns')
   })
 
 	windowState.manage(mainWindow);
