@@ -30,9 +30,15 @@ export default () => {
     const { body, params } = request
     const { accountId, measurementId } = params
 
-    Timemeasurement.findByIdAndUpdate(measurementId, body)
-      .then(() => {
-        response.json({ message: 'Succesfully updated time measurement' })
+    Timemeasurement.findById(measurementId)
+      .then(measurement => {
+        const total = body.endTime - measurement.startTime
+
+        body.total = total
+        Timemeasurement.findByIdAndUpdate(measurementId, body) 
+          .then(() => {
+            response.json({ message: 'Succesfully updated time measurement' })
+          })
       })
   })
 
