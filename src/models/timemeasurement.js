@@ -20,7 +20,11 @@ const measurementSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Task'
   },
-  total: Number
+  total: Number,
+  isFinished: {
+    type: Boolean,
+    required: true
+  } 
 })
 
 export default mongoose.model('Timemeasurement', measurementSchema)
