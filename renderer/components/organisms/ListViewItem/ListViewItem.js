@@ -98,21 +98,25 @@ class ListViewItem extends Component {
 							onBlur={e => this.deselectInputAndSetTitle() }
 						/>
 					}
-					{ !editingSubTitle ?
-						<p	className="list-view-sub-title"
-								onDoubleClick={e => this.toggleEditTaskView(e) }>
-								{ task.subTitle }
-						</p>
-						:
-						<input
-							autoFocus
-							maxLength="140"
-							className="list-view-sub-title edit"
-							onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
-							value={ this.state.subTitle }
-							onChange={e => this.updateInputValue(task.title, e.target.value) }
-							onBlur={e => this.deselectInputAndSetTitle() }
-						/>
+					{ task.subTitle &&
+					<span>
+							{ !editingSubTitle ?
+								<p	className="list-view-sub-title"
+										onDoubleClick={e => this.toggleEditTaskView(e) }>
+										{ task.subTitle }
+								</p>
+								:
+								<input
+									autoFocus
+									maxLength="140"
+									className="list-view-sub-title edit"
+									onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
+									value={ this.state.subTitle }
+									onChange={e => this.updateInputValue(task.title, e.target.value) }
+									onBlur={e => this.deselectInputAndSetTitle() }
+								/>
+							}
+						</span>
 					}
 				</div>
 				<style jsx>{ styles }</style>
