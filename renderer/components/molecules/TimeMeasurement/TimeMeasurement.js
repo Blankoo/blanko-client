@@ -90,8 +90,7 @@ class TimeMeasurement extends React.Component {
 		const totalInMiliSeconds = (endTime, startTime) => Math.floor(endTime - startTime)
 		const totalInSeconds = (endTime, startTime) => Math.floor(totalInMiliSeconds(endTime, startTime) / 1000)
 		const totalMeasuredTime = this.props.measurements.reduce((zero, { total }) => zero + total, 0)
-		console.log('totalMeasuredTime', totalMeasuredTime);
-		console.log('totalMeasuredTime == NaN', totalMeasuredTime == undefined);
+
 		return (
 			<div className="time-measurement-container">
 				{ selectedTask !== null ?

@@ -92,7 +92,7 @@ class ListViewItem extends Component {
 							autoFocus
 							maxLength="80"
 							className="list-view-title edit"
-							onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
+							onKeyUp={e => e.key === 'Enter' && this.deselectInputAndSetTitle() }
 							value={ this.state.title }
 							onChange={e => this.updateInputValue(e.target.value, task.subTitle)}
 							onBlur={e => this.deselectInputAndSetTitle() }

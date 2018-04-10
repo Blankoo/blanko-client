@@ -11,38 +11,51 @@ class ActiveProject extends React.Component {
 	constructor(props) {
 		super(props)
 
-		this.state = { isAddingProject: false }
+		this.state = { isAddingTask: false }
 
-		this.toggleAddTask = this.toggleAddTask.bind(this)
 		this.onKeyUp = this.onKeyUp.bind(this)
+		this.showAddTask = this.showAddTask.bind(this)
+		this.hideAddTask = this.hideAddTask.bind(this)
 	}
 
-	toggleAddTask() {
-		this.setState(prevState => ({ isAddingProject: !prevState.isAddingProject}))
+	showAddTask() {
+		this.setState({ isAddingTask: true })
+		window.scrollTo(0, document.querySelector('.active-project').scrollHeight)
+	}
 
-		if(this.state.isAddingProject) {
-			window.scrollTo(0, document.querySelector('.active-project').scrollHeight)
-		}
+	hideAddTask() {
+		this.setState({ isAddingTask: false })
 	}
 
 	onKeyUp(e) {
-		if((e.key === 'Escape' && this.state.isAddingProject) || (e.key === 'Enter')) {
-			this.toggleAddTask()
+		if((e.key === 'Escape' && this.state.isAddingTask) || (e.key === 'Enter')) {
+			this.hideAddTask()
 		}
 	}
 
 	render() {
-		const { activeProject, tasks, updateTaskStatus, updateTaskTitles, deleteTask, addNewTask, filteredValue, setFilteredValue } = this.props
+		const {
+			activeProject,
+			tasks,
+			updateTaskStatus,
+			updateTaskTitles,
+			deleteTask,
+			addNewTask,
+			filteredValue,
+			setFilteredValue,
+			setTaskActive,
+			selectedTaskId
+		} = this.props
 		const { projectTitle, projectDescription } = activeProject
 
-		return(<div className="active-project" onKeyUp={this.onKeyUp}>
+		return(<div className="active-project" onKeyUp={ this.onKeyUp }>
 			<h1 className="mainTitle" ref="activeProjectTitle">{ projectTitle }</h1>
 			{ projectDescription && <p className="description" ref="activeProjectDescription">{ projectDescription }</p> }
 
 			<FilterTasks
-				filteredValue={filteredValue}
-				setFilteredValue={setFilteredValue}
-				toggleAddTask={this.toggleAddTask}
+				filteredValue={ filteredValue }
+				setFilteredValue={ setFilteredValue }
+				toggleAddTask={ this.showAddTask }
 			/>
 
 			<div className="label">
@@ -54,15 +67,15 @@ class ActiveProject extends React.Component {
 				updateTaskStatus={ updateTaskStatus }
 				updateTaskTitles={ updateTaskTitles }
 				deleteTask={ deleteTask }
-				setTaskActive={this.props.setTaskActive}
-				selectedTaskId={this.props.selectedTaskId}
+				setTaskActive={ setTaskActive }
+				selectedTaskId={ selectedTaskId }
 			/>
 
 			{
-				this.state.isAddingProject ?
+				this.state.isAddingTask || tasks.length === 0 ?
 				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp}/>
 				:
-				<Button onClick={this.toggleAddTask} text="Add Task"/>
+				<Button onClick={ this.showAddTask } text="Add Task"/>
 			}
 
 			<style jsx>{styles}</style>
