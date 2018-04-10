@@ -75,8 +75,7 @@ class Start extends Component {
 			router.push('/login')
 		} else {
 			this.setState({
-				loading: false,
-				accountId: localStorage.getItem('USER_ID')
+				accountId: localStorage.getItem('USER_ID'),
 			}, () => {
 				if (isThereAProjectSelected) {
 					this.setState({
@@ -110,7 +109,8 @@ class Start extends Component {
 			this.setState({
 				projects,
 				tasks,
-				activeProject: selectedProjectObject
+				activeProject: selectedProjectObject,
+				loading: false
 			})
 		}
 	}
