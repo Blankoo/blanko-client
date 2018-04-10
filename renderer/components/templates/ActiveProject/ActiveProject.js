@@ -59,7 +59,7 @@ class ActiveProject extends React.Component {
 			/>
 
 			<div className="label">
-				{ filteredValue === 'done' ? 'done' : 'to do' }
+				{filteredValue === 'done' ? 'done' : filteredValue === 'todo' ? 'todo' : 'all' }
 			</div>
 
 			<ListView
