@@ -8,8 +8,8 @@ async function get(endpoint, id) {
 		const finalEndpoint = `${conf.apiUrl}/${hasEndpoint}${hasId}`
 		const retrievedData = await http.get(finalEndpoint)
 		const { data } = retrievedData
-		console.log(data);
-		return { data, retrievedData}
+
+		return { data, retrievedData }
 	} catch(err) {
 		throw err
 	}
