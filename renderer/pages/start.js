@@ -20,6 +20,7 @@ import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
 import TaskDetail from '../components/templates/TaskDetail'
+import LogoutConfirmation from '../components/organisms/LogoutConfirmation'
 
 class Start extends Component {
 	constructor(props) {
@@ -42,7 +43,8 @@ class Start extends Component {
 			addProjectModalVisible: false,
 			isDetailShown: false,
 			measurements: [],
-			isMeasuring: false
+			isMeasuring: false,
+			showLogoutConfirmation: false
 		}
 
 		this.remote = electron.remote || false
@@ -64,6 +66,7 @@ class Start extends Component {
 		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
 		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
 		this.putNewTimeMeasurement = this.putNewTimeMeasurement.bind(this)
+		this.toggleLogoutConfirmation = this.toggleLogoutConfirmation.bind(this)
 	}
 
 	componentDidMount() {
@@ -84,7 +87,13 @@ class Start extends Component {
 						this.dataInit(false)
 					})
 				} else {
-					this.dataInit(true)
+					if(this.state.projects.length === 0) {
+						this.setState({
+							addProjectModalVisible: true
+						})
+					} else {
+						this.dataInit(true)
+					}
 				}
 			})
 		}
@@ -101,7 +110,10 @@ class Start extends Component {
 		const { data: projects } = await get('projects', accountId)
 
 		if(noSelectedProject) {
-			this.setState({ projects })
+			this.setState({
+				projects,
+				loading: false
+			})
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
 			const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
@@ -142,6 +154,7 @@ class Start extends Component {
 			selectedProjectId: newProject._id
 		}), () => {
 			this.dataInit(false)
+			localStorage.setItem('SELECTED_PROJECT_ID', newProject._id)
 			callback('addProjectModalVisible', false)
 		})
 	}
@@ -318,6 +331,19 @@ class Start extends Component {
 		}
 	}
 
+	toggleLogoutConfirmation() {
+		this.setState(prevState => ({
+			showLogoutConfirmation: !prevState.showLogoutConfirmation
+		}))
+	}
+
+	logoutUser() {
+		router.push('/login')
+		localStorage.removeItem('USER')
+		localStorage.removeItem('USER_ID')
+		localStorage.removeItem('USER_TOK')
+	}
+
 	render() {
 		const filteredTask = this.state.tasks.filter(task =>
 			(this.state.filteredValue === 'all') ? task : task.status === this.state.filteredValue)
@@ -335,6 +361,7 @@ class Start extends Component {
 					addProjectToAccount={this.addProjectToAccount}
 					setProjectFavorite={this.setProjectFavorite}
 					toggleModal={this.toggleModal}
+					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
 				/>
 
 				<ActiveProject
@@ -356,6 +383,12 @@ class Start extends Component {
 					visible={this.state.addProjectModalVisible}
 					toggleModal={this.toggleModal}
 					addProjectToAccount={this.addProjectToAccount}
+				/>
+
+				<LogoutConfirmation
+					visible={this.state.showLogoutConfirmation}
+					logoutUser={this.logoutUser}
+					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
 				/>
 
 				<TaskDetail

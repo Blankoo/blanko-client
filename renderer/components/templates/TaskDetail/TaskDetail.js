@@ -83,16 +83,6 @@ class TaskDetail extends React.Component {
 									{ selectedTask.subTitle &&
 										<p className="description">{ selectedTask.subTitle }</p>
 									}
-									<div className="labels">
-										<div className="label-item">
-											<label>Task due date</label>
-											<span className="status">21-08-2012</span>
-										</div>
-										<div className="label-item">
-											<label>Task status</label>
-											<span className="status">{ selectedTask.status }</span>
-										</div>
-									</div>
 
 									<div className="subtask-list">
 										{selectedTask.subTasks.map((task, idx) =>

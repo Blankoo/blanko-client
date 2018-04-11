@@ -35,4 +35,25 @@ export default `
 	.projectList .label {
 		padding-left:48px;
 	}
+
+	.logout-icon {
+		display: block;
+		position: absolute;
+		bottom: 24px;
+		left: 12px;
+		width: 12px;
+		height: 12px;
+		object-fit: cover;
+		opacity: 0.7;
+	}
+
+	.logout-icon:hover svg g {
+		transition: 200ms ease;
+		fill: #FB1C1C;
+	}
+
+	.logout-icon svg {
+		width: 100%;
+		transition: 200ms;
+	}
 `
