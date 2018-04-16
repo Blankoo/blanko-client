@@ -21,6 +21,7 @@ import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
 import TaskDetail from '../components/templates/TaskDetail'
 import LogoutConfirmation from '../components/organisms/LogoutConfirmation'
+import EmptyState from '../components/molecules/EmptyState'
 
 class Start extends Component {
 	constructor(props) {
@@ -87,13 +88,10 @@ class Start extends Component {
 						this.dataInit(false)
 					})
 				} else {
-					if(this.state.projects.length === 0) {
-						this.setState({
-							addProjectModalVisible: true
-						})
-					} else {
-						this.dataInit(true)
-					}
+					this.dataInit(true)
+					this.setState({
+						noSelectedProject: true
+					})
 				}
 			})
 		}
@@ -161,7 +159,8 @@ class Start extends Component {
 
 	selectProject(id) {
 		this.setState({
-			selectedProjectId: id
+			selectedProjectId: id,
+			noSelectedProject: false
 		}, () => {
 			localStorage.setItem('SELECTED_PROJECT_ID', this.state.selectedProjectId)
 			this.dataInit(false)
@@ -364,18 +363,22 @@ class Start extends Component {
 					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
 				/>
 
-				<ActiveProject
-					tasks={filteredTask}
-					updateTaskStatus={this.updateTaskStatus}
-					updateTaskTitles={this.updateTaskTitles}
-					deleteTask={ this.deleteTask }
-					addNewTask={this.addNewTask}
-					activeProject={this.state.activeProject}
-					filteredValue={this.state.filteredValue}
-					setFilteredValue={this.setFilteredValue}
-					setTaskActive={this.setTaskActive}
-					selectedTaskId={this.state.selectedTaskId}
-				/>
+				{ this.state.noSelectedProject ?
+					<EmptyState message="niks aan t handje"/>
+					:
+					<ActiveProject
+						tasks={filteredTask}
+						updateTaskStatus={this.updateTaskStatus}
+						updateTaskTitles={this.updateTaskTitles}
+						deleteTask={ this.deleteTask }
+						addNewTask={this.addNewTask}
+						activeProject={this.state.activeProject}
+						filteredValue={this.state.filteredValue}
+						setFilteredValue={this.setFilteredValue}
+						setTaskActive={this.setTaskActive}
+						selectedTaskId={this.state.selectedTaskId}
+					/>
+				}
 
 				{ this.state.loading && <Loader loading/> }
 
