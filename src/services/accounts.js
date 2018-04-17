@@ -132,17 +132,17 @@ export default () => {
       resetPasswordExpires: { $gt: Date.now() }
     }).then(acc => {
       if(!acc) {
-        res.json({ message: 'This URL might be out of date, try it again.'})
+        res.json({ message: 'This URL might be out of date, try it again.', succes: false })
       } else {
         acc.setPassword(newPasswordValue, err => {
           if(err) {
-            res.json(err)
+            res.json({ err, succes: false })
           } else {
             acc.resetPasswordToken = undefined
             acc.resetPasswordExpires = undefined
 
             acc.save()
-            res.json({ message: 'Succesfully changed password'})
+            res.json({ message: 'Succesfully changed password', succes: true })
           }
         })
       }
