@@ -31,13 +31,15 @@ class ListViewItem extends Component {
 
 	toggleEditTaskView(e) {
 		if(e.target.tagName === 'H4') {
-			this.setState(({editingTitle}) => (
-				{ editingTitle: !editingTitle }
-			))
+			this.setState(({editingTitle, editing}) => ({
+				editingTitle: !editingTitle,
+				editing: !editing
+			}))
 		} else if(e.target.tagName === 'P') {
-			this.setState(({editingSubTitle}) => (
-				{ editingSubTitle: !editingSubTitle }
-			))
+			this.setState(({editingSubTitle, editing}) => ({
+				editingSubTitle: !editingSubTitle,
+				editing: !editing
+			}))
 		}
 	}
 
@@ -78,9 +80,10 @@ class ListViewItem extends Component {
 		return (
 			<div className={'list-view-item single ' + isCheckedToggle + isSelected} onClick={(e) => { this.setActiveTaskCheck(e) }}>
 				<Checkbox check={task.status === 'done'} onClick={ updateTaskStatus } />
-				<div className="task-titles">
+				<div className={"task-titles " + (this.state.editing ? 'isEditing' :  '')}>
 					{ !editingTitle ?
 						<h4 className="list-view-title"
+								onClick={(e) => { this.setActiveTaskCheck(e) }}
 								onDoubleClick={e => this.toggleEditTaskView(e) }>
 								{ task.title }
 						</h4>
@@ -89,27 +92,31 @@ class ListViewItem extends Component {
 							autoFocus
 							maxLength="80"
 							className="list-view-title edit"
-							onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
+							onKeyUp={e => e.key === 'Enter' && this.deselectInputAndSetTitle() }
 							value={ this.state.title }
-							onChange={e => this.updateInputValue(e.target.value, task.subTitle) }
+							onChange={e => this.updateInputValue(e.target.value, task.subTitle)}
 							onBlur={e => this.deselectInputAndSetTitle() }
 						/>
 					}
-					{ !editingSubTitle ?
-						<p	className="list-view-sub-title"
-								onDoubleClick={e => this.toggleEditTaskView(e) }>
-								{ task.subTitle }
-						</p>
-						:
-						<input
-							autoFocus
-							maxLength="140"
-							className="list-view-sub-title edit"
-							onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
-							value={ this.state.subTitle }
-							onChange={e => this.updateInputValue(task.title, e.target.value) }
-							onBlur={e => this.deselectInputAndSetTitle() }
-						/>
+					{ task.subTitle &&
+					<span>
+							{ !editingSubTitle ?
+								<p	className="list-view-sub-title"
+										onDoubleClick={e => this.toggleEditTaskView(e) }>
+										{ task.subTitle }
+								</p>
+								:
+								<input
+									autoFocus
+									maxLength="140"
+									className="list-view-sub-title edit"
+									onKeyUp={e => e.keyCode === 27 && this.deselectInputAndSetTitle() }
+									value={ this.state.subTitle }
+									onChange={e => this.updateInputValue(task.title, e.target.value) }
+									onBlur={e => this.deselectInputAndSetTitle() }
+								/>
+							}
+						</span>
 					}
 				</div>
 				<style jsx>{ styles }</style>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-//
 import Checkbox from '../../atoms/form/Checkbox';
 
 // Style import
@@ -12,7 +11,7 @@ class ListView extends Component {
 	}
 
 	render() {
-		const { tasks, selectedTaskId } = this.props
+		const { tasks, selectedTaskId, setTaskActive, updateTaskStatus } = this.props
 		const isCheckedToggle = task => (task.status === 'done' ? ' checked ' : '')
 		const isSelected = task => (task._id === selectedTaskId ? ' active ' : '')
 
@@ -22,12 +21,12 @@ class ListView extends Component {
 
 					<div
 						key={i} className={'single ' + isCheckedToggle(task) + isSelected(task)}
-						onClick={e => this.props.setTaskActive(e, task._id)}
+						onClick={e => setTaskActive(e, task._id)}
 					>
 
 						<Checkbox
 							check={task.status === 'done'}
-							onClick={ e => this.props.updateTaskStatus(e, i, task._id, task) }
+							onClick={ e => updateTaskStatus(e, i, task._id, task) }
 						/>
 
 						<div className="taskTitle">

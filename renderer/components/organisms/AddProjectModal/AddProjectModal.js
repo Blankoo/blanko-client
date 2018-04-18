@@ -30,7 +30,6 @@ class ModalContainer extends React.Component {
 
 	validateCheck() {
 		if(this.state.projectTitle !== '') {
-			console.log('Title is filled in')
 
 			this.props.addProjectToAccount(this.state, this.props.toggleModal)
 
@@ -49,7 +48,7 @@ class ModalContainer extends React.Component {
 						<h2>Add Project</h2>
 
 						<label className="label" style={offset}>Project title</label>
-						<InputText onChange={e => this.onType(e)} name="projectTitle"/>
+						<InputText onChange={e => this.onType(e)} name="projectTitle" autoFocus/>
 
 						<label className="label" style={offset}>Project Description</label>
 						<Textarea onChange={e => this.onType(e)} name="projectDescription"/>

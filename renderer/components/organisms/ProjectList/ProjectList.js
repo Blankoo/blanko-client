@@ -26,17 +26,18 @@ class ProjectList extends React.Component {
 				{projects !== undefined && <div>
 
 					<ul className="projects-list">{
-						projects.filter(project => project !== null && project.favorite === favorite).map((project, i) => {
+						projects.filter(project => project !== null && project.favorite === favorite)
+							.map((project, i) => {
 
-							return(
-								<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
-									onClick={e => this.props.selectProject(project._id)}>
-									<span title={project.projectTitle}>{ project.projectTitle }</span>
-									<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
-										⭐
-									</span>
-								</li>
-							)
+								return(
+									<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
+										onClick={e => this.props.selectProject(project._id)}>
+										<span title={project.projectTitle}>{ project.projectTitle }</span>
+										<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
+											⭐
+										</span>
+									</li>
+								)
 
 						})
 					}</ul>

@@ -20,6 +20,8 @@ import Sidebar from '../components/templates/Sidebar'
 import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
 import TaskDetail from '../components/templates/TaskDetail'
+import LogoutConfirmation from '../components/organisms/LogoutConfirmation'
+import EmptyState from '../components/molecules/EmptyState'
 
 class Start extends Component {
 	constructor(props) {
@@ -40,7 +42,10 @@ class Start extends Component {
 			filteredValue: 'all',
 			selectedTaskId: '',
 			addProjectModalVisible: false,
-			isDetailShown: false
+			isDetailShown: false,
+			measurements: [],
+			isMeasuring: false,
+			showLogoutConfirmation: false
 		}
 
 		this.remote = electron.remote || false
@@ -62,6 +67,7 @@ class Start extends Component {
 		this.addSubTaskToTask = this.addSubTaskToTask.bind(this)
 		this.updateSubTaskStatus = this.updateSubTaskStatus.bind(this)
 		this.putNewTimeMeasurement = this.putNewTimeMeasurement.bind(this)
+		this.toggleLogoutConfirmation = this.toggleLogoutConfirmation.bind(this)
 	}
 
 	componentDidMount() {
@@ -73,8 +79,7 @@ class Start extends Component {
 			router.push('/login')
 		} else {
 			this.setState({
-				loading: false,
-				accountId: localStorage.getItem('USER_ID')
+				accountId: localStorage.getItem('USER_ID'),
 			}, () => {
 				if (isThereAProjectSelected) {
 					this.setState({
@@ -84,6 +89,9 @@ class Start extends Component {
 					})
 				} else {
 					this.dataInit(true)
+					this.setState({
+						noSelectedProject: true
+					})
 				}
 			})
 		}
@@ -100,7 +108,10 @@ class Start extends Component {
 		const { data: projects } = await get('projects', accountId)
 
 		if(noSelectedProject) {
-			this.setState({ projects })
+			this.setState({
+				projects,
+				loading: false
+			})
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
 			const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
@@ -108,7 +119,8 @@ class Start extends Component {
 			this.setState({
 				projects,
 				tasks,
-				activeProject: selectedProjectObject
+				activeProject: selectedProjectObject,
+				loading: false
 			})
 		}
 	}
@@ -140,13 +152,15 @@ class Start extends Component {
 			selectedProjectId: newProject._id
 		}), () => {
 			this.dataInit(false)
+			localStorage.setItem('SELECTED_PROJECT_ID', newProject._id)
 			callback('addProjectModalVisible', false)
 		})
 	}
 
 	selectProject(id) {
 		this.setState({
-			selectedProjectId: id
+			selectedProjectId: id,
+			noSelectedProject: false
 		}, () => {
 			localStorage.setItem('SELECTED_PROJECT_ID', this.state.selectedProjectId)
 			this.dataInit(false)
@@ -203,12 +217,22 @@ class Start extends Component {
 	}
 
 	setTaskActive(e, id) {
-		if(!e.target.classList.contains('checkbox')) {
+		if(!e.target.classList.contains('checkbox') && !this.state.isMeasuring) {
 			this.setState({
 				selectedTaskId: id,
 				isDetailShown: true
+			}, () => {
+				this.inititalizeMeasurements()
 			})
 		}
+	}
+
+	inititalizeMeasurements() {
+		get(`timemeasurements/all/${this.state.selectedTaskId}`)
+			.then(response => {
+				const { data: { measurements }} = response
+				this.setState({ measurements })
+			})
 	}
 
 	async getActiveTaskData(id) {
@@ -238,13 +262,15 @@ class Start extends Component {
 	}
 
 	hideTaskDetail() {
-		this.setState({
-			isDetailShown: false,
-		}, () => {
-			setTimeout(() => {
-				this.setState({ selectedTaskId: '' })
-			}, 320) // remove data after transition time.
-		})
+		if(!this.state.isMeasuring) {
+			this.setState({
+				isDetailShown: false,
+			}, () => {
+				setTimeout(() => {
+					this.setState({ selectedTaskId: '' })
+				}, 320) // remove data after transition time.
+			})
+		}
 	}
 
 	async addSubTaskToTask(title) {
@@ -271,6 +297,7 @@ class Start extends Component {
 	updateTaskTitles(taskId, title, subTitle) {
 		const { accountId } = this.state
 		let body = {}
+
 		if(title === undefined) {
 			body = { subTitle }
  		} else if(subTitle === undefined) {
@@ -282,31 +309,43 @@ class Start extends Component {
 			})
 	}
 
-	async putNewTimeMeasurement(taskId, startTime, endTime) {
+	async putNewTimeMeasurement(isNew, bodyToUpload, measurementId) {
+		const { selectedTaskId } = this.state
 		const { accountId, selectedProjectId, tasks } = this.state
 		const copyTasks = [...tasks]
-		const measurements = copyTasks.find(({ _id }) => _id === taskId).measurements
-		const body = {
-			startTime,
-			endTime,
-			isPosted: true
+
+		if(isNew && measurementId === undefined) {
+			add(`timemeasurements/new/${accountId}/${selectedTaskId}`, undefined, bodyToUpload)
+				.then(response => {
+					this.setState({ isMeasuring: true })
+					this.inititalizeMeasurements()
+				})
+
+		} else {
+			put(`timemeasurements/update/${accountId}/${selectedTaskId}/${measurementId}`, bodyToUpload)
+				.then(response => {
+					this.setState({ isMeasuring: false })
+					this.inititalizeMeasurements()
+				})
 		}
+	}
 
-		measurements.push(body)
+	toggleLogoutConfirmation() {
+		this.setState(prevState => ({
+			showLogoutConfirmation: !prevState.showLogoutConfirmation
+		}))
+	}
 
-		const { message } = await put(`/tasks/newtimemeasurement/${accountId}/${selectedProjectId}/${taskId}`, body)
-
-		this.setState({ task: copyTasks }, () => this.dataInit(false))
+	logoutUser() {
+		router.push('/login')
+		localStorage.removeItem('USER')
+		localStorage.removeItem('USER_ID')
+		localStorage.removeItem('USER_TOK')
 	}
 
 	render() {
-		const filteredTask = this.state.tasks.filter(task => {
-			if(this.state.filteredValue === 'all') {
-				return task
-			} else {
-				return task.status === this.state.filteredValue
-			}
-		})
+		const filteredTask = this.state.tasks.filter(task =>
+			(this.state.filteredValue === 'all') ? task : task.status === this.state.filteredValue)
 
 		return (
 			<div className={`container ${this.state.isDetailShown ? 'toggleTaskDetail' : ''}`}>
@@ -321,20 +360,25 @@ class Start extends Component {
 					addProjectToAccount={this.addProjectToAccount}
 					setProjectFavorite={this.setProjectFavorite}
 					toggleModal={this.toggleModal}
+					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
 				/>
 
-				<ActiveProject
-					tasks={filteredTask}
-					updateTaskStatus={this.updateTaskStatus}
-					updateTaskTitles={this.updateTaskTitles}
-					deleteTask={ this.deleteTask }
-					addNewTask={this.addNewTask}
-					activeProject={this.state.activeProject}
-					filteredValue={this.state.filteredValue}
-					setFilteredValue={this.setFilteredValue}
-					setTaskActive={this.setTaskActive}
-					selectedTaskId={this.state.selectedTaskId}
-				/>
+				{ this.state.noSelectedProject ?
+					<EmptyState message="niks aan t handje"/>
+					:
+					<ActiveProject
+						tasks={filteredTask}
+						updateTaskStatus={this.updateTaskStatus}
+						updateTaskTitles={this.updateTaskTitles}
+						deleteTask={ this.deleteTask }
+						addNewTask={this.addNewTask}
+						activeProject={this.state.activeProject}
+						filteredValue={this.state.filteredValue}
+						setFilteredValue={this.setFilteredValue}
+						setTaskActive={this.setTaskActive}
+						selectedTaskId={this.state.selectedTaskId}
+					/>
+				}
 
 				{ this.state.loading && <Loader loading/> }
 
@@ -342,6 +386,12 @@ class Start extends Component {
 					visible={this.state.addProjectModalVisible}
 					toggleModal={this.toggleModal}
 					addProjectToAccount={this.addProjectToAccount}
+				/>
+
+				<LogoutConfirmation
+					visible={this.state.showLogoutConfirmation}
+					logoutUser={this.logoutUser}
+					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
 				/>
 
 				<TaskDetail
@@ -355,6 +405,7 @@ class Start extends Component {
 					deleteTask={this.deleteTask}
 					deleteSubTask={this.deleteSubTask}
 					putNewTimeMeasurement={this.putNewTimeMeasurement}
+					measurements={this.state.measurements}
 				/>
 
 				<style jsx global>{ styles }</style>

@@ -12,9 +12,16 @@ export default `
 		transition: 300ms	ease-in-out;
 	}
 
+	.single * {
+		cursor: default;
+	}
+
 	.task-titles {
-		flex: 1;
 		display: inline-block;
+	}
+
+	.task-titles.isEditing {
+		flex: 1 !important;
 	}
 
 	.single.checked {
@@ -27,7 +34,6 @@ export default `
 		font-size: 14px;
 		color: #424459;
 		letter-spacing: 0;
-		margin-bottom: 8px;
 		height: 17px;
 		overflow: hidden;
 	}
@@ -49,6 +55,10 @@ export default `
 		color: #7D7D7D;
 		letter-spacing: 0;
 		overflow: hidden;
+	}
+
+	.list-view-sub-title {
+		margin-top: 8px;
 	}
 
 	.task-titles .list-view-sub-title.edit {

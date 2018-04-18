@@ -31,14 +31,17 @@ export default `
 	}
 
 	.projects-list li.active:before {
-		content: url('../../static/activeProjectLine.svg');
+		content: '';
 		display: flex;
 		position: absolute;
 		left:4px;
 		top:0;
 		width: 3px;
 		height:14px;
-		background-color: #7A848F;
+		background-image: url('../../static/activeProjectLine.svg');
+		background-size: contain !important;
+		background-repeat: no-repeat;
+		background-position: top left;
 	}
 
 	.set-favorite {
