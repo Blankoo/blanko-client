@@ -90,10 +90,12 @@ export default () => {
   projects.delete('/:accountId/:projectId', authenticate, (req, res) => {
     const { accountId, projectId } = req.params
 
-    Project.findByIdAndRemove(projectId).then(() => {
-      res.json({ accountId, projectId, message: 'delete ffies dan'})
-      Account.update({ projects }, { $pull: projects[projectId] }, { multi: true })
-    }).catch(err => err)
+    Project.findByIdAndRemove(projectId)
+      .then(() => {
+        res.json({ message: 'Project succesfully deleted', succes: true })
+        Account.update({ projects }, { $pull: projects[projectId] }, { multi: true })
+      })
+      .catch(err => err)
   })
 
 

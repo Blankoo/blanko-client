@@ -11,8 +11,14 @@ export default () => {
   const api = router();
 
   api.post('/register', (req, res) => {
+    const { username, firstName, lastName } = req.body
+    const fullName = `${firstName} ${lastName}`
+
     Account.register( new Account({
-      username: req.body.username
+      username,
+      firstName,
+      lastName,
+      fullName
     }), req.body.password, (err) => {
 
       if(err) {
@@ -82,13 +88,10 @@ export default () => {
 
         const { resetPasswordToken } = acc
         const output = `
-          <h3>Hey ${username},</h3>
+          <h3>Hey ${acc.fullName},</h3>
 
           <p>Reset blanko passwordt</p>
-          <a href="http://blankoapp.com/reset?tok=${resetPasswordToken}">https://blankoapp.com/reset/</a>
-
-          <img src="https://media.giphy.com/media/3rgXBQIDHkFNniTNRu/giphy.gif"/>
-        `
+          <a href="http://blankoapp.com/reset?tok=${resetPasswordToken}">https://blankoapp.com/reset/</a>`
 
         const blankoMailSmtp = nodemailer.createTransport({
           host: 'smtp.blankoapp.com',
