@@ -43,7 +43,10 @@ class ProjectMenu extends Component {
 					menuVisibility &&
 					<div className="action-bar-menu">
 						<ul>
-							<li onClick={ e => setProjectFavorite(e, project._id, !project.favorite)}>Favorite</li>
+							<li onClick={ e => {
+									setProjectFavorite(e, project._id, !project.favorite)
+									this.hideMenuPopOver()
+								}}>Favorite</li>
 							<li style={{color: '#fb1c1c'}}>Delete</li>
 						</ul>
 					</div>
