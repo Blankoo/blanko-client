@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './projectListStyle'
 import get from '../../../utils/get'
 
+import ProjectMenu from '../../molecules/ProjectMenu'
+
 const listStyle = {
 	lineHeight: 2.6
 }
@@ -9,6 +11,12 @@ const listStyle = {
 class ProjectList extends React.Component {
 	constructor(props) {
 		super(props)
+	}
+
+ 	selectProjectCheck(e) {
+		if(e.target.classList[0] !== 'action-bar-icon') {
+			this.props.selectProject(this.props.project._id)
+		}
 	}
 
 	render() {
@@ -33,9 +41,10 @@ class ProjectList extends React.Component {
 									<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
 										onClick={e => this.props.selectProject(project._id)}>
 										<span title={project.projectTitle}>{ project.projectTitle }</span>
-										<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
+										{/*<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
 											⭐
-										</span>
+										</span>*/}
+										<ProjectMenu iconVisibility={true}/>
 									</li>
 								)
 

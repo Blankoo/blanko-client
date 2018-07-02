@@ -1,7 +1,7 @@
 export default `
 
 	.sidebar {
-		padding-right:16px;
+		/* padding-right:16px; */
 	}
 
 	.blanko,

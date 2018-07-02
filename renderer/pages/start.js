@@ -71,7 +71,7 @@ class Start extends Component {
 	}
 
 	componentDidMount() {
-		this.disableWindowZoom()
+		// this.disableWindowZoom()
 		const isThereAToken = localStorage.getItem('USER_TOK')
 		const isThereAProjectSelected = localStorage.getItem('SELECTED_PROJECT_ID')
 

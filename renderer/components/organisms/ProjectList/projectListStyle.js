@@ -10,19 +10,19 @@ export default `
 	}
 
 	.projects-list li {
-		margin: 16px 0;
+		margin: 24px 0;
 		line-height: 1;
 		user-select: none;
 		cursor: default;
 		position: relative;
 		padding-left: 48px;
+		padding-right: 40px;
 		font-size: 12px;
 		font-weight: 500;
 		transition: 100ms linear;
 		color: #9B9B9B;
 		white-space: pre;
 		text-overflow: ellipsis;
-		overflow: hidden;
 	}
 
 	.projects-list li.active {
@@ -61,7 +61,7 @@ export default `
 	}
 
 	.label {
-		max-width: 200px;
+		max-width: 212px;
 	}
 
 	.label .add-project img {
