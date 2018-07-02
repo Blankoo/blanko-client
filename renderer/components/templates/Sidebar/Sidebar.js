@@ -16,6 +16,7 @@ class SideBar extends Component {
 			<div className="sidebar">
 				<div className="blanko">Blanko.</div>
 				<div className="blanko-small">B.</div>
+
 				<ProjectList
 					className="favorites"
 					favorite={true}
@@ -24,6 +25,7 @@ class SideBar extends Component {
 					activeProjectId={this.props.activeProjectId}
 					selectProject={this.props.selectProject}
 					setProjectFavorite={this.props.setProjectFavorite}
+					deleteProject={this.props.deleteProject}
 				/>
 
 				<ProjectList
@@ -35,6 +37,7 @@ class SideBar extends Component {
 					selectProject={this.props.selectProject}
 					setProjectFavorite={this.props.setProjectFavorite}
 					toggleModal={this.props.toggleModal}
+					deleteProject={this.props.deleteProject}
 				/>
 
 				<span className="logout-icon" onClick={e => this.props.toggleLogoutConfirmation()}>

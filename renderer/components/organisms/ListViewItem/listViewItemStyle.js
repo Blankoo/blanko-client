@@ -35,7 +35,7 @@ export default `
 		color: #424459;
 		letter-spacing: 0;
 		height: 17px;
-		overflow: hidden;
+		/* overflow: hidden; */
 	}
 
 	.task-titles .list-view-title.edit {
@@ -54,7 +54,7 @@ export default `
 		font-size: 12px;
 		color: #7D7D7D;
 		letter-spacing: 0;
-		overflow: hidden;
+		/* overflow: hidden; */
 	}
 
 	.list-view-sub-title {

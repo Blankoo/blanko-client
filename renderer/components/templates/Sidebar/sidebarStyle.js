@@ -1,9 +1,4 @@
 export default `
-
-	.sidebar {
-		padding-right:16px;
-	}
-
 	.blanko,
 	.blanko-small {
 		font-size: 32px;
@@ -25,10 +20,12 @@ export default `
 	.favorites {
 		margin-top:64px;
 		margin-bottom:64px;
+		height: 20%;
 	}
 
 	.projectList {
 		margin-top:64px;
+		height: 50%;
 	}
 
 	.favorites .label,

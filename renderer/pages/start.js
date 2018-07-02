@@ -56,6 +56,7 @@ class Start extends Component {
 		this.updateTaskTitles = this.updateTaskTitles.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
+		this.deleteProject = this.deleteProject.bind(this)
 		this.selectProject = this.selectProject.bind(this)
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
@@ -110,7 +111,9 @@ class Start extends Component {
 		if(noSelectedProject) {
 			this.setState({
 				projects,
-				loading: false
+				loading: false,
+				selectedProjectId: '',
+				noSelectedProject
 			})
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
@@ -200,16 +203,37 @@ class Start extends Component {
 
 	deleteTask(e, id) {
 		const { accountId, selectedProjectId } = this.state
-		del(`tasks/${accountId}/${selectedProjectId}/${id}`).then(res => {
-			this.dataInit(false)
-		})
+
+		del(`tasks/${accountId}/${selectedProjectId}/${id}`)
+			.then(res => {
+				this.dataInit(false)
+			})
 	}
 
 	deleteSubTask(e, taskId, subTaskId) {
 		const { accountId, selectedProjectId } = this.state
-		put(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`).then(res => {
-			this.dataInit(false)
-		})
+
+		put(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`)
+			.then(res => {
+				this.dataInit(false)
+			})
+	}
+
+	deleteProject(projectId) {
+		const { accountId } = this.state
+
+		del(`projects/${accountId}/${projectId}`)
+			.then(res => {
+				this.dataInit(true)
+				return res.data.succes
+			})
+			.then(hasSucceed => {
+				if(hasSucceed) {
+					window.localStorage.removeItem('SELECTED_PROJECT_ID')
+				} else {
+					console.error('There has been an error deleting your project.');
+				}
+			})
 	}
 
 	setFilteredValue(filteredValue) {
@@ -276,6 +300,7 @@ class Start extends Component {
 	async addSubTaskToTask(title) {
 		const { accountId, projectId, selectedTaskId } = this.state
 		const body = { title }
+
 		put(`tasks/sub/${accountId}/${projectId}/${selectedTaskId}`, body)
 			.then(({ message }) => {
 				this.dataInit(false)
@@ -287,6 +312,7 @@ class Start extends Component {
 		const { id: subTaskId, status } = task
 		const newStatus = status === 'done' ? 'todo' : 'done'
 		const body = { status: newStatus }
+
 		put(`tasks/updatesub/${accountId}/${projectId}/${selectedTaskId}/${subTaskId}`, body)
 			.then(({ message }) => {
 				this.dataInit(false)
@@ -331,21 +357,22 @@ class Start extends Component {
 	}
 
 	toggleLogoutConfirmation() {
-		this.setState(prevState => ({
-			showLogoutConfirmation: !prevState.showLogoutConfirmation
+		this.setState(({ showLogoutConfirmation }) => ({
+			showLogoutConfirmation: !showLogoutConfirmation
 		}))
 	}
 
 	logoutUser() {
-		router.push('/login')
 		localStorage.removeItem('USER')
 		localStorage.removeItem('USER_ID')
 		localStorage.removeItem('USER_TOK')
+		router.push('/login')
 	}
 
 	render() {
-		const filteredTask = this.state.tasks.filter(task =>
-			(this.state.filteredValue === 'all') ? task : task.status === this.state.filteredValue)
+		const filteredTask = this.state.tasks.filter(task => (
+			this.state.filteredValue === 'all') ? task : task.status === this.state.filteredValue
+		)
 
 		return (
 			<div className={`container ${this.state.isDetailShown ? 'toggleTaskDetail' : ''}`}>
@@ -361,6 +388,7 @@ class Start extends Component {
 					setProjectFavorite={this.setProjectFavorite}
 					toggleModal={this.toggleModal}
 					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
+					deleteProject={this.deleteProject}
 				/>
 
 				{ this.state.noSelectedProject ?
