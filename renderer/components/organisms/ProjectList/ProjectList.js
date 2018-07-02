@@ -31,8 +31,7 @@ class ProjectList extends React.Component {
 					</span>}
 				</div>
 
-				{projects !== undefined && <div>
-
+				{projects !== undefined &&
 					<ul className="projects-list">{
 						projects.filter(project => project !== null && project.favorite === favorite)
 							.map((project, i) => {
@@ -41,17 +40,19 @@ class ProjectList extends React.Component {
 									<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
 										onClick={e => this.props.selectProject(project._id)}>
 										<span title={project.projectTitle}>{ project.projectTitle }</span>
-										{/*<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
+										{/*<span className="set-favorite">
 											⭐
 										</span>*/}
-										<ProjectMenu iconVisibility={true}/>
+										<ProjectMenu
+											iconVisibility={true}
+											project={{ favorite: project.favorite, _id: project._id }}
+											setProjectFavorite={this.props.setProjectFavorite}
+										/>
 									</li>
 								)
 
 						})
-					}</ul>
-
-				</div>}
+					}</ul>}
 
 				<style jsx>{styles}</style>
 			</div>

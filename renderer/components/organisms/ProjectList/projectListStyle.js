@@ -2,7 +2,11 @@ export default `
 	.projects-list {
 		list-style: none;
 		overflow-y: scroll;
+		height: 100%;
 		display: block;
+		position: relative;
+		z-index: 2;
+		padding-bottom: 64px;
 	}
 
 	.title {

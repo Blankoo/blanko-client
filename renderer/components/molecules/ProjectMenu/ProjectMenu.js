@@ -28,13 +28,12 @@ class ProjectMenu extends Component {
 	}
 
 	render() {
-
 		const { project, setProjectFavorite, iconVisibility } = this.props
 
 		const { menuVisibility } = this.state
 
 		return (
-			<div className='action-bar' onClick={ this.showMenuPopOver }>
+			<div className='action-bar' onClick={ this.showMenuPopOver } onMouseLeave={this.hideMenuPopOver}>
 				{ iconVisibility &&
 					<span className="action-bar-icon">
 						<img src="../../static/kebab-menu.svg"/>
@@ -42,9 +41,9 @@ class ProjectMenu extends Component {
 				}
 				{
 					menuVisibility &&
-					<div className="action-bar-menu" onMouseLeave={this.hideMenuPopOver}>
+					<div className="action-bar-menu">
 						<ul>
-							<li>Favorite</li>
+							<li onClick={ e => setProjectFavorite(e, project._id, !project.favorite)}>Favorite</li>
 							<li style={{color: '#fb1c1c'}}>Delete</li>
 						</ul>
 					</div>

@@ -1,14 +1,14 @@
 export default `
 	.action-bar {
 		position: absolute;
-		right: 40px;
+		right: 16px;
 		font-size: 12px;
 		color: #9B9B9B;
 		top: 0;
 	}
 
 	.action-bar-icon {
-		right: 0;
+		right: 22px;
 		position: absolute;
 		width: 12px;
 		z-index: 1;
@@ -20,7 +20,7 @@ export default `
 
 	.action-bar-menu {
 		background: #fff;
-		box-shadow: 0 5px 32px 0 rgba(213, 213, 221, .54);
+		box-shadow: 0 5px 32px 0 rgba(213, 213, 221, .34);
 		border-radius: 4px;
 		padding: 8px;
 		position: relative;
@@ -28,7 +28,7 @@ export default `
 		text-align: center;
 		z-index: 5;
 		top: 24px;
-		right: calc(-50% + 6px);
+		right: 0;
 	}
 
 	.action-bar-menu:before {
