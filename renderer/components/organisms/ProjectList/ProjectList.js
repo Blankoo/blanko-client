@@ -22,7 +22,7 @@ class ProjectList extends React.Component {
 	render() {
 		const { projects, activeProjectId, selectedProjectId, favorite } = this.props
 
-		return(
+		return (
 			<div className={this.props.className}>
 				<div className="label">
 					{ this.props.className }
@@ -33,19 +33,21 @@ class ProjectList extends React.Component {
 
 				{projects !== undefined &&
 					<ul className="projects-list">{
-						projects.filter(project => project !== null && project.favorite === favorite)
+						projects
+							.filter(project => project !== null && project.favorite === favorite)
 							.map((project, i) => {
+								const { _id, projectTitle, favorite } = project
 
-								return(
-									<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
-										onClick={e => this.props.selectProject(project._id)}>
-										<span title={project.projectTitle}>{ project.projectTitle }</span>
-										{/*<span className="set-favorite">
-											⭐
-										</span>*/}
+								return (
+									<li
+										key={i}
+										className={selectedProjectId === _id ? 'active' : ''}
+										onClick={e => this.props.selectProject(_id)}
+									>
+										<span title={ projectTitle }>{ projectTitle }</span>
 										<ProjectMenu
 											iconVisibility={true}
-											project={{ favorite: project.favorite, _id: project._id }}
+											project={{ favorite: favorite, _id: _id }}
 											setProjectFavorite={this.props.setProjectFavorite}
 											deleteProject={this.props.deleteProject}
 										/>

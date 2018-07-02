@@ -1,9 +1,4 @@
 export default `
-
-	.sidebar {
-		/* padding-right:16px; */
-	}
-
 	.blanko,
 	.blanko-small {
 		font-size: 32px;

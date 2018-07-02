@@ -30,7 +30,6 @@ export default `
 	}
 
 	.projects-list li.active {
-		/* font-weight: bold; */
 		color: #1C87FB;
 	}
 
