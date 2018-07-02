@@ -56,6 +56,7 @@ class Start extends Component {
 		this.updateTaskTitles = this.updateTaskTitles.bind(this)
 		this.deleteTask = this.deleteTask.bind(this)
 		this.deleteSubTask = this.deleteSubTask.bind(this)
+		this.deleteProject = this.deleteProject.bind(this)
 		this.selectProject = this.selectProject.bind(this)
 		this.addProjectToAccount = this.addProjectToAccount.bind(this)
 		this.setFilteredValue = this.setFilteredValue.bind(this)
@@ -110,7 +111,9 @@ class Start extends Component {
 		if(noSelectedProject) {
 			this.setState({
 				projects,
-				loading: false
+				loading: false,
+				selectedProjectId: '',
+				noSelectedProject
 			})
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
@@ -209,6 +212,21 @@ class Start extends Component {
 		const { accountId, selectedProjectId } = this.state
 		put(`tasks/delsub/${accountId}/${selectedProjectId}/${taskId}/${subTaskId}`).then(res => {
 			this.dataInit(false)
+		})
+	}
+
+	deleteProject(projectId) {
+		const { accountId } = this.state
+
+		del(`projects/${accountId}/${projectId}`).then(res => {
+			console.log(res)
+			this.dataInit(true)
+			return res.data.succes
+		})
+		.then(hasSucceed => {
+			if(hasSucceed) {
+				window.localStorage.removeItem('SELECTED_PROJECT_ID')
+			}
 		})
 	}
 
@@ -361,6 +379,7 @@ class Start extends Component {
 					setProjectFavorite={this.setProjectFavorite}
 					toggleModal={this.toggleModal}
 					toggleLogoutConfirmation={this.toggleLogoutConfirmation}
+					deleteProject={this.deleteProject}
 				/>
 
 				{ this.state.noSelectedProject ?

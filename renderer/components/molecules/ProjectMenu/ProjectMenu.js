@@ -28,8 +28,7 @@ class ProjectMenu extends Component {
 	}
 
 	render() {
-		const { project, setProjectFavorite, iconVisibility } = this.props
-
+		const { project, setProjectFavorite, iconVisibility, deleteProject } = this.props
 		const { menuVisibility } = this.state
 
 		return (
@@ -47,7 +46,10 @@ class ProjectMenu extends Component {
 									setProjectFavorite(e, project._id, !project.favorite)
 									this.hideMenuPopOver()
 								}}>Favorite</li>
-							<li style={{color: '#fb1c1c'}}>Delete</li>
+							<li onClick={e => {
+									deleteProject(project._id)
+									this.hideMenuPopOver()
+								}} style={{color: '#fb1c1c'}}>Delete</li>
 						</ul>
 					</div>
 				}

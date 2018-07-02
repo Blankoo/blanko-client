@@ -47,6 +47,7 @@ class ProjectList extends React.Component {
 											iconVisibility={true}
 											project={{ favorite: project.favorite, _id: project._id }}
 											setProjectFavorite={this.props.setProjectFavorite}
+											deleteProject={this.props.deleteProject}
 										/>
 									</li>
 								)
