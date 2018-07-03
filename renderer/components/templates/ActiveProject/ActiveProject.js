@@ -48,18 +48,21 @@ class ActiveProject extends React.Component {
 		} = this.props
 		const { projectTitle, projectDescription } = activeProject
 
-		return(<div className="active-project" onKeyUp={ this.onKeyUp }>
-			<h1 className="mainTitle" ref="activeProjectTitle">{ projectTitle }</h1>
-			{ projectDescription && <p className="description" ref="activeProjectDescription">{ projectDescription }</p> }
+		return(
+		<div className="active-project" onKeyUp={ this.onKeyUp }>
+			<div className="active-project-head">
+				<h1 className="mainTitle" ref="activeProjectTitle">{ projectTitle }</h1>
+				{ projectDescription && <p className="description" ref="activeProjectDescription">{ projectDescription }</p> }
 
-			<FilterTasks
-				filteredValue={ filteredValue }
-				setFilteredValue={ setFilteredValue }
-				toggleAddTask={ this.showAddTask }
-			/>
+				<FilterTasks
+					filteredValue={ filteredValue }
+					setFilteredValue={ setFilteredValue }
+					toggleAddTask={ this.showAddTask }
+				/>
 
-			<div className="label">
-				{filteredValue === 'done' ? 'done' : filteredValue === 'todo' ? 'todo' : 'all' }
+				<div className="label">
+					{filteredValue === 'done' ? 'done' : filteredValue === 'todo' ? 'todo' : 'all' }
+				</div>
 			</div>
 
 			<ListView

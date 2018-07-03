@@ -33,6 +33,7 @@ class Login extends React.Component {
 	}
 
 	async login() {
+		console.log('Login');
 		try {
 			const { data: { message, success, user, token, id }} = await http.post(`${config.apiUrl}/account/login`, this.state)
 			this.setState({ success })
@@ -41,6 +42,7 @@ class Login extends React.Component {
 					localStorage.setItem('USER', user)
 					localStorage.setItem('USER_TOK', token)
 					localStorage.setItem('USER_ID', id)
+
 					this.setState({
 						skeletonLeft: 0
 					}, () => {
