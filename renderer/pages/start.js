@@ -17,6 +17,7 @@ import Loader from '../components/atoms/Loader'
 import TitleBar from '../components/atoms/TitleBar'
 import AddTask from '../components/molecules/AddTask'
 import Sidebar from '../components/templates/Sidebar'
+import IsOnlineMessage from '../components/templates/IsOnlineMessage'
 import ActiveProject from '../components/templates/ActiveProject'
 import AddProjectModal from '../components/organisms/AddProjectModal'
 import TaskDetail from '../components/templates/TaskDetail'
@@ -45,7 +46,8 @@ class Start extends Component {
 			isDetailShown: false,
 			measurements: [],
 			isMeasuring: false,
-			showLogoutConfirmation: false
+			showLogoutConfirmation: false,
+			isonline: false
 		}
 
 		this.remote = electron.remote || false
@@ -102,30 +104,49 @@ class Start extends Component {
 				this.hideTaskDetail()
 			}
 		})
+
+		const retrieveInternetStatus = () => {
+			this.setState({
+				isonline: window.navigator.isOnline
+			}, () => {
+				this.forceUpdate()
+			})
+		}
+
+		window.addEventListener('online', retrieveInternetStatus)
+		window.addEventListener('offline', retrieveInternetStatus)
 	}
 
 	async dataInit(noSelectedProject) {
 		const { accountId, selectedProjectId, selectedTaskId } = this.state
 		const { data: projects } = await get('projects', accountId)
 
-		if(noSelectedProject) {
-			this.setState({
-				loading: false,
-				projects,
-				tasks: [],
-				activeProject: {},
-				selectedProjectId: '',
-				noSelectedProject,
-			})
-		} else {
-			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
-			const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
+		if(window.navigator.onLine) {
+			if(noSelectedProject) {
+				this.setState({
+					// isonline: window.navigator.onLine,
+					loading: false,
+					projects,
+					tasks: [],
+					activeProject: {},
+					selectedProjectId: '',
+					noSelectedProject,
+				})
+			} else {
+				const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
+				const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
 
+				this.setState({
+					// isonline: window.navigator.onLine,
+					projects,
+					tasks,
+					activeProject: selectedProjectObject,
+					loading: false
+				})
+			}
+		} else {
 			this.setState({
-				projects,
-				tasks,
-				activeProject: selectedProjectObject,
-				loading: false
+				// isonline: window.navigator.onLine
 			})
 		}
 	}
@@ -380,6 +401,8 @@ class Start extends Component {
 			<div className={`container ${this.state.isDetailShown ? 'toggleTaskDetail' : ''}`}>
 				<TitleBar/>
 
+				{ this.state.isonline ?
+				<span>
 				<Sidebar
 					tasks={filteredTask}
 					projects={this.state.projects}
@@ -437,6 +460,10 @@ class Start extends Component {
 					putNewTimeMeasurement={this.putNewTimeMeasurement}
 					measurements={this.state.measurements}
 				/>
+				</span>
+				:
+				<IsOnlineMessage/>
+				}
 
 				<style jsx global>{ styles }</style>
 			</div>
