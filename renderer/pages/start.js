@@ -47,7 +47,7 @@ class Start extends Component {
 			measurements: [],
 			isMeasuring: false,
 			showLogoutConfirmation: false,
-			isonline: false
+			isonline: true
 		}
 
 		this.remote = electron.remote || false
@@ -124,7 +124,7 @@ class Start extends Component {
 		if(window.navigator.onLine) {
 			if(noSelectedProject) {
 				this.setState({
-					// isonline: window.navigator.onLine,
+					isonline: window.navigator.onLine,
 					loading: false,
 					projects,
 					tasks: [],
@@ -137,7 +137,7 @@ class Start extends Component {
 				const selectedProjectObject = projects.find(project => project._id === selectedProjectId)
 
 				this.setState({
-					// isonline: window.navigator.onLine,
+					isonline: window.navigator.onLine,
 					projects,
 					tasks,
 					activeProject: selectedProjectObject,
@@ -146,7 +146,7 @@ class Start extends Component {
 			}
 		} else {
 			this.setState({
-				// isonline: window.navigator.onLine
+				isonline: window.navigator.onLine
 			})
 		}
 	}
