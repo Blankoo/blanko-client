@@ -24,7 +24,7 @@ class ProjectMenu extends Component {
 	}
 
 	hideMenuPopOver() {
-		this.setState((prevState) => ({ menuVisibility: false }))
+			this.setState((prevState) => ({ menuVisibility: false }))
 	}
 
 	render() {

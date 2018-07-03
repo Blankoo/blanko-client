@@ -1,6 +1,17 @@
 export default `
 .active-project {
 	position: relative;
+	max-width: calc(100% - 420px);
+	transition: 300ms;
+}
+
+@media screen and (max-width: 1184px ) {
+	.active-project {
+		max-width: 100%;
+	}
+}
+
+.active-project-head {
 }
 
 .mainTitle {

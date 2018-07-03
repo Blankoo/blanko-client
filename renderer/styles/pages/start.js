@@ -30,7 +30,7 @@ export default `
 		padding: 0 64px 32px;
 		margin-right: 30%;
 		transition: all .2s ease-in-out;
-		max-width: 763px;
+		/* max-width: 763px; */
 		width: 100%;
 	}
 
@@ -46,12 +46,6 @@ export default `
 		}
 	}
 
-	.container.toggleTaskDetail {
-		margin-right: 420px;
-		max-width: 720px;
-		padding: 0 64px 32px 32px;
-	}
-
 	.sidebar {
 		width: var(--sizebar-width);
 		height: 100vh;
@@ -60,6 +54,9 @@ export default `
 		left: 0;
 		background: #FBFBFD;
 		box-shadow: inset 0 2px 40px 0 rgba(114,114,114,0.07);
+		padding-bottom: 32px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.numbers {
