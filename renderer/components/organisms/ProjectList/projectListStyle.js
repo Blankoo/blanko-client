@@ -64,7 +64,7 @@ export default `
 	}
 
 	.label {
-		max-width: 212px;
+		max-width: 216px;
 	}
 
 	.label .add-project img {

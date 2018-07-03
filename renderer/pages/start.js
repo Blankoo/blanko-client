@@ -110,10 +110,12 @@ class Start extends Component {
 
 		if(noSelectedProject) {
 			this.setState({
-				projects,
 				loading: false,
+				projects,
+				tasks: [],
+				activeProject: {},
 				selectedProjectId: '',
-				noSelectedProject
+				noSelectedProject,
 			})
 		} else {
 			const { data: tasks } = await get(`projects/${accountId}/${selectedProjectId}/tasks`, undefined)
@@ -224,15 +226,15 @@ class Start extends Component {
 
 		del(`projects/${accountId}/${projectId}`)
 			.then(res => {
-				this.dataInit(true)
-				return res.data.succes
-			})
-			.then(hasSucceed => {
-				if(hasSucceed) {
+				if(res.data.succes) {
 					window.localStorage.removeItem('SELECTED_PROJECT_ID')
 				} else {
 					console.error('There has been an error deleting your project.');
 				}
+				return res.data.succes
+			})
+			.then(hasSucceed => {
+				this.dataInit(true)
 			})
 	}
 
