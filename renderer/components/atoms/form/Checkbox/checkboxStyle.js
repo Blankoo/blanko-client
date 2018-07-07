@@ -7,9 +7,12 @@ export default `
 		border-radius: 4px;
 		margin-right: 16px;
 		cursor: default;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.checkbox.checked {
-		background: #F3F3F3 url(../../static/checked-v.svg) center center no-repeat;
+	.checkbox img {
+		width: 9px;
+		height: 6px;
 	}
 `
