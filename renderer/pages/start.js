@@ -105,12 +105,10 @@ class Start extends Component {
 			}
 		})
 
-		const retrieveInternetStatus = () => {
+		const retrieveInternetStatus = e => {
 			this.setState({
-				isonline: window.navigator.isOnline
-			}, () => {
-				this.forceUpdate()
-			})
+				isonline: window.navigator.onLine
+			}, this.forceUpdate)
 		}
 
 		window.addEventListener('online', retrieveInternetStatus)
