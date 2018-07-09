@@ -17,7 +17,15 @@ export default `
 	margin-left: -20px;
 }
 
-span {
+.toggle-add-task {
 	margin-right: 16px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.toggle-add-task svg {
+ 	width: 100%;
+	transform: rotate(45deg);
 }
 `

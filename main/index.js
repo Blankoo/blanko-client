@@ -2,11 +2,12 @@
 const { format } = require('url')
 const path = require('path')
 // Packages
-const { BrowserWindow, app } = require('electron')
+const { BrowserWindow, app, Menu } = require('electron')
 const isDev = require('electron-is-dev')
 const prepareNext = require('electron-next')
 const { resolve } = require('app-root-path')
 const windowStateKeeper = require('electron-window-state')
+const buildNativeTopBarMenu = require('./util/menu')
 
 app.setName('Blanko')
 
@@ -40,6 +41,7 @@ app.on('ready', async e => {
 
 	windowState.manage(mainWindow);
 
+
   const devPath = 'http://localhost:8000/start'
 
   const prodPath = format({
@@ -56,6 +58,8 @@ app.on('ready', async e => {
   }
 
   global.windows = windows
+
+	buildNativeTopBarMenu()
 })
 
 app.on('window-all-closed', app.quit)

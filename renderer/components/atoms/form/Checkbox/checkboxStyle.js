@@ -14,5 +14,6 @@ export default `
 	.checkbox img {
 		width: 9px;
 		height: 6px;
+		user-select: none;
 	}
 `

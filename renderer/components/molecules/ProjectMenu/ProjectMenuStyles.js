@@ -9,13 +9,15 @@ export default `
 
 	.action-bar-icon {
 		right: 22px;
+		top: 0;
 		position: absolute;
 		width: 12px;
 		z-index: 1;
 	}
 
-	.action-bar-icon img {
+	.action-bar-icon svg {
 		width: 100%;
+		height: 100%;
 	}
 
 	.action-bar-menu {
