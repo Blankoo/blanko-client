@@ -35,7 +35,13 @@ class ProjectMenu extends Component {
 			<div className='action-bar' onClick={ this.showMenuPopOver } onMouseLeave={this.hideMenuPopOver}>
 				{ iconVisibility &&
 					<span className="action-bar-icon">
-						<img src="../../static/kebab-menu.svg"/>
+						<svg xmlns="http://www.w3.org/2000/svg" width="512" height="128" viewBox="0 0 512 128">
+						  <g fill="#9B9B9B">
+						    <circle cx="256" cy="64" r="64"/>
+						    <circle cx="448" cy="64" r="64"/>
+						    <circle cx="64" cy="64" r="64"/>
+						  </g>
+						</svg>
 					</span>
 				}
 				{

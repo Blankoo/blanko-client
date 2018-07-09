@@ -25,7 +25,8 @@
       "target": [
         "dmg",
         "zip"
-      ]
+      ],
+      "icon": "./main/assets/icon.icns"
     }
   },
   "devDependencies": {
