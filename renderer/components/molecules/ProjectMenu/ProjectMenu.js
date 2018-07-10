@@ -51,7 +51,7 @@ class ProjectMenu extends Component {
 							<li onClick={ e => {
 									setProjectFavorite(e, project._id, !project.favorite)
 									this.hideMenuPopOver()
-								}}>Favorite</li>
+								}}>{ project.favorite ? 'Unfavorite' : 'Favorite' }</li>
 							<li onClick={e => {
 									deleteProject(project._id)
 									this.hideMenuPopOver()
