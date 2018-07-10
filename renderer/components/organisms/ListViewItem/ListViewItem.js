@@ -80,7 +80,7 @@ class ListViewItem extends Component {
 		return (
 			<div className={'list-view-item single ' + isCheckedToggle + isSelected} onClick={(e) => { this.setActiveTaskCheck(e) }}>
 				<Checkbox check={task.status === 'done'} onClick={ updateTaskStatus } />
-				<div className={"task-titles " + (this.state.editing ? 'isEditing' :  '')}>
+				<div className={'task-titles ' + (this.state.editing ? 'isEditing' :  '')}>
 					{ !editingTitle ?
 						<h4 className="list-view-title"
 								onClick={(e) => { this.setActiveTaskCheck(e) }}

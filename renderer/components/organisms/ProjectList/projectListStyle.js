@@ -67,8 +67,10 @@ export default `
 		max-width: 216px;
 	}
 
-	.label .add-project img {
+	.label .add-project svg {
+		transform: rotate(45deg);
 		float:right;
+		margin-top: 4px;
 		width: 8px;
 		height: 8px;
 	}
