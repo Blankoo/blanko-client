@@ -43,7 +43,7 @@ class ListViewItem extends Component {
 	}
 
 	deselectInputAndSetTitle() {
-		if (this.state.title.length > 1) {
+		if (this.state.title.length > 0) {
 			this.props.updateTaskTitles(this.props.task._id, this.state.title, undefined)
 		} else {
 			this.setState({
