@@ -1,6 +1,6 @@
 {
   "name": "blanko",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "main/index.js",
   "author": "noudadrichem",
   "description": "A task manager + time tracker app.",
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "electron .",
     "build": "next build renderer && next export renderer",
-    "dist": "npm run build && build",
+    "dist": "rm -rf dist && npm run build && build",
     "lint": "./node_modules/.bin/eslint ."
   },
   "build": {
