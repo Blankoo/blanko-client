@@ -21,25 +21,24 @@ class ListViewItem extends Component {
 	}
 
 	setActiveTaskCheck(targetItem) {
-		const targetFirstClassName = targetItem.target.className.split(' ')[0];
-		if(targetFirstClassName === 'list-view-title' || targetFirstClassName === 'list-view-sub-title' ) {
-			targetItem.preventDefault()
-		} else {
-			this.props.setTaskActive(targetItem)
-		}
+		this.props.setTaskActive(targetItem)
 	}
 
 	toggleEditTaskView(e) {
-		if(e.target.tagName === 'H4') {
-			this.setState(({editingTitle, editing}) => ({
-				editingTitle: !editingTitle,
-				editing: !editing
-			}))
-		} else if(e.target.tagName === 'P') {
-			this.setState(({editingSubTitle, editing}) => ({
-				editingSubTitle: !editingSubTitle,
-				editing: !editing
-			}))
+		if(e.metaKey) {
+			if(e.target.tagName === 'H4') {
+				this.setState(({editingTitle, editing}) => ({
+					editingTitle: !editingTitle,
+					editing: !editing
+				}))
+			} else if(e.target.tagName === 'P') {
+				this.setState(({editingSubTitle, editing}) => ({
+					editingSubTitle: !editingSubTitle,
+					editing: !editing
+				}))
+			}
+		} else {
+			console.log('You have to press the Metakey to edit task');
 		}
 	}
 
@@ -83,8 +82,7 @@ class ListViewItem extends Component {
 				<div className={'task-titles ' + (this.state.editing ? 'isEditing' :  '')}>
 					{ !editingTitle ?
 						<h4 className="list-view-title"
-								onClick={(e) => { this.setActiveTaskCheck(e) }}
-								onDoubleClick={e => this.toggleEditTaskView(e) }>
+								onClick={e => this.toggleEditTaskView(e) }>
 								{ task.title }
 						</h4>
 						:
@@ -102,7 +100,7 @@ class ListViewItem extends Component {
 					<span>
 							{ !editingSubTitle ?
 								<p	className="list-view-sub-title"
-										onDoubleClick={e => this.toggleEditTaskView(e) }>
+										onClick={e => this.toggleEditTaskView(e) }>
 										{ task.subTitle }
 								</p>
 								:

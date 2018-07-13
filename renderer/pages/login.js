@@ -121,7 +121,7 @@ class Login extends React.Component {
 					</ReactCSSTransitionGroup>
 				</div>
 
-				<div className="skeleton" style={{ left: `${this.state.skeletonLeft}vw` }}></div>
+				<div className="skeleton" style={{ transform: `translateX(${this.state.skeletonLeft}vw)` }}></div>
 				<style jsx global>{ styles }</style>
 			</div>
 		)
