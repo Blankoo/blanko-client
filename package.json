@@ -48,6 +48,8 @@
     "electron-is-dev": "0.3.0",
     "electron-next": "3.1.1",
     "electron-window-state": "^4.1.1",
-    "mousetrap": "^1.6.1"
+    "mousetrap": "^1.6.1",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1"
   }
 }
