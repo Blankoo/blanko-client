@@ -110,8 +110,9 @@ input.error {
 	background-size: cover;
 	position: absolute;
 	top: 0;
-	left: 40vw;
-	transition: 420ms ease-in-out;
+	/* left: 40vw; */
+	left:0;
+	transition: 820ms ease-in;
 }
 
 .links {

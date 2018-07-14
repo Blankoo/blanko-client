@@ -43,6 +43,8 @@ export default `
 		overflow: auto;
 		width: 100%;
 		display: block;
+		line-height: 0;
+		height: 17px;
 	}
 
 	.task-titles p {
