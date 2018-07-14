@@ -76,7 +76,7 @@ class ActiveProject extends React.Component {
 
 			{
 				this.state.isAddingTask || tasks.length === 0 ?
-				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp}/>
+				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp} hideAddTask={this.hideAddTask}/>
 				:
 				<Button onClick={ this.showAddTask } text="Add Task"/>
 			}

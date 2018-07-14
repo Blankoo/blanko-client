@@ -46,7 +46,7 @@ class AddTask extends Component {
 	render() {
 		return (
 			<div className="addTask single">
-				<div className="plusIcon"></div>
+				<div className="plusIcon" onClick={this.props.hideAddTask}></div>
 
 				<div className="input" onKeyUp={this.onEnter}>
 					<form ref={node => this.form = node}>
