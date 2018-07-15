@@ -10,7 +10,8 @@
 		"build": "babel src -s -D -d dist --presets es2015,stage-0",
 		"start": "NODE_ENV=production pm2 start dist --name blanko",
 		"prestart": "npm run -s build",
-		"lint": "eslint src"
+		"lint": "eslint src",
+    "docker": "node dist ."
 	},
 	"dependencies": {
 		"bcrypt-nodejs": "0.0.3",
