@@ -1,6 +1,6 @@
 {
   "name": "blanko",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "main/index.js",
   "author": "noudadrichem",
   "description": "A task manager + time tracker app.",
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "electron .",
     "build": "next build renderer && next export renderer",
-    "dist": "npm run build && build",
+    "dist": "rm -rf dist && npm run build && build",
     "lint": "./node_modules/.bin/eslint ."
   },
   "build": {
@@ -25,7 +25,8 @@
       "target": [
         "dmg",
         "zip"
-      ]
+      ],
+      "icon": "./main/assets/icon.icns"
     }
   },
   "devDependencies": {
@@ -47,6 +48,8 @@
     "electron-is-dev": "0.3.0",
     "electron-next": "3.1.1",
     "electron-window-state": "^4.1.1",
-    "mousetrap": "^1.6.1"
+    "mousetrap": "^1.6.1",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1"
   }
 }
