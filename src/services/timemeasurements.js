@@ -35,7 +35,7 @@ export default () => {
         const total = body.endTime - measurement.startTime
 
         body.total = total
-        Timemeasurement.findByIdAndUpdate(measurementId, body) 
+        Timemeasurement.findByIdAndUpdate(measurementId, body)
           .then(() => {
             response.json({ message: 'Succesfully updated time measurement' })
           })

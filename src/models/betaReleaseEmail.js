@@ -6,7 +6,7 @@ const BetaReleaseEmailSchema = new Schema({
    email: {
      type: String,
      required: true
-   } 
+   }
 
 })
 
