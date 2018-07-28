@@ -14,9 +14,10 @@ class AddTask extends Component {
 		this.state = {
 			title: '',
 			subTitle: '',
-			labels: ['code'],
+			labels: [],
 			status: 'todo',
 			billable: false,
+			priorityLevel: 3
 		}
 
 		this.returnTypedValue = this.returnTypedValue.bind(this)

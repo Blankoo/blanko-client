@@ -2,6 +2,7 @@ import http from './http'
 import conf from './config'
 
 async function add(endpoint, id, obj) {
+	console.log({ obj })
 	try {
 		const hasEndpoint = endpoint !== undefined ? `${endpoint}/` : ''
 		const hasId = id !== undefined ? `${id}/` : ''
