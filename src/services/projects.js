@@ -44,7 +44,8 @@ export default () => {
     const { accountId } = params
     const newProject = new Project(body)
 
-    Account.findById(accountId).then(account => {
+    Account.findById(accountId)
+    .then(account => {
       newProject.createdBy = account._id
       account.projects.push(newProject)
       newProject.save().then(newProject => {
@@ -54,7 +55,7 @@ export default () => {
     }).catch(err => res.json(err))
   })
 
-  // add task to project in account
+  // add task to project to account
   projects.post('/add/:accountId/:projectId', authenticate, (req, res) => {
     const { params, body } = req
     const { accountId, projectId } = params
@@ -62,6 +63,7 @@ export default () => {
 
     Project.findById(projectId).then(project => {
       newTask.projectId = projectId
+      newTask.createdBy = accountId
       project.tasks.push(newTask)
 
       newTask.save(err => {
