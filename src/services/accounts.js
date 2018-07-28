@@ -1,11 +1,13 @@
 import { Router as router } from 'express';
 import Account from '../models/account';
+import Task from '../models/tasks';
 import passport from 'passport';
 import log from '../log'
 import { generateAccessToken, respond, authenticate } from '../middlewares/auth'
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import config from '../config'
+import Promise from 'bluebird'
 
 export default () => {
   const api = router();
@@ -150,6 +152,14 @@ export default () => {
         })
       }
     })
+  })
+
+  api.get('/all-tasks/:accountId', (req, res) => {
+    Task.find({ createdBy: req.params.accountId })
+      .then(function returnAllAccountTasks(allAccountTasks) {
+        log.info({ allAccountTasks })
+        res.json(allAccountTasks)
+      })
   })
 
   return api

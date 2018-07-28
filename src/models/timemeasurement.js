@@ -24,7 +24,7 @@ const measurementSchema = new Schema({
   isFinished: {
     type: Boolean,
     required: true
-  } 
+  }
 })
 
 export default mongoose.model('Timemeasurement', measurementSchema)

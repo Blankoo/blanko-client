@@ -28,7 +28,6 @@ export default () => {
     }).catch(err => res.send(err))
   })
 
-  tasks.post('/add', (req, res) => res.json({ message: 'To what account do you want to add this task :P'}))
   tasks.post('/add/:accountId', authenticate, (req, res) => {
     const { params, body } = req
     const { accountId } = params
