@@ -181,7 +181,21 @@ class Start extends Component {
 		})
 	}
 
+	getAllAccountTasks(id) {
+		get(`account/all-tasks/${this.state.accountId}`)
+			.then(response => {
+				this.setState({
+					selectedProjectId: id,
+					tasks: response.data
+				})
+			})
+	}
+
 	selectProject(id) {
+		if(id === 'all-tasks') {
+			this.getAllAccountTasks(id)
+			return
+		}
 		this.setState({
 			selectedProjectId: id,
 			noSelectedProject: false

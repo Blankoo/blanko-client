@@ -52,4 +52,10 @@ export default `
 		width: 100%;
 		transition: 200ms;
 	}
+
+	.all-tasks {
+		position: absolute;
+		bottom: 12px;
+		right: 12px;
+	}
 `
