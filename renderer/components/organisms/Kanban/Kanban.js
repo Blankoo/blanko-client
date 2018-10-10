@@ -60,7 +60,6 @@ class Kanban extends Component {
 		// update('tasks', oldTask._id, { status: e.target.dataset.name })
 	}
 
-
   render() {
     return(
 				<div id='kanban' onMouseMove={this.getMouseCoords}>
@@ -94,15 +93,8 @@ class Kanban extends Component {
 
 					<style jsx>{ styles }</style>
 				</div>
-
     )
   }
 }
 
 export default Kanban
-
-/*
-// card:
-
-
-*/

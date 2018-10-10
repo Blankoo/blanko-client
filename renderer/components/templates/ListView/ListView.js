@@ -12,7 +12,7 @@ class ListView extends Component {
 	}
 
 	render() {
-		const { tasks, selectedTaskId } = this.props
+    const { tasks, selectedTaskId, setTaskActive, updateTaskStatus, updateTaskTitles } = this.props
 		const isCheckedToggle = task => (task.status === 'done' ? ' checked ' : '')
 		const isSelected = task => (task._id === selectedTaskId ? ' active ' : '')
 
@@ -24,9 +24,9 @@ class ListView extends Component {
 						task={task}
 						isCheckedToggle={isCheckedToggle(task)}
 						isSelected={isSelected(task)}
-						setTaskActive={e => this.props.setTaskActive(e, task._id)}
-						updateTaskStatus={e => this.props.updateTaskStatus(e, i, task._id, task)}
-						updateTaskTitles={this.props.updateTaskTitles}
+						setTaskActive={e => setTaskActive(e, task._id)}
+						updateTaskStatus={e => updateTaskStatus(e, i, task._id, task)}
+						updateTaskTitles={updateTaskTitles}
 					/>
 				)}
 				<style jsx>{ styles }</style>

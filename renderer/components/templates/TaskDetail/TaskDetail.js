@@ -63,7 +63,8 @@ class TaskDetail extends React.Component {
 			updateSubTaskStatus,
 			deleteTask,
 			deleteSubTask,
-			measurements
+      measurements,
+      putNewTimeMeasurement
 		} = this.props
 
 		return(
@@ -90,7 +91,7 @@ class TaskDetail extends React.Component {
 											<div className="subtask" key={idx}>
 												<Checkbox
 													check={task.status === 'done'}
-													onClick={e => this.props.updateSubTaskStatus(task)}
+													onClick={e => updateSubTaskStatus(task)}
 													className="subtask-checkbox"
 												/>
 												<span className={task.status === 'done' ? 'checked' : null}>
@@ -116,13 +117,13 @@ class TaskDetail extends React.Component {
 
 									<TimeMeasurement
 										selectedTask={selectedTask}
-										putNewTimeMeasurement={this.props.putNewTimeMeasurement}
+										putNewTimeMeasurement={putNewTimeMeasurement}
 										measurements={measurements}
 									/>
 
 									<div className="controllers">
 										<Button text="edit" type="default" onClick={e => console.log('edit') }/>
-										<Button text="delete" type="delete" onClick={e => this.props.deleteTask(e, selectedTask._id)} />
+										<Button text="delete" type="delete" onClick={e => deleteTask(e, selectedTask._id)} />
 									</div>
 							</div>
 						}

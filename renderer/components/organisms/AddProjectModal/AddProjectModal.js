@@ -41,9 +41,12 @@ class ModalContainer extends React.Component {
 	}
 
 	render() {
+    const { visible, toggleModal } = this.props
+    const { projectTitle } = this.state
+
 		return(
 			<div>
-				{this.props.visible && <div className="modal-container">
+				{ visible && <div className="modal-container">
 					<div className="modal-content">
 						<h2>Add Project</h2>
 
@@ -54,8 +57,8 @@ class ModalContainer extends React.Component {
 						<Textarea onChange={e => this.onType(e)} name="projectDescription"/>
 
 						<div style={{ ...offset, ...{ display: 'flex', justifyContent: 'flex-end' }}}>
-							<Button style={{marginRight: 8}} text="cancel" onClick={e => this.props.toggleModal('addProjectModalVisible', false)}/>
-							<Button text="save" type={this.state.projectTitle !== '' ? 'submit' : 'disabled'} onClick={this.validateCheck}/>
+							<Button style={{marginRight: 8}} text="cancel" onClick={e => toggleModal('addProjectModalVisible', false)}/>
+							<Button text="save" type={projectTitle !== '' ? 'submit' : 'disabled'} onClick={this.validateCheck}/>
 						</div>
 					</div>
 					<style jsx>{ styles }</style>

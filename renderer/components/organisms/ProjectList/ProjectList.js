@@ -12,13 +12,22 @@ class ProjectList extends React.Component {
 	}
 
 	render() {
-		const { projects, activeProjectId, selectedProjectId, favorite } = this.props
+		const {
+      projects,
+      activeProjectId,
+      selectedProjectId,
+      favorite,
+      className,
+      toggleModal,
+      setProjectFavorite,
+      selectProject
+    } = this.props
 
 		return(
-			<div className={this.props.className}>
+			<div className={className}>
 				<div className="label">
-					{ this.props.className }
-					{!favorite && <span className="add-project" onClick={e => this.props.toggleModal('addProjectModalVisible', true)}>
+					{ className }
+					{!favorite && <span className="add-project" onClick={e => toggleModal('addProjectModalVisible', true)}>
 						<img src="/static/plus-large.svg"/>
 					</span>}
 				</div>
@@ -31,9 +40,9 @@ class ProjectList extends React.Component {
 
 								return(
 									<li key={i} className={selectedProjectId === project._id ? 'active' : ''}
-										onClick={e => this.props.selectProject(project._id)}>
+										onClick={e => selectProject(project._id)}>
 										<span title={project.projectTitle}>{ project.projectTitle }</span>
-										<span className="set-favorite" onClick={ e => this.props.setProjectFavorite(e, project._id, !project.favorite)}>
+										<span className="set-favorite" onClick={ e => setProjectFavorite(e, project._id, !project.favorite)}>
 											⭐
 										</span>
 									</li>

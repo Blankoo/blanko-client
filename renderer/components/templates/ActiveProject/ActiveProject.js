@@ -45,7 +45,10 @@ class ActiveProject extends React.Component {
 			setFilteredValue,
 			setTaskActive,
 			selectedTaskId
-		} = this.props
+    } = this.props
+
+    const { isAddingTask } = this.state
+
 		const { projectTitle, projectDescription } = activeProject
 
 		return(<div className="active-project" onKeyUp={ this.onKeyUp }>
@@ -72,7 +75,7 @@ class ActiveProject extends React.Component {
 			/>
 
 			{
-				this.state.isAddingTask || tasks.length === 0 ?
+				isAddingTask || tasks.length === 0 ?
 				<AddTask addNewTask={ addNewTask } onKeyUp={this.onKeyUp}/>
 				:
 				<Button onClick={ this.showAddTask } text="Add Task"/>

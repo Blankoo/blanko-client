@@ -11,12 +11,15 @@ class Project extends React.Component {
 	}
 
 	render() {
+
+    const { tasks, kanban, columns, updateTaskStatus, deleteTask } = this.props
+
 		return(
 			<div className="project">
-				{ this.props.tasks.length !== 0 && this.props.kanban ?
-					<Kanban tasks={ this.props.tasks } columns={this.props.columns} deleteTask={ this.deleteTask }/>
+				{ tasks.length !== 0 && kanban ?
+					<Kanban tasks={ tasks } columns={ columns } deleteTask={ this.deleteTask }/>
 					:
-					<ListView tasks={ this.props.tasks } updateTaskStatus={this.props.updateTaskStatus} deleteTask={ this.props.deleteTask }/>
+					<ListView tasks={ tasks } updateTaskStatus={ updateTaskStatus } deleteTask={ deleteTask }/>
 				}
 
 				<style jsx>{ styles }</style>
